@@ -14,6 +14,8 @@ import {
   logStudyTime,
   type QuizResult,
 } from "@/lib/progress";
+import { AppLayout } from "@/components/app-layout";
+import { TextbookNav } from "@/components/textbook-nav";
 
 export default function ChapterPage() {
   const params = useParams();
@@ -119,7 +121,8 @@ export default function ChapterPage() {
 
   if (showQuiz) {
     return (
-      <div className="min-h-screen">
+      <AppLayout>
+        <div className="min-h-screen">
         <nav className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
           <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
             <button onClick={() => { setShowQuiz(false); setQuizSubmitted(false); setQuizAnswers({}); setQuizResult(null); }} className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--foreground)]">
@@ -241,27 +244,25 @@ export default function ChapterPage() {
           )}
         </div>
       </div>
+      </AppLayout>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <nav className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-3 text-sm">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-xs">D</div>
-          </Link>
-          <span className="text-[var(--color-border)]">/</span>
-          <Link href={`/study/${sectionSlug}`} className="text-[var(--color-text-secondary)] hover:text-[var(--foreground)]">{section.name}</Link>
-          <span className="text-[var(--color-border)]">/</span>
-          <span className="text-[var(--foreground)] font-medium">{chapter.title}</span>
-        </div>
-      </nav>
+    <AppLayout>
+    <div className="flex flex-1 min-h-screen">
+      <TextbookNav sectionSlug={sectionSlug} chapterSlug={chapterSlug} />
+      <div className="flex-1 min-w-0 flex flex-col">
+      {/* Top bar */}
+      <div className="h-14 border-b border-[var(--color-border)] flex items-center px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10">
+        <span className="text-sm text-[var(--color-text-muted)]">{section.name}</span>
+        <span className="mx-2 text-[var(--color-border)]">/</span>
+        <span className="text-sm font-medium">{chapter.title}</span>
+      </div>
 
-      <div className="flex flex-1 max-w-6xl mx-auto w-full">
-        {/* Sidebar - lesson list */}
-        <aside className="w-56 border-r border-[var(--color-border)] py-6 px-4 shrink-0 hidden md:block">
+      <div className="flex flex-1 w-full">
+        {/* Lesson sidebar */}
+        <aside className="w-52 border-r border-[var(--color-border)] py-6 px-4 shrink-0 hidden md:block overflow-y-auto h-[calc(100vh-56px)] sticky top-14">
           <div className="text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">Lessons</div>
           <div className="space-y-1">
             {chapter.lessons.map((l, i) => {
@@ -387,6 +388,8 @@ export default function ChapterPage() {
           </article>
         </main>
       </div>
+      </div>
     </div>
+    </AppLayout>
   );
 }

@@ -6,6 +6,7 @@ import { getQuizResults, type QuizResult } from "@/lib/progress";
 import { EXAM_CONFIGS, getExamAttempts, type ExamAttempt } from "@/lib/exam-engine";
 import { getQuestionStats } from "@/lib/question-bank";
 import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
+import { AppLayout } from "@/components/app-layout";
 
 export default function ExamsPage() {
   const [quizScores, setQuizScores] = useState<QuizResult[]>([]);
@@ -27,18 +28,10 @@ export default function ExamsPage() {
   const availableChapterQuizzes = BIOLOGY_CHAPTERS.filter((c) => c.questions.length > 0);
 
   return (
-    <div className="min-h-screen">
-      <nav className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-6 text-sm">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-xs">D</div>
-            <span className="font-semibold tracking-tight">DAT Prep</span>
-          </Link>
-          <Link href="/dashboard" className="text-[var(--color-text-secondary)] hover:text-[var(--foreground)]">Dashboard</Link>
-          <Link href="/study" className="text-[var(--color-text-secondary)] hover:text-[var(--foreground)]">Study</Link>
-          <span className="font-medium text-[var(--color-primary)]">Practice Exams</span>
-        </div>
-      </nav>
+    <AppLayout>
+      <div className="h-14 border-b border-[var(--color-border)] flex items-center px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10">
+        <h1 className="font-semibold">FINRA DAT Practice Exams</h1>
+      </div>
 
       <div className="max-w-4xl mx-auto px-6 py-8">
         <h1 className="text-2xl font-bold mb-2">Practice Exams & Quizzes</h1>
@@ -177,6 +170,6 @@ export default function ExamsPage() {
           </>
         )}
       </div>
-    </div>
+    </AppLayout>
   );
 }
