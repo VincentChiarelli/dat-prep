@@ -26,6 +26,8 @@ export default function ExamPage() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [started, setStarted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [instantFeedback, setInstantFeedback] = useState(false);
+  const [revealedQuestions, setRevealedQuestions] = useState<Set<number>>(new Set());
   const startTimeRef = useRef<number>(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -121,6 +123,18 @@ export default function ExamPage() {
                 <span className="font-mono">{s.questionCount}Q / {s.timeLimitMinutes}m</span>
               </div>
             ))}
+          </div>
+          <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4 mb-4">
+            <div>
+              <div className="text-sm font-medium">Instant Feedback</div>
+              <div className="text-xs text-[var(--color-text-muted)]">See why each answer is right/wrong immediately</div>
+            </div>
+            <button
+              onClick={() => setInstantFeedback(!instantFeedback)}
+              className={`relative w-11 h-6 rounded-full transition-colors ${instantFeedback ? "bg-[var(--color-primary)]" : "bg-gray-300"}`}
+            >
+              <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${instantFeedback ? "translate-x-5" : ""}`} />
+            </button>
           </div>
           <button
             onClick={() => { setStarted(true); startTimeRef.current = Date.now(); }}
@@ -298,7 +312,11 @@ export default function ExamPage() {
                 return (
                   <button
                     key={choice.label}
-                    onClick={() => setAnswers({ ...answers, [q.id]: choice.label })}
+                    onClick={() => {
+                      if (revealedQuestions.has(currentIndex)) return;
+                      setAnswers({ ...answers, [q.id]: choice.label });
+                      if (instantFeedback) setRevealedQuestions(new Set(revealedQuestions).add(currentIndex));
+                    }}
                     className={`w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
                       isSelected
                         ? "border-[var(--color-primary)] bg-[var(--color-primary-light)]"
@@ -315,6 +333,25 @@ export default function ExamPage() {
                 );
               })}
             </div>
+
+            {/* Instant feedback */}
+            {revealedQuestions.has(currentIndex) && (
+              <div className={`mt-6 p-4 rounded-xl text-sm leading-relaxed ${
+                q.choices.find(c => c.isCorrect)?.label === answers[q.id]
+                  ? "bg-green-50 border border-green-200"
+                  : "bg-red-50 border border-red-200"
+              }`}>
+                <div className="font-semibold mb-1">
+                  {q.choices.find(c => c.isCorrect)?.label === answers[q.id]
+                    ? "✓ Correct!"
+                    : `✗ Incorrect — the answer is ${q.choices.find(c => c.isCorrect)?.label}`
+                  }
+                </div>
+                <div className="prose prose-sm max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{q.explanation}</ReactMarkdown>
+                </div>
+              </div>
+            )}
 
             {/* Navigation */}
             <div className="flex items-center justify-between mt-10">

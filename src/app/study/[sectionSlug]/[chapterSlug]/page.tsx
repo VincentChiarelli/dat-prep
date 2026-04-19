@@ -30,6 +30,8 @@ export default function ChapterPage() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [instantFeedback, setInstantFeedback] = useState(false);
+  const [revealedQuestions, setRevealedQuestions] = useState<Set<number>>(new Set());
   const [showTerms, setShowTerms] = useState(false);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
@@ -147,6 +149,22 @@ export default function ChapterPage() {
         </nav>
 
         <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
+          {/* Instant feedback toggle */}
+          {!quizSubmitted && (
+            <div className="flex items-center justify-between bg-white rounded-xl border border-[var(--color-border)] p-4">
+              <div>
+                <div className="text-sm font-medium">Instant Feedback</div>
+                <div className="text-xs text-[var(--color-text-muted)]">See explanations immediately after answering each question</div>
+              </div>
+              <button
+                onClick={() => setInstantFeedback(!instantFeedback)}
+                className={`relative w-11 h-6 rounded-full transition-colors ${instantFeedback ? "bg-[var(--color-primary)]" : "bg-gray-200"}`}
+              >
+                <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${instantFeedback ? "translate-x-5" : ""}`} />
+              </button>
+            </div>
+          )}
+
           {/* Results summary card */}
           {quizSubmitted && quizResult && (
             <div className="bg-white rounded-xl border-2 p-6 text-center" style={{ borderColor: quizResult.percent >= 80 ? "#16A34A" : "#D97706" }}>
@@ -190,7 +208,7 @@ export default function ChapterPage() {
                   {q.choices.map((choice) => {
                     let borderColor = "var(--color-border)";
                     let bg = "transparent";
-                    if (quizSubmitted) {
+                    if (quizSubmitted || revealedQuestions.has(qi)) {
                       if (choice.isCorrect) { borderColor = "#16A34A"; bg = "rgba(22,163,74,.06)"; }
                       else if (choice.label === selected && !choice.isCorrect) { borderColor = "#DC2626"; bg = "rgba(220,38,38,.06)"; }
                     } else if (choice.label === selected) {
@@ -200,7 +218,13 @@ export default function ChapterPage() {
                     return (
                       <button
                         key={choice.label}
-                        onClick={() => !quizSubmitted && setQuizAnswers({ ...quizAnswers, [qi]: choice.label })}
+                        onClick={() => {
+                          if (quizSubmitted || revealedQuestions.has(qi)) return;
+                          setQuizAnswers({ ...quizAnswers, [qi]: choice.label });
+                          if (instantFeedback) {
+                            setRevealedQuestions(new Set(revealedQuestions).add(qi));
+                          }
+                        }}
                         className="w-full text-left flex items-center gap-3 p-3 rounded-lg border transition-all text-sm"
                         style={{ borderColor, backgroundColor: bg }}
                         disabled={quizSubmitted}
@@ -214,9 +238,9 @@ export default function ChapterPage() {
                   })}
                 </div>
 
-                {quizSubmitted && (
+                {(quizSubmitted || revealedQuestions.has(qi)) && (
                   <div className={`mt-4 ml-10 p-4 rounded-lg text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
-                    <div className="font-semibold mb-1">{isCorrect ? "Correct!" : `Incorrect — the answer is ${correct}`}</div>
+                    <div className="font-semibold mb-1">{isCorrect ? "✓ Correct!" : `✗ Incorrect — the answer is ${correct}`}</div>
                     <div className="prose prose-sm max-w-none"><ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {q.explanation}
                     </ReactMarkdown></div>
