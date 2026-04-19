@@ -7,7 +7,6 @@ const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: "📊" },
   { label: "Textbook", href: "/study", icon: "📖" },
   { label: "Practice Exams", href: "/exams", icon: "📝" },
-  { label: "How It Works", href: "/how-it-works", icon: "ℹ️" },
 ];
 
 export function Sidebar() {
