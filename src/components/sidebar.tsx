@@ -7,9 +7,10 @@ const NAV_ITEMS = [
   { label: "Dashboard", href: "/dashboard", icon: "📊" },
   { label: "Textbook", href: "/study", icon: "📖" },
   { label: "Practice Exams", href: "/exams", icon: "📝" },
+  { label: "Quick Review", href: "/review", icon: "🔄" },
 ];
 
-export function Sidebar() {
+export function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (

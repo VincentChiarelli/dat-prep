@@ -3269,10 +3269,2045 @@ In each axis, the end hormone feeds back to **inhibit** both the hypothalamus an
       },
     ],
   },
-  { slug: "musculoskeletal", title: "Musculoskeletal & Integumentary", description: "Muscle contraction, bone growth, skin layers", estimatedMinutes: 35, lessons: [], questions: [] },
-  { slug: "reproductive-development", title: "Reproductive & Development", description: "Gametogenesis, embryology, fetal development", estimatedMinutes: 40, lessons: [], questions: [] },
-  { slug: "immunology", title: "Immunology", description: "Innate/adaptive immunity, antibodies, MHC, allergies", estimatedMinutes: 40, lessons: [], questions: [] },
-  { slug: "ecology", title: "Ecology", description: "Ecosystems, food webs, biomes, population dynamics", estimatedMinutes: 35, lessons: [], questions: [] },
-  { slug: "evolution", title: "Evolution", description: "Natural selection, speciation, phylogenetics, evidence", estimatedMinutes: 30, lessons: [], questions: [] },
-  { slug: "taxonomy-diversity", title: "Taxonomy & Diversity", description: "Classification systems, plant biology, animal phyla", estimatedMinutes: 35, lessons: [], questions: [] },
+  {
+    slug: "musculoskeletal",
+    title: "Musculoskeletal & Integumentary",
+    description: "Muscle types, sarcomere, sliding filament, bone types, ossification, skin layers",
+    estimatedMinutes: 35,
+    lessons: [
+      {
+        slug: "muscular-system",
+        title: "Muscular System & Contraction",
+        content: `# Muscular System & Contraction
+
+The muscular system is essential for movement, posture, and heat generation. The DAT frequently tests muscle fiber types, sarcomere structure, and the sliding filament model of contraction.
+
+## Three Types of Muscle Tissue
+
+| Feature | Skeletal Muscle | Cardiac Muscle | Smooth Muscle |
+|---------|----------------|----------------|---------------|
+| **Appearance** | Striated | Striated | Non-striated |
+| **Control** | Voluntary | Involuntary | Involuntary |
+| **Nuclei** | Multinucleated (peripheral) | 1-2 nuclei (central) | Single nucleus (central) |
+| **Striations** | Yes | Yes | No |
+| **Intercalated discs** | No | **Yes** (gap junctions + desmosomes) | No |
+| **Branching** | No | Yes | No |
+| **Regeneration** | Limited (satellite cells) | Very limited | Best regeneration of the three |
+| **Location** | Attached to bones | Heart wall (myocardium) | Walls of hollow organs, blood vessels, GI tract |
+
+> **High-Yield DAT Tip:** Cardiac muscle has **intercalated discs** containing **gap junctions** that allow rapid electrical communication between cells, enabling the heart to function as a **functional syncytium** (contracts as a unit). Skeletal muscle is the ONLY voluntary muscle type.
+
+## Sarcomere Structure
+
+The **sarcomere** is the basic contractile unit of striated muscle, bounded by two **Z-lines (Z-discs)**.
+
+| Band/Zone | Contains | Changes During Contraction? |
+|-----------|----------|---------------------------|
+| **A band** | Entire length of thick (myosin) filaments; includes overlap zone | **Does NOT change** length |
+| **I band** | Thin (actin) filaments only; NO myosin | **Shortens** |
+| **H zone** | Thick filaments only; NO actin (center of A band) | **Shortens** |
+| **Z line** | Anchor point for actin (thin filaments); sarcomere boundary | Z-lines move **closer together** |
+| **M line** | Center of sarcomere; anchors myosin | Stays at center |
+
+> **DAT Tip:** Mnemonic for what shortens: "**HIZ shrink**" — the **H** zone, **I** band, and the distance between **Z** lines all decrease during contraction. The **A band stays the same** because myosin length doesn't change.
+
+## Sliding Filament Model of Contraction
+
+**Key principle:** Muscle contraction occurs when **thin filaments (actin) slide over thick filaments (myosin)** — the filaments themselves do NOT shorten.
+
+### Steps of the Cross-Bridge Cycle
+
+1. **ATP binds myosin** → myosin releases from actin (rigor release)
+2. **ATP hydrolysis** (ATP → ADP + Pi) → myosin head cocks into high-energy position
+3. **Cross-bridge formation** → myosin head binds actin (when binding sites are exposed)
+4. **Power stroke** → Pi released → myosin head pivots, pulling actin toward the M line (ADP released)
+5. **Rigor state** → myosin remains bound until new ATP binds → cycle repeats
+
+> **High-Yield DAT Tip:** Without ATP, myosin remains locked to actin — this is why **rigor mortis** occurs after death (no ATP to release the cross-bridges). ATP is required for BOTH contraction (hydrolysis provides energy for the power stroke) AND relaxation (binding ATP releases myosin from actin).
+
+### Excitation-Contraction Coupling
+
+1. **Action potential** travels along the sarcolemma (muscle cell membrane) and down **T-tubules**
+2. T-tubule depolarization triggers **Ca²⁺ release** from the **sarcoplasmic reticulum (SR)**
+3. Ca²⁺ binds **troponin C** on the thin filament
+4. Troponin changes shape → moves **tropomyosin** away from myosin-binding sites on actin
+5. Cross-bridge cycling begins → contraction
+6. **Relaxation:** Ca²⁺ is pumped back into the SR by **SERCA** (Ca²⁺-ATPase) → tropomyosin re-covers binding sites
+
+> **DAT Tip:** The role of calcium: Ca²⁺ binds **troponin**, which moves **tropomyosin**, which exposes binding sites on **actin** for myosin. No calcium = no contraction.
+
+## Motor Unit & Muscle Physiology
+
+- **Motor unit** = one motor neuron + all the muscle fibers it innervates
+- **Neuromuscular junction (NMJ):** Motor neuron releases **acetylcholine (ACh)** → binds nicotinic receptors on muscle → depolarization → contraction
+- **All-or-none law:** An individual muscle fiber either contracts completely or not at all
+- **Recruitment:** Increasing the number of motor units activated increases the force of contraction
+- **Tetanus:** Rapid successive stimuli that prevent relaxation → sustained maximal contraction
+
+### Muscle Fiber Types
+
+| Type | Name | Speed | Metabolism | Fatigue | Color | Example |
+|------|------|-------|-----------|---------|-------|---------|
+| **Type I** | Slow oxidative | Slow | Aerobic (many mitochondria) | Fatigue-resistant | Red (high myoglobin) | Postural muscles, marathon |
+| **Type IIa** | Fast oxidative | Fast | Aerobic + anaerobic | Intermediate | Red | Middle-distance running |
+| **Type IIb** | Fast glycolytic | Fast | Anaerobic (glycolysis) | Fatigue quickly | White (low myoglobin) | Sprinting, weightlifting |
+`,
+        keyTerms: [
+          { term: "Sarcomere", definition: "Basic contractile unit of striated muscle, bounded by Z-lines" },
+          { term: "Sliding Filament Model", definition: "Contraction occurs when actin slides over myosin; filaments do not shorten" },
+          { term: "Troponin", definition: "Regulatory protein on actin; binds Ca2+ to initiate contraction by moving tropomyosin" },
+          { term: "Tropomyosin", definition: "Protein that covers myosin-binding sites on actin at rest; moved by troponin-Ca2+ complex" },
+          { term: "Sarcoplasmic Reticulum", definition: "Specialized ER in muscle cells that stores and releases Ca2+ for contraction" },
+          { term: "Motor Unit", definition: "A single motor neuron and all the muscle fibers it innervates" },
+          { term: "Intercalated Discs", definition: "Junctions between cardiac muscle cells containing gap junctions and desmosomes" },
+          { term: "T-tubules", definition: "Invaginations of the sarcolemma that carry action potentials deep into the muscle fiber" },
+        ],
+      },
+      {
+        slug: "skeletal-integumentary",
+        title: "Skeletal System & Integumentary System",
+        content: `# Skeletal System & Integumentary System
+
+The skeletal system provides structural support, protection, mineral storage, and blood cell production. The integumentary system (skin) is the body's largest organ and serves as the first line of defense against pathogens.
+
+## Bone Tissue
+
+Bone is a dynamic, living connective tissue composed of cells embedded in a mineralized matrix of **collagen** (flexibility) and **hydroxyapatite** (calcium phosphate crystite — rigidity/hardness).
+
+### Bone Cell Types
+
+| Cell Type | Function | Key Facts |
+|-----------|----------|-----------|
+| **Osteoblasts** | **Build** bone (deposit new bone matrix) | Produce osteoid (unmineralized matrix); become osteocytes when trapped in matrix |
+| **Osteocytes** | Maintain bone tissue; sense mechanical stress | Most abundant bone cell; trapped in **lacunae**; communicate via **canaliculi** |
+| **Osteoclasts** | **Break down** (resorb) bone; release Ca²⁺ and PO₄³⁻ | Large, multinucleated cells derived from monocytes; stimulated by **PTH** |
+
+> **High-Yield DAT Tip:** Mnemonic: Osteo**B**lasts = **B**uild bone. Osteo**C**lasts = **C**hew/destroy bone. **PTH** stimulates osteoclasts (raises blood Ca²⁺). **Calcitonin** inhibits osteoclasts (lowers blood Ca²⁺).
+
+### Types of Bone Tissue
+
+| Type | Structure | Location |
+|------|-----------|----------|
+| **Compact (cortical) bone** | Dense, organized in **osteons** (Haversian systems); central canal contains blood vessels | Outer shell of all bones; shaft of long bones |
+| **Spongy (cancellous/trabecular) bone** | Lattice of **trabeculae**; lighter; spaces filled with bone marrow | Epiphyses of long bones; interior of flat bones |
+
+### Long Bone Anatomy
+
+| Region | Description |
+|--------|-------------|
+| **Epiphysis** | Expanded ends; spongy bone covered by articular cartilage; contains red marrow |
+| **Diaphysis** | Shaft; compact bone surrounding the **medullary cavity** (contains yellow marrow in adults) |
+| **Metaphysis** | Transition zone between epiphysis and diaphysis; location of the **epiphyseal plate** (growth plate) |
+| **Periosteum** | Outer connective tissue membrane covering bone; site of appositional growth and fracture repair |
+| **Endosteum** | Inner lining of the medullary cavity; contains osteoblasts and osteoclasts |
+
+## Ossification (Bone Formation)
+
+| Type | Process | Examples |
+|------|---------|---------|
+| **Intramembranous** | Bone forms directly from **mesenchymal (connective) tissue** — no cartilage intermediate | Flat bones of the skull, clavicle |
+| **Endochondral** | Bone replaces a **hyaline cartilage model** — cartilage template is gradually replaced by bone | Most bones: long bones, vertebrae, pelvis |
+
+> **DAT Tip:** **Endochondral** ossification involves a cartilage intermediate ("endo" = within, "chondral" = cartilage). Longitudinal bone growth occurs at the **epiphyseal plate** (growth plate) via endochondral ossification. Growth hormone and thyroid hormones stimulate bone growth. Estrogen/testosterone cause the growth plate to close (epiphyseal closure) at the end of puberty.
+
+### Bone Remodeling
+
+- Continuous process of bone resorption (osteoclasts) and bone deposition (osteoblasts)
+- **Wolff's Law:** Bone remodels in response to mechanical stress — weight-bearing exercise strengthens bone
+- Regulated by **PTH** (stimulates resorption), **calcitonin** (inhibits resorption), **vitamin D** (promotes Ca²⁺ absorption), and **growth hormone**
+
+## Joints (Articulations)
+
+| Type | Movement | Examples |
+|------|----------|---------|
+| **Fibrous (synarthrosis)** | Immovable | Skull sutures |
+| **Cartilaginous (amphiarthrosis)** | Slightly movable | Pubic symphysis, intervertebral discs |
+| **Synovial (diarthrosis)** | Freely movable | Knee, shoulder, hip, elbow |
+
+## The Integumentary System (Skin)
+
+The skin has three main layers:
+
+### Epidermis (Outermost — Epithelial)
+
+Layers from deep to superficial:
+
+| Layer | Key Features |
+|-------|-------------|
+| **Stratum basale** | Deepest; single layer of stem cells that continuously divide; contains **melanocytes** (produce melanin) |
+| **Stratum spinosum** | "Spiny" layer; contains **Langerhans cells** (dendritic cells — immune surveillance) |
+| **Stratum granulosum** | Cells accumulate **keratohyalin granules**; waterproofing begins |
+| **Stratum lucidum** | Thin, clear layer found only in **thick skin** (palms and soles) |
+| **Stratum corneum** | Outermost; 20-30 layers of dead, keratinized cells; primary physical barrier |
+
+> **DAT Tip:** Mnemonic for epidermal layers (deep → superficial): "**B**aseball **S**tars **G**rab **L**ots of **C**ash" — Basale, Spinosum, Granulosum, Lucidum, Corneum.
+
+### Dermis (Middle — Connective Tissue)
+
+- **Papillary layer:** Superficial; loose connective tissue; **dermal papillae** (fingerprints); contains capillaries and sensory receptors
+- **Reticular layer:** Deep; dense irregular connective tissue; contains collagen and elastin fibers, hair follicles, sweat glands, sebaceous glands
+
+### Hypodermis (Subcutaneous — NOT technically part of skin)
+
+- **Adipose tissue** (fat) for insulation, energy storage, and cushioning
+- Contains larger blood vessels and nerves
+
+### Skin Cell Types and Structures
+
+| Structure | Function |
+|-----------|----------|
+| **Keratinocytes** | Produce **keratin** (structural protein); most abundant epidermal cell (~90%) |
+| **Melanocytes** | Produce **melanin** (pigment); protect against UV radiation |
+| **Langerhans cells** | Dendritic immune cells; antigen presentation |
+| **Merkel cells** | Touch receptors (mechanoreceptors) |
+| **Eccrine sweat glands** | Thermoregulation; watery sweat; found all over body |
+| **Apocrine sweat glands** | Produce thicker secretion; found in axillae and groin; activated at puberty |
+| **Sebaceous glands** | Produce **sebum** (oily secretion); lubricate skin and hair; prevent desiccation |
+`,
+        keyTerms: [
+          { term: "Osteoblast", definition: "Bone cell that builds new bone tissue by depositing osteoid matrix" },
+          { term: "Osteoclast", definition: "Large multinucleated cell that resorbs (breaks down) bone; stimulated by PTH" },
+          { term: "Osteocyte", definition: "Mature bone cell trapped in lacunae; maintains bone tissue and senses stress" },
+          { term: "Endochondral Ossification", definition: "Bone formation by replacing a hyaline cartilage model; responsible for long bone growth" },
+          { term: "Epiphyseal Plate", definition: "Growth plate between epiphysis and diaphysis; site of longitudinal bone growth" },
+          { term: "Keratinocyte", definition: "Most abundant epidermal cell; produces keratin for structural protection" },
+          { term: "Melanocyte", definition: "Epidermal cell in stratum basale that produces melanin pigment for UV protection" },
+          { term: "Stratum Corneum", definition: "Outermost epidermal layer of dead keratinized cells; primary physical barrier" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "During muscle contraction, which of the following bands or zones does NOT change in length?",
+        choices: [
+          { label: "A", text: "I band", isCorrect: false },
+          { label: "B", text: "H zone", isCorrect: false },
+          { label: "C", text: "A band", isCorrect: true },
+          { label: "D", text: "Distance between Z lines", isCorrect: false },
+          { label: "E", text: "Sarcomere overall length", isCorrect: false },
+        ],
+        explanation: "The **A band** does NOT change in length during contraction because it spans the entire length of the thick (myosin) filaments, which do not change length. The **I band** and **H zone** both shorten as actin slides over myosin. The distance between Z lines (sarcomere length) also decreases. Mnemonic: **HIZ shrink** — H zone, I band, and Z-to-Z distance all decrease; the A band stays constant.",
+        difficulty: 1,
+        tags: ["sarcomere", "muscle contraction"],
+      },
+      {
+        stem: "Calcium ions released from the sarcoplasmic reticulum bind to which protein to initiate muscle contraction?",
+        choices: [
+          { label: "A", text: "Actin", isCorrect: false },
+          { label: "B", text: "Myosin", isCorrect: false },
+          { label: "C", text: "Tropomyosin", isCorrect: false },
+          { label: "D", text: "Troponin", isCorrect: true },
+          { label: "E", text: "Titin", isCorrect: false },
+        ],
+        explanation: "Ca²⁺ binds to **troponin C** (a subunit of the troponin complex on the thin filament). This causes a conformational change that moves **tropomyosin** away from the myosin-binding sites on actin, allowing cross-bridge formation and contraction. Without Ca²⁺, tropomyosin blocks the binding sites and the muscle remains relaxed.",
+        difficulty: 1,
+        tags: ["excitation-contraction coupling", "calcium"],
+      },
+      {
+        stem: "Rigor mortis occurs because after death:",
+        choices: [
+          { label: "A", text: "Excess ATP floods the muscle cells", isCorrect: false },
+          { label: "B", text: "Ca²⁺ cannot be released from the sarcoplasmic reticulum", isCorrect: false },
+          { label: "C", text: "ATP is unavailable to detach myosin heads from actin", isCorrect: true },
+          { label: "D", text: "Tropomyosin permanently blocks binding sites on actin", isCorrect: false },
+          { label: "E", text: "Motor neurons continuously stimulate the muscles", isCorrect: false },
+        ],
+        explanation: "After death, cellular metabolism stops and **ATP is depleted**. ATP is required to release myosin heads from actin (ATP binding causes the cross-bridge to detach). Without ATP, myosin remains locked to actin in a rigid state — this is **rigor mortis**. ATP is needed for BOTH contraction (powering the cross-bridge cycle) AND relaxation (detaching myosin and pumping Ca²⁺ back into the SR).",
+        difficulty: 2,
+        tags: ["muscle contraction", "rigor mortis"],
+      },
+      {
+        stem: "Which type of muscle tissue contains intercalated discs with gap junctions?",
+        choices: [
+          { label: "A", text: "Skeletal muscle", isCorrect: false },
+          { label: "B", text: "Smooth muscle", isCorrect: false },
+          { label: "C", text: "Cardiac muscle", isCorrect: true },
+          { label: "D", text: "Both skeletal and cardiac muscle", isCorrect: false },
+          { label: "E", text: "All three types of muscle", isCorrect: false },
+        ],
+        explanation: "**Cardiac muscle** uniquely possesses **intercalated discs** — specialized junctions containing **gap junctions** (allow rapid electrical signal propagation) and **desmosomes** (mechanical attachment). Gap junctions enable the heart to beat as a coordinated **functional syncytium**. Skeletal muscle fibers are multinucleated and voluntary. Smooth muscle is non-striated and found in hollow organs.",
+        difficulty: 1,
+        tags: ["muscle types", "cardiac muscle"],
+      },
+      {
+        stem: "Osteoclasts break down bone and are stimulated by:",
+        choices: [
+          { label: "A", text: "Calcitonin", isCorrect: false },
+          { label: "B", text: "Growth hormone", isCorrect: false },
+          { label: "C", text: "Parathyroid hormone (PTH)", isCorrect: true },
+          { label: "D", text: "Insulin", isCorrect: false },
+          { label: "E", text: "Estrogen", isCorrect: false },
+        ],
+        explanation: "**PTH (parathyroid hormone)** stimulates **osteoclasts** to resorb bone, releasing calcium and phosphate into the blood to raise blood Ca²⁺ levels. **Calcitonin** does the opposite — it inhibits osteoclasts and promotes calcium deposition into bone (lowering blood Ca²⁺). **Estrogen** also inhibits osteoclast activity, which is why postmenopausal women (declining estrogen) are at increased risk for **osteoporosis**.",
+        difficulty: 1,
+        tags: ["bone cells", "PTH"],
+      },
+      {
+        stem: "Endochondral ossification involves:",
+        choices: [
+          { label: "A", text: "Bone forming directly from mesenchymal tissue without a cartilage intermediate", isCorrect: false },
+          { label: "B", text: "Bone replacing a pre-existing hyaline cartilage model", isCorrect: true },
+          { label: "C", text: "Cartilage replacing existing bone tissue", isCorrect: false },
+          { label: "D", text: "Bone forming from tendons and ligaments", isCorrect: false },
+          { label: "E", text: "Bone forming only in flat bones of the skull", isCorrect: false },
+        ],
+        explanation: "**Endochondral ossification** is the process by which a **hyaline cartilage template** is gradually replaced by bone tissue. This is how most bones in the body form, including all long bones, vertebrae, and pelvic bones. Longitudinal growth occurs at the **epiphyseal plate** (growth plate). **Intramembranous ossification** forms bone directly from mesenchyme without a cartilage intermediate (flat skull bones, clavicle).",
+        difficulty: 2,
+        tags: ["ossification", "bone development"],
+      },
+      {
+        stem: "The stratum basale of the epidermis is important because it contains:",
+        choices: [
+          { label: "A", text: "Dead keratinized cells that form the primary barrier", isCorrect: false },
+          { label: "B", text: "Langerhans cells for immune surveillance", isCorrect: false },
+          { label: "C", text: "Stem cells that continuously divide and melanocytes", isCorrect: true },
+          { label: "D", text: "Sebaceous glands for oil production", isCorrect: false },
+          { label: "E", text: "Eccrine sweat glands for thermoregulation", isCorrect: false },
+        ],
+        explanation: "The **stratum basale** (basal layer) is the deepest layer of the epidermis. It contains **actively dividing stem cells** (keratinocyte precursors) that replenish the epidermis as surface cells are shed, and **melanocytes** that produce melanin pigment for UV protection. Dead keratinized cells form the **stratum corneum** (outermost layer). Langerhans cells are concentrated in the **stratum spinosum**. Glands are located in the **dermis**.",
+        difficulty: 2,
+        tags: ["epidermis", "skin layers"],
+      },
+      {
+        stem: "Type I (slow oxidative) muscle fibers are characterized by all of the following EXCEPT:",
+        choices: [
+          { label: "A", text: "High myoglobin content giving them a red appearance", isCorrect: false },
+          { label: "B", text: "Many mitochondria for aerobic metabolism", isCorrect: false },
+          { label: "C", text: "Resistance to fatigue", isCorrect: false },
+          { label: "D", text: "Rapid contraction speed and high power output", isCorrect: true },
+          { label: "E", text: "Use in postural maintenance and endurance activities", isCorrect: false },
+        ],
+        explanation: "Type I (slow oxidative) fibers contract **slowly** but are **fatigue-resistant** due to their reliance on **aerobic metabolism** (many mitochondria, rich blood supply). They have high **myoglobin** content (red color) and are used for sustained activities like posture and marathon running. **Rapid contraction speed and high power output** are characteristics of **Type IIb (fast glycolytic)** fibers, which rely on anaerobic glycolysis and fatigue quickly.",
+        difficulty: 2,
+        tags: ["muscle fiber types", "physiology"],
+      },
+      {
+        stem: "At the neuromuscular junction, the neurotransmitter released by motor neurons is:",
+        choices: [
+          { label: "A", text: "Norepinephrine", isCorrect: false },
+          { label: "B", text: "GABA", isCorrect: false },
+          { label: "C", text: "Glutamate", isCorrect: false },
+          { label: "D", text: "Acetylcholine (ACh)", isCorrect: true },
+          { label: "E", text: "Dopamine", isCorrect: false },
+        ],
+        explanation: "Motor neurons release **acetylcholine (ACh)** at the **neuromuscular junction (NMJ)**. ACh binds **nicotinic receptors** on the motor end plate of the skeletal muscle fiber, causing depolarization and initiating contraction. ACh is then rapidly degraded by **acetylcholinesterase** in the synaptic cleft. **Curare** blocks nicotinic receptors (paralysis). **Botulinum toxin** prevents ACh release (flaccid paralysis).",
+        difficulty: 1,
+        tags: ["neuromuscular junction", "ACh"],
+      },
+      {
+        stem: "The epiphyseal plate (growth plate) is responsible for:",
+        choices: [
+          { label: "A", text: "Bone widening (appositional growth)", isCorrect: false },
+          { label: "B", text: "Longitudinal bone growth during development", isCorrect: true },
+          { label: "C", text: "Production of red blood cells (hematopoiesis)", isCorrect: false },
+          { label: "D", text: "Attachment of tendons to bone", isCorrect: false },
+          { label: "E", text: "Storage of calcium in the medullary cavity", isCorrect: false },
+        ],
+        explanation: "The **epiphyseal plate** (growth plate) is a region of hyaline cartilage between the epiphysis and diaphysis of long bones. It allows **longitudinal (lengthwise) bone growth** through endochondral ossification — chondrocytes proliferate and are gradually replaced by bone. At puberty, sex hormones (estrogen, testosterone) cause **epiphyseal closure** (the plate becomes the epiphyseal line), ending longitudinal growth. **Appositional growth** (widening) occurs at the periosteum.",
+        difficulty: 2,
+        tags: ["bone growth", "epiphyseal plate"],
+      },
+    ],
+  },
+  {
+    slug: "reproductive-development",
+    title: "Reproductive & Development",
+    description: "Male/female reproductive anatomy, gametogenesis, fertilization, embryology, fetal development",
+    estimatedMinutes: 40,
+    lessons: [
+      {
+        slug: "reproductive-systems",
+        title: "Male & Female Reproductive Systems",
+        content: `# Male & Female Reproductive Systems
+
+Understanding reproductive anatomy and gametogenesis is essential for the DAT. You need to know the structures, hormones, and processes involved in producing gametes and supporting reproduction.
+
+## Male Reproductive System
+
+### Anatomy
+
+| Structure | Function |
+|-----------|----------|
+| **Testes** | Produce **sperm** (seminiferous tubules) and **testosterone** (Leydig/interstitial cells) |
+| **Seminiferous tubules** | Site of **spermatogenesis**; contain **Sertoli cells** (nurse cells that support developing sperm) |
+| **Epididymis** | Sperm maturation and storage; sperm gain motility here |
+| **Vas deferens (ductus deferens)** | Transports sperm from epididymis to ejaculatory duct; cut during vasectomy |
+| **Seminal vesicles** | Secrete fructose-rich alkaline fluid (~60% of semen volume); nourishes sperm |
+| **Prostate gland** | Secretes slightly acidic milky fluid (~30% of semen); contains enzymes (PSA) |
+| **Bulbourethral (Cowper's) glands** | Secrete pre-ejaculate; lubricates and neutralizes residual urine acidity in urethra |
+
+> **High-Yield DAT Tip:** **Leydig cells** (interstitial cells) produce **testosterone** in response to **LH**. **Sertoli cells** (sustentacular cells) support spermatogenesis and are stimulated by **FSH**. Sertoli cells also produce **inhibin**, which provides negative feedback to the anterior pituitary to inhibit FSH release.
+
+### Spermatogenesis
+
+Spermatogenesis occurs in the **seminiferous tubules** and takes ~64 days:
+
+| Stage | Cell | Ploidy | Process |
+|-------|------|--------|---------|
+| 1 | **Spermatogonium** (2n) | Diploid | Mitosis (self-renewal + primary spermatocyte) |
+| 2 | **Primary spermatocyte** (2n) | Diploid | Meiosis I → |
+| 3 | **Secondary spermatocyte** (n) | Haploid | Meiosis II → |
+| 4 | **Spermatid** (n) | Haploid | Spermiogenesis (maturation, no division) → |
+| 5 | **Spermatozoon** (n) | Haploid | Mature sperm |
+
+- **Result:** 1 spermatogonium → **4 functional sperm**
+- **Continuous process** from puberty throughout life
+- Spermiogenesis = maturation of spermatids (develop acrosome, flagellum, shed cytoplasm)
+
+### Sperm Structure
+
+- **Head:** Contains haploid nucleus + **acrosome** (enzyme-filled cap for penetrating the egg)
+- **Midpiece:** Packed with **mitochondria** (energy for flagellum movement)
+- **Tail (flagellum):** Provides motility
+
+## Female Reproductive System
+
+### Anatomy
+
+| Structure | Function |
+|-----------|----------|
+| **Ovaries** | Produce **oocytes** (eggs) and hormones (**estrogen**, **progesterone**) |
+| **Fallopian tubes (oviducts)** | Site of **fertilization**; **fimbriae** sweep oocyte from ovary; **cilia** move egg toward uterus |
+| **Uterus** | Site of implantation and fetal development; **endometrium** is the inner lining that thickens and sheds |
+| **Cervix** | Lower portion of uterus; connects to vagina |
+| **Vagina** | Birth canal; receives sperm during intercourse |
+
+### Oogenesis
+
+| Stage | Cell | Ploidy | Timing |
+|-------|------|--------|--------|
+| 1 | **Oogonium** (2n) | Diploid | Mitosis occurs during **fetal development** |
+| 2 | **Primary oocyte** (2n) | Diploid | Arrested in **Prophase I** from birth until puberty |
+| 3 | **Secondary oocyte** (n) + 1st polar body | Haploid | Meiosis I completed at **ovulation** (one per cycle) |
+| 4 | **Ovum** (n) + 2nd polar body | Haploid | Meiosis II completed only upon **fertilization** |
+
+- **Result:** 1 oogonium → **1 functional egg** + 2-3 polar bodies (discarded)
+- Contrast with spermatogenesis: 4 functional sperm per primary spermatocyte
+
+> **High-Yield DAT Tip:** Oogenesis produces **1 viable egg** (unequal cytokinesis concentrates cytoplasm in the egg). Spermatogenesis produces **4 viable sperm** (equal cytokinesis). The secondary oocyte is arrested in **Metaphase II** until fertilization triggers completion of Meiosis II.
+
+### The Menstrual Cycle (~28 days)
+
+| Phase | Days | Ovarian Events | Uterine Events | Key Hormones |
+|-------|------|----------------|-----------------|-------------|
+| **Follicular phase** | 1-13 | Follicle develops (granulosa cells produce estrogen) | **Menstruation** (days 1-5) then **proliferative phase** (endometrium thickens) | FSH, estrogen (rising) |
+| **Ovulation** | ~Day 14 | Secondary oocyte released from ovary | — | **LH surge** (positive feedback from high estrogen) |
+| **Luteal phase** | 15-28 | Corpus luteum forms; produces **progesterone** and estrogen | **Secretory phase** (endometrium maintained, glands secrete) | Progesterone (dominant), LH |
+
+- If **no fertilization:** Corpus luteum degenerates → progesterone drops → endometrium sheds (menstruation)
+- If **fertilization occurs:** Embryo produces **hCG** (human chorionic gonadotropin) → maintains corpus luteum → progesterone continues → no menstruation
+
+> **DAT Tip:** The **LH surge** triggers ovulation. It is caused by **positive feedback** from high estrogen levels during the late follicular phase. After ovulation, **progesterone** from the corpus luteum dominates and maintains the endometrium. Pregnancy tests detect **hCG**.
+`,
+        keyTerms: [
+          { term: "Spermatogenesis", definition: "Process of sperm production in seminiferous tubules; one primary spermatocyte produces 4 sperm" },
+          { term: "Oogenesis", definition: "Process of egg production; one primary oocyte produces 1 viable egg and 2-3 polar bodies" },
+          { term: "Leydig Cells", definition: "Testicular cells that produce testosterone in response to LH" },
+          { term: "Sertoli Cells", definition: "Nurse cells in seminiferous tubules that support sperm development; stimulated by FSH" },
+          { term: "Corpus Luteum", definition: "Structure formed from follicle after ovulation; produces progesterone to maintain endometrium" },
+          { term: "LH Surge", definition: "Sudden spike in LH that triggers ovulation; caused by positive feedback from high estrogen" },
+          { term: "hCG", definition: "Human chorionic gonadotropin; hormone produced by embryo to maintain the corpus luteum during early pregnancy" },
+          { term: "Acrosome", definition: "Enzyme-filled cap on sperm head; releases enzymes to penetrate the egg's protective layers" },
+        ],
+      },
+      {
+        slug: "embryology-development",
+        title: "Fertilization, Embryology & Development",
+        content: `# Fertilization, Embryology & Development
+
+Embryology is a high-yield DAT topic. You need to understand the stages from fertilization through organ formation and the key germ layer derivatives.
+
+## Fertilization
+
+Fertilization occurs in the **ampulla (upper third) of the fallopian tube**.
+
+### Steps of Fertilization
+
+1. **Capacitation:** Sperm undergo biochemical changes in the female tract (removal of cholesterol from membrane, increased motility)
+2. **Acrosome reaction:** Sperm releases enzymes (**hyaluronidase**, **acrosin**) to penetrate the **corona radiata** and **zona pellucida**
+3. **Sperm-egg binding:** Sperm binds ZP3 receptors on the zona pellucida
+4. **Cortical reaction (block to polyspermy):** Oocyte releases cortical granules → zona pellucida hardens → prevents additional sperm from entering
+5. **Fusion of pronuclei:** Male and female pronuclei fuse → diploid **zygote** (2n) formed
+6. **Meiosis II completion:** Fertilization triggers completion of meiosis II in the oocyte
+
+> **High-Yield DAT Tip:** The **cortical reaction** is the slow block to polyspermy (the fast block is membrane depolarization). Without it, multiple sperm could fertilize the egg, creating a non-viable polyploid embryo. The cortical granule contents modify ZP3 so no more sperm can bind.
+
+## Early Embryonic Development
+
+| Stage | Time | Description |
+|-------|------|-------------|
+| **Zygote** | Day 0 | Single diploid cell formed by fusion of sperm and egg |
+| **Cleavage** | Days 1-3 | Rapid mitotic divisions WITHOUT growth (cells get smaller); total volume stays the same |
+| **Morula** | Day 3-4 | Solid ball of 16-32 cells |
+| **Blastocyst** | Day 5-7 | Hollow ball: **inner cell mass (ICM)** → embryo proper; **trophoblast** → placenta; **blastocoel** = fluid-filled cavity |
+| **Implantation** | Days 6-10 | Blastocyst embeds in the **endometrium** of the uterus |
+| **Gastrulation** | Week 3 | Formation of **three germ layers**: ectoderm, mesoderm, endoderm |
+| **Neurulation** | Week 3-4 | **Neural plate** folds to form **neural tube** (future CNS) and **neural crest cells** |
+| **Organogenesis** | Weeks 3-8 | Organ systems begin to form from the three germ layers |
+
+> **DAT Tip:** During **cleavage**, cells divide rapidly but do NOT grow — the embryo stays the same total size. The resulting cells are called **blastomeres**. Cleavage converts the single large zygote into many small cells, increasing the surface-area-to-volume ratio.
+
+## The Three Germ Layers and Their Derivatives
+
+| Germ Layer | Derivatives | Memory Aid |
+|-----------|-------------|------------|
+| **Ectoderm** (outermost) | **Nervous system** (brain, spinal cord, neural crest), epidermis, hair, nails, tooth enamel, sensory organs (lens, retina, inner ear), adrenal medulla | "Ecto = outer" → skin and nervous system |
+| **Mesoderm** (middle) | **Muscle** (all types), **bone**, cartilage, connective tissue, **cardiovascular system** (heart, blood vessels, blood), kidneys, gonads, adrenal cortex, dermis | "Meso = middle" → muscle, bone, blood, kidneys |
+| **Endoderm** (innermost) | **GI tract lining**, **respiratory tract lining**, liver, pancreas, thyroid, parathyroid, thymus, bladder lining, tonsils | "Endo = inner" → gut lining and associated organs |
+
+> **High-Yield DAT Tip:** Common question: "Which germ layer gives rise to the nervous system?" → **Ectoderm**. "Skeletal muscle?" → **Mesoderm**. "Liver and pancreas?" → **Endoderm**. The **neural crest** (ectoderm derivative) gives rise to: peripheral nerves, melanocytes, adrenal medulla, pharyngeal arch cartilage, dental papilla (dentin), Schwann cells.
+
+## Extraembryonic Membranes
+
+| Membrane | Function |
+|----------|----------|
+| **Amnion** | Forms the **amniotic sac**; surrounds embryo/fetus in **amniotic fluid** (cushioning, temperature regulation) |
+| **Chorion** | Outermost membrane; forms **chorionic villi** → becomes fetal part of the **placenta** |
+| **Allantois** | Waste storage in reptiles/birds; in mammals, contributes to **umbilical blood vessels** |
+| **Yolk sac** | Nutrition in birds/reptiles; in mammals, site of early **blood cell formation** (hematopoiesis) |
+
+## Fetal Development Milestones
+
+| Time | Milestone |
+|------|-----------|
+| **Weeks 1-2** | Cleavage, implantation |
+| **Week 3** | Gastrulation (three germ layers), primitive streak, neurulation begins |
+| **Weeks 3-8** | Organogenesis — most sensitive period for **teratogens** (birth defects) |
+| **Week 8** | All major organs present; embryo → **fetus** |
+| **Months 3-9** | Growth and maturation of organ systems |
+| **Week 20** | Fetal movements felt by mother |
+| **Week 24** | Lungs begin producing **surfactant** (viability threshold) |
+| **Week 38-40** | Full-term birth |
+
+> **DAT Tip:** The first trimester is the most critical for teratogenic effects because **organogenesis** occurs during weeks 3-8. Teratogens include alcohol (fetal alcohol syndrome), thalidomide, isotretinoin (Accutane), certain infections (TORCH: Toxoplasma, Other, Rubella, CMV, Herpes).
+
+## Induction & Cell Differentiation
+
+- **Induction:** One group of cells (organizer) signals another group to differentiate into a specific tissue
+- **Spemann organizer:** Dorsal lip of the blastopore; induces neural plate formation in amphibians
+- **Determination:** Cell's developmental fate becomes fixed (committed but not yet differentiated)
+- **Differentiation:** Cell acquires specialized structure and function (gene expression changes, not DNA sequence)
+- **Apoptosis:** Programmed cell death; essential for normal development (e.g., separation of digits, elimination of webbing)
+`,
+        keyTerms: [
+          { term: "Cleavage", definition: "Rapid mitotic divisions of the zygote without growth; produces smaller blastomeres" },
+          { term: "Blastocyst", definition: "Hollow embryonic structure with inner cell mass (embryo) and trophoblast (placenta)" },
+          { term: "Gastrulation", definition: "Process forming three germ layers (ectoderm, mesoderm, endoderm) from the blastula" },
+          { term: "Neurulation", definition: "Formation of the neural tube from the neural plate; precursor to the CNS" },
+          { term: "Ectoderm", definition: "Outermost germ layer; gives rise to nervous system, epidermis, and sensory organs" },
+          { term: "Mesoderm", definition: "Middle germ layer; gives rise to muscle, bone, cardiovascular system, and kidneys" },
+          { term: "Endoderm", definition: "Innermost germ layer; gives rise to GI tract lining, respiratory lining, liver, and pancreas" },
+          { term: "Neural Crest Cells", definition: "Migratory ectoderm-derived cells that form peripheral nerves, melanocytes, adrenal medulla, and more" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "Spermatogenesis produces how many functional sperm from one primary spermatocyte?",
+        choices: [
+          { label: "A", text: "1", isCorrect: false },
+          { label: "B", text: "2", isCorrect: false },
+          { label: "C", text: "4", isCorrect: true },
+          { label: "D", text: "8", isCorrect: false },
+          { label: "E", text: "16", isCorrect: false },
+        ],
+        explanation: "One **primary spermatocyte** (2n) undergoes **Meiosis I** to produce 2 secondary spermatocytes (n), and each undergoes **Meiosis II** to produce 2 spermatids (n), for a total of **4 functional spermatids** that mature into 4 spermatozoa. This contrasts with oogenesis, which produces only 1 functional egg from each primary oocyte (the rest become polar bodies).",
+        difficulty: 1,
+        tags: ["spermatogenesis", "meiosis"],
+      },
+      {
+        stem: "The secondary oocyte is arrested at which stage until fertilization occurs?",
+        choices: [
+          { label: "A", text: "Prophase I", isCorrect: false },
+          { label: "B", text: "Metaphase I", isCorrect: false },
+          { label: "C", text: "Prophase II", isCorrect: false },
+          { label: "D", text: "Metaphase II", isCorrect: true },
+          { label: "E", text: "Telophase II", isCorrect: false },
+        ],
+        explanation: "After ovulation, the **secondary oocyte** is arrested in **Metaphase II** of meiosis. It only completes meiosis II upon **fertilization** by a sperm, at which point the second polar body is expelled and the ovum and sperm pronuclei fuse. The primary oocyte was arrested in **Prophase I** from fetal life until ovulation.",
+        difficulty: 2,
+        tags: ["oogenesis", "meiosis"],
+      },
+      {
+        stem: "The cortical reaction following fertilization primarily functions to:",
+        choices: [
+          { label: "A", text: "Activate the egg's metabolic enzymes", isCorrect: false },
+          { label: "B", text: "Trigger the first cleavage division", isCorrect: false },
+          { label: "C", text: "Prevent polyspermy by hardening the zona pellucida", isCorrect: true },
+          { label: "D", text: "Initiate gastrulation", isCorrect: false },
+          { label: "E", text: "Fuse the male and female pronuclei", isCorrect: false },
+        ],
+        explanation: "The **cortical reaction** is the slow block to **polyspermy**. Upon sperm entry, cortical granules within the oocyte release their contents (enzymes) into the space between the cell membrane and zona pellucida. These enzymes modify the zona pellucida (hardening it and destroying ZP3 receptors), preventing additional sperm from binding and entering. Multiple sperm fertilization would create a non-viable polyploid embryo.",
+        difficulty: 2,
+        tags: ["fertilization", "polyspermy"],
+      },
+      {
+        stem: "The nervous system and epidermis are derived from which embryonic germ layer?",
+        choices: [
+          { label: "A", text: "Endoderm", isCorrect: false },
+          { label: "B", text: "Mesoderm", isCorrect: false },
+          { label: "C", text: "Ectoderm", isCorrect: true },
+          { label: "D", text: "Trophoblast", isCorrect: false },
+          { label: "E", text: "Yolk sac", isCorrect: false },
+        ],
+        explanation: "The **ectoderm** (outermost germ layer) gives rise to the **nervous system** (brain, spinal cord, peripheral nerves via neural crest), **epidermis** of the skin, hair, nails, tooth enamel, lens of the eye, and sensory receptor cells. The **mesoderm** produces muscle, bone, and cardiovascular system. The **endoderm** produces the GI and respiratory tract linings, liver, and pancreas.",
+        difficulty: 1,
+        tags: ["germ layers", "ectoderm"],
+      },
+      {
+        stem: "During early embryonic development, cleavage divisions differ from typical mitosis because:",
+        choices: [
+          { label: "A", text: "DNA replication does not occur between divisions", isCorrect: false },
+          { label: "B", text: "The resulting cells decrease in size without overall embryo growth", isCorrect: true },
+          { label: "C", text: "Meiosis rather than mitosis occurs", isCorrect: false },
+          { label: "D", text: "Only one daughter cell is produced per division", isCorrect: false },
+          { label: "E", text: "The chromosomes do not replicate", isCorrect: false },
+        ],
+        explanation: "During **cleavage**, the zygote divides rapidly by mitosis, but the resulting cells (**blastomeres**) become progressively **smaller** with each division — the total embryo volume remains constant. There is little or no G1 or G2 phase between S phases, so cells do not grow before dividing. This increases the surface-area-to-volume ratio. DNA replication does occur; the process is true mitosis with chromosome duplication.",
+        difficulty: 2,
+        tags: ["cleavage", "embryology"],
+      },
+      {
+        stem: "Which hormone is detected by a pregnancy test and functions to maintain the corpus luteum during early pregnancy?",
+        choices: [
+          { label: "A", text: "Progesterone", isCorrect: false },
+          { label: "B", text: "Estrogen", isCorrect: false },
+          { label: "C", text: "LH", isCorrect: false },
+          { label: "D", text: "hCG (human chorionic gonadotropin)", isCorrect: true },
+          { label: "E", text: "FSH", isCorrect: false },
+        ],
+        explanation: "**hCG** (human chorionic gonadotropin) is produced by the **trophoblast** (later the placenta) of the developing embryo. It maintains the **corpus luteum** during the first trimester, ensuring continued production of **progesterone** (which maintains the endometrium and prevents menstruation). Without hCG, the corpus luteum would degenerate, progesterone would drop, and the pregnancy would be lost. After the first trimester, the placenta takes over progesterone production.",
+        difficulty: 1,
+        tags: ["pregnancy", "hormones"],
+      },
+      {
+        stem: "The LH surge at midcycle triggers:",
+        choices: [
+          { label: "A", text: "Menstruation", isCorrect: false },
+          { label: "B", text: "Ovulation", isCorrect: true },
+          { label: "C", text: "Implantation", isCorrect: false },
+          { label: "D", text: "Follicle development", isCorrect: false },
+          { label: "E", text: "Corpus luteum degeneration", isCorrect: false },
+        ],
+        explanation: "The **LH surge** at approximately day 14 of the menstrual cycle triggers **ovulation** — the release of the secondary oocyte from the mature Graafian follicle. The LH surge is caused by **positive feedback** from high estrogen levels produced by the developing follicle. After ovulation, LH promotes transformation of the ruptured follicle into the **corpus luteum**, which produces progesterone.",
+        difficulty: 1,
+        tags: ["menstrual cycle", "ovulation"],
+      },
+      {
+        stem: "Neural crest cells are derived from ectoderm and give rise to all of the following EXCEPT:",
+        choices: [
+          { label: "A", text: "Melanocytes", isCorrect: false },
+          { label: "B", text: "Adrenal medulla", isCorrect: false },
+          { label: "C", text: "Schwann cells", isCorrect: false },
+          { label: "D", text: "Cardiac muscle", isCorrect: true },
+          { label: "E", text: "Pharyngeal arch cartilage", isCorrect: false },
+        ],
+        explanation: "**Cardiac muscle** is derived from **mesoderm**, not neural crest cells. **Neural crest cells** are a special population of ectoderm-derived migratory cells that give rise to a diverse array of structures: melanocytes, adrenal medulla (chromaffin cells), Schwann cells, sensory neurons of the PNS, pharyngeal arch cartilage and bone, dentin of teeth, and more. Neural crest derivatives are heavily tested on the DAT.",
+        difficulty: 2,
+        tags: ["neural crest", "germ layers"],
+      },
+      {
+        stem: "The acrosome reaction during fertilization involves the release of enzymes that:",
+        choices: [
+          { label: "A", text: "Stimulate the corpus luteum to produce progesterone", isCorrect: false },
+          { label: "B", text: "Digest through the corona radiata and zona pellucida", isCorrect: true },
+          { label: "C", text: "Initiate cleavage divisions", isCorrect: false },
+          { label: "D", text: "Convert the morula into a blastocyst", isCorrect: false },
+          { label: "E", text: "Trigger gastrulation", isCorrect: false },
+        ],
+        explanation: "The **acrosome** is an enzyme-filled vesicle at the tip of the sperm head. During the **acrosome reaction**, it releases **hyaluronidase** (digests the hyaluronic acid matrix of the corona radiata) and **acrosin** (a protease that digests through the zona pellucida). This allows the sperm to reach and fuse with the oocyte membrane. The acrosome reaction must occur for successful fertilization.",
+        difficulty: 2,
+        tags: ["fertilization", "acrosome"],
+      },
+      {
+        stem: "Teratogenic effects on the developing embryo are most severe during which period?",
+        choices: [
+          { label: "A", text: "Pre-implantation (days 1-6)", isCorrect: false },
+          { label: "B", text: "Organogenesis (weeks 3-8)", isCorrect: true },
+          { label: "C", text: "Fetal period (months 3-9)", isCorrect: false },
+          { label: "D", text: "Immediately before birth", isCorrect: false },
+          { label: "E", text: "During labor and delivery", isCorrect: false },
+        ],
+        explanation: "**Organogenesis** (weeks 3-8) is the most critical period for teratogenic effects because all major organ systems are forming from the three germ layers. Exposure to teratogens during this window can cause major structural birth defects. During the pre-implantation period, the embryo tends to either survive unharmed or fail to implant. During the fetal period, teratogens are more likely to cause growth retardation or functional defects rather than major structural abnormalities.",
+        difficulty: 2,
+        tags: ["teratogens", "embryology"],
+      },
+    ],
+  },
+  {
+    slug: "immunology",
+    title: "Immunology",
+    description: "Innate vs adaptive immunity, antibodies, MHC, T cells, B cells, allergies, autoimmunity, vaccines",
+    estimatedMinutes: 40,
+    lessons: [
+      {
+        slug: "innate-immunity",
+        title: "Innate Immunity & Inflammation",
+        content: `# Innate Immunity & Inflammation
+
+The immune system protects the body from pathogens. It consists of two interconnected branches: **innate (nonspecific)** immunity and **adaptive (specific)** immunity. Understanding both is crucial for the DAT.
+
+## Innate vs. Adaptive Immunity Overview
+
+| Feature | Innate Immunity | Adaptive Immunity |
+|---------|----------------|-------------------|
+| **Speed** | Immediate (minutes to hours) | Slow (days to weeks on first exposure) |
+| **Specificity** | Nonspecific (recognizes general pathogen patterns) | Highly specific (recognizes unique antigens) |
+| **Memory** | **No** immunological memory | **Yes** — faster, stronger secondary response |
+| **Components** | Barriers, phagocytes, complement, NK cells, inflammation | T cells, B cells, antibodies |
+| **Receptors** | **Pattern recognition receptors (PRRs)** — e.g., Toll-like receptors (TLRs) | **Antigen-specific receptors** — TCRs and BCRs |
+
+## First Line of Defense — Physical & Chemical Barriers
+
+| Barrier | Mechanism |
+|---------|-----------|
+| **Skin** (epidermis) | Physical barrier; dead keratinized cells; acidic pH; sebum |
+| **Mucous membranes** | Line respiratory, GI, and urogenital tracts; trap pathogens in **mucus** |
+| **Cilia** | Mucociliary escalator sweeps trapped pathogens out of airways |
+| **Stomach acid** | pH ~2 kills most ingested pathogens |
+| **Lysozyme** | Enzyme in tears, saliva, nasal secretions; breaks down peptidoglycan |
+| **Defensins** | Antimicrobial peptides that disrupt pathogen membranes |
+| **Normal flora** | Commensal bacteria compete with pathogens for resources (competitive exclusion) |
+
+## Second Line of Defense — Cellular & Chemical Responses
+
+### Phagocytes
+
+| Cell Type | Key Features |
+|-----------|-------------|
+| **Neutrophils** | Most abundant WBC; first responders; short-lived; multilobed nucleus; form **pus** |
+| **Macrophages** | Derived from monocytes; phagocytize + present antigens (**APCs**); long-lived |
+| **Dendritic cells** | Best antigen-presenting cells; bridge innate and adaptive immunity; activate naive T cells |
+| **Eosinophils** | Target parasites (helminths); involved in allergic responses |
+| **Basophils/Mast cells** | Release **histamine** and **heparin**; mediate allergic/inflammatory responses |
+
+> **High-Yield DAT Tip:** **Neutrophils** are the **first** immune cells to arrive at a site of infection (within hours). **Macrophages** arrive later but persist longer and serve as **antigen-presenting cells (APCs)** to activate the adaptive immune response. **Dendritic cells** are the most potent APCs.
+
+### Natural Killer (NK) Cells
+
+- Part of innate immunity (NOT T cells or B cells)
+- Kill **virus-infected cells** and **tumor cells**
+- Recognize cells that lack **MHC class I** molecules ("missing self" recognition)
+- Kill via **perforin** (pore-forming) and **granzymes** (induce apoptosis)
+
+### Complement System
+
+A cascade of ~30 plasma proteins that enhance ("complement") immune responses:
+
+| Function | Mechanism |
+|----------|-----------|
+| **Opsonization** | C3b coats pathogens → enhances phagocytosis |
+| **Membrane Attack Complex (MAC)** | C5b-C9 form pores in pathogen membranes → lysis |
+| **Chemotaxis** | C3a, C5a attract phagocytes to infection site |
+| **Inflammation** | C3a, C5a stimulate mast cell degranulation (histamine release) |
+
+Three activation pathways: **Classical** (antibody-antigen complexes), **Alternative** (spontaneous C3 hydrolysis on pathogen surfaces), **Lectin** (mannose-binding lectin on pathogen surfaces)
+
+### The Inflammatory Response
+
+1. **Tissue damage or infection** → damaged cells and resident macrophages release **cytokines** and **histamine**
+2. **Vasodilation** → increased blood flow → redness (rubor) and heat (calor)
+3. **Increased vascular permeability** → fluid and proteins leak into tissue → swelling (tumor) and pain (dolor)
+4. **Chemotaxis** → neutrophils and monocytes migrate to the site (diapedesis through vessel walls)
+5. **Phagocytosis** → immune cells engulf and destroy pathogens
+
+> **DAT Tip:** The four cardinal signs of inflammation: **R**edness, **H**eat, **S**welling, **P**ain (Rubor, Calor, Tumor, Dolor). Histamine from mast cells causes vasodilation and increased permeability. NSAIDs (e.g., ibuprofen) reduce inflammation by inhibiting **cyclooxygenase (COX)** enzymes → blocking prostaglandin synthesis.
+
+### Interferons
+
+- **Cytokines** produced by virus-infected cells
+- **Interferon-alpha (IFN-α)** and **IFN-β:** Alert neighboring cells to upregulate antiviral defenses
+- **Interferon-gamma (IFN-γ):** Activates macrophages; produced by T cells and NK cells
+- Do NOT directly kill viruses — they "interfere" with viral replication by signaling neighboring cells to prepare
+`,
+        keyTerms: [
+          { term: "Innate Immunity", definition: "Nonspecific, immediate defense against pathogens; includes barriers, phagocytes, complement, and inflammation" },
+          { term: "Phagocytosis", definition: "Process by which immune cells (neutrophils, macrophages) engulf and destroy pathogens" },
+          { term: "Complement System", definition: "Cascade of plasma proteins that opsonize pathogens, form MAC pores, and promote inflammation" },
+          { term: "Natural Killer (NK) Cells", definition: "Innate lymphocytes that kill virus-infected and tumor cells lacking MHC I" },
+          { term: "Toll-like Receptors (TLRs)", definition: "Pattern recognition receptors on innate immune cells that detect conserved pathogen molecules (PAMPs)" },
+          { term: "Inflammation", definition: "Local protective response to tissue damage: redness, heat, swelling, and pain" },
+          { term: "Histamine", definition: "Chemical released by mast cells/basophils that causes vasodilation and increased vascular permeability" },
+          { term: "Interferon", definition: "Cytokine produced by virus-infected cells that alerts neighboring cells to upregulate antiviral defenses" },
+        ],
+      },
+      {
+        slug: "adaptive-immunity",
+        title: "Adaptive Immunity, Antibodies & Immune Disorders",
+        content: `# Adaptive Immunity, Antibodies & Immune Disorders
+
+Adaptive immunity provides highly specific, long-lasting protection with immunological memory. For the DAT, you must understand T cells, B cells, antibodies, MHC molecules, and common immune disorders.
+
+## Key Concepts
+
+- **Antigen:** Any molecule that can trigger an immune response (usually a foreign protein or polysaccharide)
+- **Epitope (antigenic determinant):** The specific part of an antigen recognized by an antibody or T cell receptor
+- **Immunological memory:** After initial exposure, memory cells enable a faster, stronger response on re-exposure
+
+## MHC Molecules (Major Histocompatibility Complex)
+
+| Feature | MHC Class I | MHC Class II |
+|---------|------------|-------------|
+| **Found on** | **All nucleated cells** | **APCs only** (macrophages, dendritic cells, B cells) |
+| **Presents** | **Intracellular** antigens (endogenous — e.g., viral proteins) | **Extracellular** antigens (exogenous — phagocytized pathogens) |
+| **Recognized by** | **CD8+ cytotoxic T cells** | **CD4+ helper T cells** |
+| **Function** | Targets infected cells for destruction | Activates helper T cells to coordinate immune response |
+
+> **High-Yield DAT Tip:** MHC I = **Class 1** → presents to **CD8** (1 x 8 = 8). MHC II = **Class 2** → presents to **CD4** (2 x 4 = 8). Both products equal 8 — this is a classic mnemonic. MHC I is on ALL nucleated cells (RBCs lack a nucleus → no MHC I).
+
+## T Cells (Cell-Mediated Immunity)
+
+All T cells mature in the **thymus** (T = Thymus).
+
+| T Cell Type | Surface Marker | Function |
+|-------------|---------------|----------|
+| **Helper T cells (Th)** | **CD4** | Coordinate immune response; secrete **cytokines**; activate B cells, macrophages, and cytotoxic T cells |
+| **Cytotoxic T cells (Tc/CTLs)** | **CD8** | Directly kill infected cells, tumor cells, and transplant cells; release **perforin** and **granzymes** |
+| **Regulatory T cells (Treg)** | CD4+ CD25+ | Suppress immune responses; prevent autoimmunity; maintain tolerance |
+| **Memory T cells** | CD4 or CD8 | Long-lived cells that provide rapid response upon re-exposure to same antigen |
+
+> **DAT Tip:** **Helper T cells (CD4+)** are the "conductors of the immune orchestra" — they do not directly kill anything but activate nearly every other immune cell through cytokine secretion. This is why **HIV** (which destroys CD4+ T cells) is so devastating — it cripples the entire adaptive immune system.
+
+## B Cells (Humoral Immunity)
+
+B cells mature in the **bone marrow** (B = Bone marrow) and produce **antibodies** (immunoglobulins).
+
+### B Cell Activation
+
+1. B cell receptor (membrane-bound antibody) binds specific antigen
+2. B cell internalizes antigen, processes it, and presents peptide on **MHC II**
+3. **Helper T cell (CD4+)** recognizes MHC II-peptide complex → provides co-stimulation and cytokines
+4. B cell undergoes **clonal expansion** (proliferation)
+5. Differentiates into: **Plasma cells** (secrete antibodies) and **Memory B cells** (long-lived for secondary response)
+
+### Antibody (Immunoglobulin) Structure
+
+- **Y-shaped** molecule with 2 heavy chains + 2 light chains
+- **Fab region** (Fragment antigen-binding): Variable region that binds specific antigen
+- **Fc region** (Fragment crystallizable): Constant region; determines antibody class; binds receptors on immune cells
+- **Variable region** gives antigen specificity; **constant region** determines effector function
+
+### Antibody Classes (Isotypes)
+
+| Class | Structure | Key Functions | Memory Aid |
+|-------|-----------|---------------|------------|
+| **IgG** | Monomer | Most abundant in blood; crosses placenta (passive immunity to fetus); opsonization; complement activation | **G** = **G**amma globulin; crosses placenta |
+| **IgM** | Pentamer | First antibody produced (primary response); best complement activator; surface BCR on naive B cells | **M** = first (**M**acro, pentaMer) |
+| **IgA** | Dimer | Found in **secretions** (saliva, tears, breast milk, GI/respiratory mucus); mucosal immunity | **A** = secretory, mucos**A**l |
+| **IgE** | Monomer | Mediates **allergic reactions** (type I hypersensitivity); binds mast cells/basophils; anti-parasite | **E** = allerg**E**, parasit**E** |
+| **IgD** | Monomer | Surface BCR on mature naive B cells; function unclear | **D** = on B cell surface (like a **D**oorbell) |
+
+> **High-Yield DAT Tip:** **IgM** is the first antibody produced. **IgG** is the most abundant and the only antibody to cross the placenta. **IgA** protects mucosal surfaces. **IgE** mediates allergies. These are the four most commonly tested.
+
+## Primary vs. Secondary Immune Response
+
+| Feature | Primary Response | Secondary Response |
+|---------|-----------------|-------------------|
+| **First exposure** | Yes | No (re-exposure) |
+| **Lag period** | Long (7-14 days) | Short (1-3 days) |
+| **Antibody type** | Mostly **IgM** then class switching to IgG | Primarily **IgG** |
+| **Antibody level** | Lower | Much higher |
+| **Duration** | Shorter | Longer |
+| **Memory cells** | Generated | Activated (clonal expansion) |
+
+## Immune Disorders
+
+### Hypersensitivity Reactions
+
+| Type | Name | Mechanism | Examples |
+|------|------|-----------|---------|
+| **Type I** | Immediate/Anaphylactic | **IgE** binds mast cells → histamine release | Allergies, anaphylaxis, asthma, hay fever |
+| **Type II** | Cytotoxic | **IgG/IgM** against cell surface antigens | Hemolytic disease of newborn, transfusion reactions, autoimmune hemolytic anemia |
+| **Type III** | Immune complex | Antigen-antibody complexes deposit in tissues | Serum sickness, lupus (SLE), rheumatoid arthritis |
+| **Type IV** | Delayed-type | **T cell-mediated** (no antibodies) | TB skin test (PPD), contact dermatitis, transplant rejection |
+
+### Autoimmune Diseases
+
+The immune system attacks self-tissues:
+- **Type 1 diabetes:** T cells destroy pancreatic beta cells
+- **Multiple sclerosis:** Immune attack on myelin in CNS
+- **Rheumatoid arthritis:** Immune complex deposition in joints
+- **Graves' disease:** Antibodies stimulate TSH receptors (hyperthyroidism)
+- **Systemic lupus erythematosus (SLE):** Anti-nuclear antibodies; affects multiple organs
+
+### Active vs. Passive Immunity
+
+| Feature | Active Immunity | Passive Immunity |
+|---------|----------------|-----------------|
+| **How acquired** | Exposure to antigen (infection or vaccination) | Receiving pre-formed antibodies |
+| **Memory** | **Yes** (long-lasting) | **No** (temporary) |
+| **Speed of onset** | Slow (days to weeks) | Immediate |
+| **Duration** | Long-lasting (years to lifetime) | Short (weeks to months) |
+| **Examples** | Natural infection; vaccines | Maternal IgG across placenta; IgA in breast milk; antivenom injection |
+
+> **DAT Tip:** Vaccines provide **active** immunity — they expose the immune system to a weakened or inactivated antigen, triggering memory cell production. Passive immunity provides immediate but temporary protection because no memory cells are formed (e.g., a newborn receiving IgG from the mother across the placenta).
+`,
+        keyTerms: [
+          { term: "MHC Class I", definition: "Present on all nucleated cells; displays intracellular antigens to CD8+ cytotoxic T cells" },
+          { term: "MHC Class II", definition: "Present on APCs only; displays extracellular antigens to CD4+ helper T cells" },
+          { term: "Helper T Cell (CD4+)", definition: "Coordinates immune responses by secreting cytokines to activate B cells, macrophages, and cytotoxic T cells" },
+          { term: "Cytotoxic T Cell (CD8+)", definition: "Directly kills infected or abnormal cells using perforin and granzymes" },
+          { term: "Plasma Cell", definition: "Differentiated B cell that produces and secretes large quantities of antibodies" },
+          { term: "IgG", definition: "Most abundant antibody in blood; only Ig to cross placenta; provides passive immunity to fetus" },
+          { term: "IgE", definition: "Antibody that mediates type I hypersensitivity (allergic reactions) by binding mast cells" },
+          { term: "Active Immunity", definition: "Immunity produced by the body's own immune response to antigen exposure; produces memory cells" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "Which of the following is a characteristic of innate immunity but NOT adaptive immunity?",
+        choices: [
+          { label: "A", text: "Immunological memory", isCorrect: false },
+          { label: "B", text: "Antigen-specific receptors", isCorrect: false },
+          { label: "C", text: "Clonal expansion of lymphocytes", isCorrect: false },
+          { label: "D", text: "Pattern recognition of conserved pathogen molecules", isCorrect: true },
+          { label: "E", text: "Antibody production", isCorrect: false },
+        ],
+        explanation: "Innate immunity uses **pattern recognition receptors (PRRs)** such as Toll-like receptors to detect conserved **pathogen-associated molecular patterns (PAMPs)** — this is nonspecific recognition. Adaptive immunity features antigen-specific receptors (TCRs, BCRs), immunological memory, clonal expansion, and antibody production — all of which are absent from innate immunity.",
+        difficulty: 1,
+        tags: ["innate immunity", "adaptive immunity"],
+      },
+      {
+        stem: "MHC class I molecules are found on:",
+        choices: [
+          { label: "A", text: "Only macrophages and dendritic cells", isCorrect: false },
+          { label: "B", text: "Only B cells", isCorrect: false },
+          { label: "C", text: "All nucleated cells", isCorrect: true },
+          { label: "D", text: "Red blood cells only", isCorrect: false },
+          { label: "E", text: "Only CD4+ T cells", isCorrect: false },
+        ],
+        explanation: "**MHC class I** molecules are expressed on virtually **all nucleated cells** in the body. They present intracellular (endogenous) antigens — such as viral proteins — to **CD8+ cytotoxic T cells**. Red blood cells lack a nucleus and therefore do not express MHC I. **MHC class II** is restricted to antigen-presenting cells (macrophages, dendritic cells, B cells).",
+        difficulty: 1,
+        tags: ["MHC", "antigen presentation"],
+      },
+      {
+        stem: "The antibody class that is the first to be produced during a primary immune response is:",
+        choices: [
+          { label: "A", text: "IgG", isCorrect: false },
+          { label: "B", text: "IgA", isCorrect: false },
+          { label: "C", text: "IgM", isCorrect: true },
+          { label: "D", text: "IgE", isCorrect: false },
+          { label: "E", text: "IgD", isCorrect: false },
+        ],
+        explanation: "**IgM** is the first antibody produced during the **primary immune response**. It is a **pentamer** (5 Y-shaped units linked together), making it the largest antibody and an excellent complement activator. After class switching (isotype switching), B cells produce **IgG** (the most abundant antibody in blood and the predominant antibody in the secondary response). IgM on the B cell surface also serves as the B cell receptor (BCR).",
+        difficulty: 1,
+        tags: ["antibodies", "IgM"],
+      },
+      {
+        stem: "Helper T cells (CD4+) are critical for the immune response because they:",
+        choices: [
+          { label: "A", text: "Directly kill virus-infected cells using perforin", isCorrect: false },
+          { label: "B", text: "Secrete cytokines that activate B cells, macrophages, and cytotoxic T cells", isCorrect: true },
+          { label: "C", text: "Produce antibodies that neutralize pathogens", isCorrect: false },
+          { label: "D", text: "Phagocytize bacteria and present antigens on MHC I", isCorrect: false },
+          { label: "E", text: "Form the membrane attack complex", isCorrect: false },
+        ],
+        explanation: "**CD4+ helper T cells** coordinate the adaptive immune response by secreting **cytokines** that activate multiple immune cell types: they help **B cells** undergo class switching and differentiate into plasma cells, activate **macrophages** for enhanced killing, and promote **CD8+ cytotoxic T cell** proliferation. They do NOT directly kill cells or produce antibodies. HIV destroys CD4+ T cells, which is why it causes such severe immunodeficiency.",
+        difficulty: 2,
+        tags: ["T cells", "CD4"],
+      },
+      {
+        stem: "IgE is most closely associated with:",
+        choices: [
+          { label: "A", text: "Mucosal immunity in the GI tract", isCorrect: false },
+          { label: "B", text: "Crossing the placenta to the fetus", isCorrect: false },
+          { label: "C", text: "Allergic reactions and defense against parasites", isCorrect: true },
+          { label: "D", text: "Being the first antibody produced in a primary response", isCorrect: false },
+          { label: "E", text: "Activating the complement system as a pentamer", isCorrect: false },
+        ],
+        explanation: "**IgE** mediates **type I hypersensitivity (allergic)** reactions by binding to **Fc receptors on mast cells and basophils**. When allergens cross-link bound IgE molecules, mast cells degranulate, releasing **histamine** and other mediators → allergic symptoms (itching, swelling, bronchoconstriction, anaphylaxis). IgE also plays a role in defense against **parasites** (helminths). IgA protects mucosal surfaces. IgG crosses the placenta. IgM is the pentamer.",
+        difficulty: 2,
+        tags: ["IgE", "allergy"],
+      },
+      {
+        stem: "A vaccine provides immunity by:",
+        choices: [
+          { label: "A", text: "Transferring pre-formed antibodies from another individual", isCorrect: false },
+          { label: "B", text: "Exposing the immune system to a weakened or inactivated antigen to produce memory cells", isCorrect: true },
+          { label: "C", text: "Directly killing pathogens in the blood", isCorrect: false },
+          { label: "D", text: "Suppressing the immune system to prevent autoimmunity", isCorrect: false },
+          { label: "E", text: "Providing temporary passive immunity lasting only weeks", isCorrect: false },
+        ],
+        explanation: "Vaccines provide **active immunity** by exposing the immune system to a weakened (attenuated), inactivated, or subunit form of a pathogen. This stimulates the primary immune response and, crucially, produces **memory B and T cells**. Upon future exposure to the real pathogen, these memory cells mount a rapid, robust **secondary immune response**, preventing or reducing disease. Passive immunity (e.g., receiving antibodies via injection) provides immediate but temporary protection without memory.",
+        difficulty: 1,
+        tags: ["vaccines", "active immunity"],
+      },
+      {
+        stem: "Type IV hypersensitivity reactions differ from types I-III because they:",
+        choices: [
+          { label: "A", text: "Involve antibody-mediated responses", isCorrect: false },
+          { label: "B", text: "Are mediated by T cells rather than antibodies", isCorrect: true },
+          { label: "C", text: "Occur within seconds of antigen exposure", isCorrect: false },
+          { label: "D", text: "Involve IgE and mast cell degranulation", isCorrect: false },
+          { label: "E", text: "Are caused by immune complex deposition", isCorrect: false },
+        ],
+        explanation: "**Type IV hypersensitivity** (delayed-type hypersensitivity) is the only type that is **T cell-mediated** (no antibodies involved). It takes 24-72 hours to develop. Examples include the **tuberculin (PPD) skin test**, **contact dermatitis** (poison ivy), and **transplant rejection**. Types I (IgE), II (IgG/IgM cytotoxic), and III (immune complex) are all antibody-mediated.",
+        difficulty: 2,
+        tags: ["hypersensitivity", "T cells"],
+      },
+      {
+        stem: "The complement system enhances phagocytosis through which process?",
+        choices: [
+          { label: "A", text: "Antigenic variation", isCorrect: false },
+          { label: "B", text: "Opsonization by C3b", isCorrect: true },
+          { label: "C", text: "Class switching to IgG", isCorrect: false },
+          { label: "D", text: "MHC class II presentation", isCorrect: false },
+          { label: "E", text: "Interferon signaling", isCorrect: false },
+        ],
+        explanation: "**Opsonization** is the process of coating a pathogen with molecules (opsonins) that enhance phagocytosis. **C3b** is the major opsonin of the complement system — it coats pathogen surfaces, and phagocytes have C3b receptors that recognize the coated pathogens, facilitating engulfment. Other complement functions include the **membrane attack complex (MAC)** for lysis and **C3a/C5a** for chemotaxis and inflammation.",
+        difficulty: 2,
+        tags: ["complement", "opsonization"],
+      },
+      {
+        stem: "Which of the following correctly describes passive immunity?",
+        choices: [
+          { label: "A", text: "It produces long-lasting memory cells", isCorrect: false },
+          { label: "B", text: "It involves the transfer of pre-formed antibodies and provides immediate but temporary protection", isCorrect: true },
+          { label: "C", text: "It requires weeks to develop after antigen exposure", isCorrect: false },
+          { label: "D", text: "It is stimulated by vaccines", isCorrect: false },
+          { label: "E", text: "It involves activation of T cells against a specific antigen", isCorrect: false },
+        ],
+        explanation: "**Passive immunity** involves receiving **pre-formed antibodies** from another source, providing **immediate** but **temporary** protection (weeks to months). Examples: maternal **IgG** crossing the placenta, **IgA** in breast milk, and injection of **antivenom** or **immune globulin**. No memory cells are produced because the recipient's own immune system was never activated. **Active immunity** (from infection or vaccination) takes longer to develop but produces memory cells for long-lasting protection.",
+        difficulty: 2,
+        tags: ["passive immunity", "antibodies"],
+      },
+      {
+        stem: "Natural killer (NK) cells of the innate immune system target cells that:",
+        choices: [
+          { label: "A", text: "Express high levels of MHC class I", isCorrect: false },
+          { label: "B", text: "Lack MHC class I molecules on their surface", isCorrect: true },
+          { label: "C", text: "Present antigens via MHC class II", isCorrect: false },
+          { label: "D", text: "Are coated with IgE antibodies", isCorrect: false },
+          { label: "E", text: "Are actively undergoing mitosis", isCorrect: false },
+        ],
+        explanation: "**NK cells** use the **\"missing self\"** mechanism — they survey cells for the presence of **MHC class I** molecules. Normal cells express MHC I, which sends an inhibitory signal to NK cells (\"don't kill me\"). **Virus-infected cells** and **tumor cells** often downregulate MHC I to evade cytotoxic T cells, but this makes them targets for NK cells. NK cells kill using **perforin** (pore-forming protein) and **granzymes** (serine proteases that induce apoptosis).",
+        difficulty: 3,
+        tags: ["NK cells", "innate immunity"],
+      },
+    ],
+  },
+  {
+    slug: "ecology",
+    title: "Ecology",
+    description: "Ecosystems, food webs, energy flow, biogeochemical cycles, biomes, population dynamics, symbiosis",
+    estimatedMinutes: 35,
+    lessons: [
+      {
+        slug: "ecosystems-energy",
+        title: "Ecosystems, Energy Flow & Biogeochemical Cycles",
+        content: `# Ecosystems, Energy Flow & Biogeochemical Cycles
+
+Ecology examines interactions between organisms and their environment. For the DAT, you need to understand energy flow, trophic levels, nutrient cycling, and how ecosystems function.
+
+## Ecosystem Components
+
+| Component | Description | Examples |
+|-----------|-------------|---------|
+| **Biotic factors** | Living components | Plants, animals, fungi, bacteria |
+| **Abiotic factors** | Nonliving components | Temperature, light, water, pH, soil, wind |
+| **Producers (autotrophs)** | Make their own food from inorganic molecules | Plants (photosynthesis), chemosynthetic bacteria |
+| **Primary consumers** | Herbivores that eat producers | Rabbits, grasshoppers, zooplankton |
+| **Secondary consumers** | Carnivores that eat primary consumers | Frogs, small fish |
+| **Tertiary consumers** | Carnivores that eat secondary consumers | Hawks, large fish |
+| **Decomposers** | Break down dead organic matter; recycle nutrients | Bacteria, fungi |
+
+## Energy Flow Through Ecosystems
+
+### Trophic Levels
+
+Energy flows in **one direction** through an ecosystem: Sun → Producers → Primary consumers → Secondary consumers → Tertiary consumers
+
+| Trophic Level | Organisms | Energy Available |
+|--------------|-----------|-----------------|
+| 1st (Producers) | Plants, algae | 100% (baseline) |
+| 2nd (Primary consumers) | Herbivores | ~10% |
+| 3rd (Secondary consumers) | Carnivores | ~1% |
+| 4th (Tertiary consumers) | Top predators | ~0.1% |
+
+> **High-Yield DAT Tip:** The **10% rule** — only about **10%** of the energy at one trophic level is passed to the next. The remaining 90% is lost as **heat** (from cellular respiration), used in metabolism, or lost as waste. This is why food chains rarely exceed 4-5 trophic levels and why there are fewer top predators than producers.
+
+### Food Chains vs. Food Webs
+
+- **Food chain:** Linear sequence of who eats whom (simple)
+- **Food web:** Interconnected food chains showing complex feeding relationships (more realistic)
+- **Keystone species:** Species whose removal causes disproportionate ecosystem disruption (e.g., sea otters controlling sea urchin populations that graze on kelp)
+
+### Ecological Pyramids
+
+| Pyramid Type | What It Shows | Always Upright? |
+|-------------|---------------|-----------------|
+| **Pyramid of energy** | Energy at each trophic level | **Always upright** (energy always decreases) |
+| **Pyramid of biomass** | Total mass of organisms at each level | Usually upright; inverted in some aquatic systems |
+| **Pyramid of numbers** | Number of individuals at each level | Can be inverted (e.g., one tree supporting many insects) |
+
+### Productivity
+
+- **Gross Primary Productivity (GPP):** Total energy fixed by producers (total photosynthesis)
+- **Net Primary Productivity (NPP):** Energy available to consumers = GPP - Respiration
+- **NPP = GPP - R** (R = energy lost to producer respiration)
+
+## Biogeochemical Cycles
+
+### Water Cycle
+
+Evaporation → Transpiration (from plants) → Condensation → Precipitation → Runoff/infiltration → Repeat
+
+### Carbon Cycle
+
+| Process | Effect on Atmospheric CO₂ |
+|---------|---------------------------|
+| **Photosynthesis** | Removes CO₂ (carbon sink) |
+| **Cellular respiration** | Releases CO₂ |
+| **Combustion** (fossil fuels) | Releases CO₂ (human impact) |
+| **Decomposition** | Releases CO₂ |
+
+> **DAT Tip:** Carbon enters living systems via **photosynthesis** (CO₂ → organic carbon) and is released back to the atmosphere via **respiration** and **decomposition**. Human burning of fossil fuels adds excess CO₂ → **greenhouse effect** → climate change.
+
+### Nitrogen Cycle
+
+| Process | Description | Organisms |
+|---------|-------------|-----------|
+| **Nitrogen fixation** | N₂ → NH₃ (ammonia) | *Rhizobium* (symbiotic with legumes), *Azotobacter* (free-living), lightning |
+| **Nitrification** | NH₃ → NO₂⁻ → NO₃⁻ | *Nitrosomonas*, *Nitrobacter* |
+| **Assimilation** | Plants absorb NO₃⁻ or NH₄⁺ and incorporate into organic molecules | Plants |
+| **Ammonification** | Organic N → NH₃ (from decomposition) | Decomposers (bacteria, fungi) |
+| **Denitrification** | NO₃⁻ → N₂ (returned to atmosphere) | Anaerobic bacteria |
+
+> **High-Yield DAT Tip:** **Nitrogen fixation** (N₂ → NH₃) is performed by nitrogen-fixing bacteria, many of which live in **root nodules of legumes** (e.g., *Rhizobium*). This is why legumes (beans, peas, clover) enrich soil nitrogen. Animals cannot fix atmospheric nitrogen — they must obtain it by eating plants or other animals.
+
+### Phosphorus Cycle
+
+- **No atmospheric component** (unlike carbon and nitrogen cycles)
+- Phosphorus moves through rocks → soil → water → organisms → sediment
+- Limiting nutrient in many freshwater ecosystems
+- Essential for DNA, RNA, ATP, and phospholipids
+- Excess phosphorus (fertilizer runoff) → **eutrophication** → algal blooms → oxygen depletion → dead zones
+`,
+        keyTerms: [
+          { term: "Trophic Level", definition: "Position in a food chain; energy decreases at each successive level (~10% rule)" },
+          { term: "10% Rule", definition: "Only about 10% of energy at one trophic level is passed to the next; rest lost as heat" },
+          { term: "Keystone Species", definition: "Species whose removal causes disproportionate ecosystem change" },
+          { term: "Net Primary Productivity", definition: "Energy available to consumers after producers' respiration: NPP = GPP - R" },
+          { term: "Nitrogen Fixation", definition: "Conversion of atmospheric N2 to ammonia (NH3) by bacteria like Rhizobium" },
+          { term: "Eutrophication", definition: "Excessive nutrient enrichment (N, P) in water bodies causing algal blooms and oxygen depletion" },
+          { term: "Decomposers", definition: "Organisms (bacteria, fungi) that break down dead matter and recycle nutrients back into the ecosystem" },
+          { term: "Carbon Cycle", definition: "Biogeochemical cycle: carbon fixed by photosynthesis, released by respiration and combustion" },
+        ],
+      },
+      {
+        slug: "population-biomes",
+        title: "Population Ecology, Biomes & Symbiosis",
+        content: `# Population Ecology, Biomes & Symbiosis
+
+Understanding population dynamics, biome characteristics, and species interactions is essential for the DAT ecology section.
+
+## Population Ecology
+
+### Population Growth Models
+
+| Model | Equation | Description | Shape |
+|-------|----------|-------------|-------|
+| **Exponential growth** | dN/dt = rN | Unlimited resources; no competition; population grows without bound | **J-shaped** curve |
+| **Logistic growth** | dN/dt = rN(K-N)/K | Limited resources; growth slows as population approaches **carrying capacity (K)** | **S-shaped** (sigmoidal) curve |
+
+- **r** = intrinsic rate of increase (birth rate - death rate)
+- **N** = population size
+- **K** = carrying capacity (maximum sustainable population size)
+
+> **High-Yield DAT Tip:** In logistic growth, the population grows fastest when N = **K/2** (half the carrying capacity). At this point, dN/dt is at its maximum. As N approaches K, growth rate approaches zero. This is the most commonly tested population ecology concept on the DAT.
+
+### r-selected vs. K-selected Species
+
+| Feature | r-selected | K-selected |
+|---------|-----------|-----------|
+| **Population size** | Fluctuates; often below K | Stable; near K |
+| **Offspring** | Many, small, little parental care | Few, large, extensive parental care |
+| **Maturation** | Rapid | Slow |
+| **Lifespan** | Short | Long |
+| **Survivorship curve** | Type III | Type I |
+| **Examples** | Insects, bacteria, mice, dandelions | Elephants, whales, humans, oak trees |
+
+### Survivorship Curves
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| **Type I** | Low mortality early, high mortality late (most survive to old age) | Humans, large mammals |
+| **Type II** | Constant mortality throughout life | Birds, small mammals |
+| **Type III** | Very high mortality early, low mortality for survivors | Fish, insects, plants (many offspring, few survive) |
+
+### Population Regulation
+
+| Factor | Type | Effect |
+|--------|------|--------|
+| **Density-dependent** | Biotic | Competition, predation, disease, parasitism — intensify as population grows |
+| **Density-independent** | Abiotic | Natural disasters, weather, fire — affect population regardless of size |
+
+## Species Interactions
+
+| Interaction | Species A | Species B | Example |
+|-------------|----------|----------|---------|
+| **Mutualism** | + (benefits) | + (benefits) | Mycorrhizae (fungi-plant roots); cleaner fish + large fish |
+| **Commensalism** | + (benefits) | 0 (unaffected) | Barnacles on whales; birds nesting in trees |
+| **Parasitism** | + (benefits) | - (harmed) | Tapeworms in intestines; ticks on dogs |
+| **Predation** | + (benefits) | - (harmed/killed) | Lion eating zebra; spider eating fly |
+| **Competition** | - (harmed) | - (harmed) | Two species competing for same food source |
+
+> **DAT Tip:** **Competitive exclusion principle** (Gause's principle): Two species competing for the exact same niche cannot coexist indefinitely — one will outcompete the other. Species can coexist through **resource partitioning** (dividing the niche to reduce competition).
+
+### Ecological Succession
+
+| Type | Starting Point | Description | Example |
+|------|---------------|-------------|---------|
+| **Primary succession** | Bare substrate (no soil) | Pioneer species (lichens, mosses) colonize → build soil → grasses → shrubs → climax community | Lava flow, retreating glacier |
+| **Secondary succession** | After disturbance (soil remains) | Faster than primary; existing seed bank and soil accelerate recovery | After fire, hurricane, abandoned farmland |
+
+**Climax community:** Stable, mature community that is the end point of succession (e.g., deciduous forest)
+
+## Biomes
+
+| Biome | Key Characteristics | Key Organisms |
+|-------|-------------------|---------------|
+| **Tropical rainforest** | High temperature, high rainfall year-round; greatest biodiversity | Primates, parrots, epiphytes, jungle canopy |
+| **Temperate deciduous forest** | Moderate temperature; deciduous trees; four distinct seasons | Oak, maple, deer, bears |
+| **Taiga (boreal forest)** | Cold winters; coniferous trees (evergreens); largest terrestrial biome | Spruce, pine, moose, wolves |
+| **Tundra** | Very cold; permafrost; short growing season; no trees | Moss, lichen, caribou, arctic fox |
+| **Desert** | Low precipitation (<25 cm/year); extreme temperature variation | Cacti, lizards, camels |
+| **Grassland (savanna/prairie)** | Moderate rainfall; dominated by grasses; few trees | Bison, zebras, prairie dogs |
+| **Marine (ocean)** | Saltwater; covers >70% of Earth; photic zone supports photosynthesis | Phytoplankton, fish, whales, coral reefs |
+| **Freshwater** | Low salt; includes lakes, rivers, wetlands | Fish, amphibians, aquatic plants |
+
+> **High-Yield DAT Tip:** **Tropical rainforests** have the greatest **species diversity** (biodiversity). The **taiga (boreal forest)** is the **largest terrestrial biome** by area. The **tundra** is characterized by **permafrost** (permanently frozen soil). Know these distinctions — they appear frequently on the DAT.
+
+## Ecological Concepts
+
+- **Niche:** An organism's total role in its environment (what it eats, where it lives, when it's active, etc.)
+- **Habitat:** Physical location where an organism lives
+- **Biodiversity:** Variety of species in an ecosystem; higher biodiversity generally = greater ecosystem stability
+- **Biomagnification:** Toxin concentration increases at higher trophic levels (e.g., DDT, mercury)
+- **Bioaccumulation:** Toxin accumulates within an individual organism over its lifetime
+`,
+        keyTerms: [
+          { term: "Carrying Capacity (K)", definition: "Maximum population size an environment can sustain indefinitely" },
+          { term: "Logistic Growth", definition: "S-shaped population growth that levels off at carrying capacity: dN/dt = rN(K-N)/K" },
+          { term: "Competitive Exclusion", definition: "Two species competing for the same niche cannot coexist; one will be eliminated" },
+          { term: "Mutualism", definition: "Symbiotic relationship where both species benefit (+/+)" },
+          { term: "Ecological Succession", definition: "Gradual change in species composition over time; primary (bare) or secondary (disturbed)" },
+          { term: "Biomagnification", definition: "Increasing concentration of toxins at higher trophic levels" },
+          { term: "r-selected Species", definition: "Species with rapid reproduction, many offspring, and little parental care" },
+          { term: "K-selected Species", definition: "Species with slow reproduction, few offspring, and extensive parental care; population near K" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "According to the 10% rule, if producers fix 10,000 kcal of energy, approximately how much energy is available to secondary consumers?",
+        choices: [
+          { label: "A", text: "10,000 kcal", isCorrect: false },
+          { label: "B", text: "1,000 kcal", isCorrect: false },
+          { label: "C", text: "100 kcal", isCorrect: true },
+          { label: "D", text: "10 kcal", isCorrect: false },
+          { label: "E", text: "50 kcal", isCorrect: false },
+        ],
+        explanation: "The **10% rule** states that only ~10% of energy at one trophic level passes to the next. Producers: 10,000 kcal → Primary consumers: 1,000 kcal (10%) → **Secondary consumers: 100 kcal** (10% of 1,000). This energy loss (90% at each level) is primarily due to heat from cellular respiration, which is why food chains rarely exceed 4-5 levels.",
+        difficulty: 1,
+        tags: ["energy flow", "10% rule"],
+      },
+      {
+        stem: "In logistic population growth, the population grows most rapidly when:",
+        choices: [
+          { label: "A", text: "N = K (at carrying capacity)", isCorrect: false },
+          { label: "B", text: "N = K/2 (half the carrying capacity)", isCorrect: true },
+          { label: "C", text: "N = 0", isCorrect: false },
+          { label: "D", text: "N exceeds K", isCorrect: false },
+          { label: "E", text: "N = K/4 (one quarter of carrying capacity)", isCorrect: false },
+        ],
+        explanation: "In the **logistic growth** model (dN/dt = rN(K-N)/K), the growth rate is maximized when N = **K/2** (half the carrying capacity). At this point, there are enough individuals for rapid reproduction but resources are not yet severely limiting. At N = K, growth rate = 0. At N = 0, there are no individuals to reproduce. This is one of the most commonly tested ecology concepts on the DAT.",
+        difficulty: 2,
+        tags: ["population growth", "logistic"],
+      },
+      {
+        stem: "Nitrogen fixation is the process of converting atmospheric N₂ into a biologically usable form and is performed by:",
+        choices: [
+          { label: "A", text: "All plants through their root systems", isCorrect: false },
+          { label: "B", text: "Animals through digestion", isCorrect: false },
+          { label: "C", text: "Specific bacteria such as Rhizobium", isCorrect: true },
+          { label: "D", text: "Fungi through decomposition", isCorrect: false },
+          { label: "E", text: "Fish and aquatic organisms", isCorrect: false },
+        ],
+        explanation: "**Nitrogen fixation** (N₂ → NH₃/NH₄⁺) is performed by **nitrogen-fixing bacteria**. *Rhizobium* lives in root nodules of legumes (beans, peas, clover) in a mutualistic relationship. Free-living bacteria like *Azotobacter* also fix nitrogen. Plants CANNOT fix nitrogen themselves — they must absorb fixed nitrogen (as NO₃⁻ or NH₄⁺) from the soil. Animals obtain nitrogen by eating plants or other animals.",
+        difficulty: 1,
+        tags: ["nitrogen cycle", "bacteria"],
+      },
+      {
+        stem: "An organism that benefits from a symbiotic relationship while the other organism is neither helped nor harmed is an example of:",
+        choices: [
+          { label: "A", text: "Mutualism", isCorrect: false },
+          { label: "B", text: "Parasitism", isCorrect: false },
+          { label: "C", text: "Commensalism", isCorrect: true },
+          { label: "D", text: "Predation", isCorrect: false },
+          { label: "E", text: "Competition", isCorrect: false },
+        ],
+        explanation: "**Commensalism** is a symbiotic relationship where one species **benefits (+)** while the other is **unaffected (0)**. Examples include barnacles on whales (barnacles gain transport and access to food; the whale is unaffected) and birds nesting in trees. In **mutualism**, both benefit (+/+). In **parasitism**, one benefits while the other is harmed (+/-). In **competition**, both are harmed (-/-).",
+        difficulty: 1,
+        tags: ["symbiosis", "commensalism"],
+      },
+      {
+        stem: "Primary succession differs from secondary succession in that primary succession:",
+        choices: [
+          { label: "A", text: "Occurs after a forest fire", isCorrect: false },
+          { label: "B", text: "Begins on bare substrate with no existing soil", isCorrect: true },
+          { label: "C", text: "Takes less time to reach a climax community", isCorrect: false },
+          { label: "D", text: "Begins with large tree species as pioneer organisms", isCorrect: false },
+          { label: "E", text: "Only occurs in aquatic ecosystems", isCorrect: false },
+        ],
+        explanation: "**Primary succession** begins on **bare, lifeless substrate** with no soil (e.g., after a volcanic eruption or glacial retreat). **Pioneer species** like lichens and mosses colonize first, breaking down rock to gradually build soil. **Secondary succession** starts after a disturbance in an area that already has soil (e.g., after a fire or hurricane), so it proceeds faster. Both culminate in a **climax community**.",
+        difficulty: 1,
+        tags: ["succession", "ecology"],
+      },
+      {
+        stem: "Biomagnification refers to:",
+        choices: [
+          { label: "A", text: "An increase in biomass at each trophic level", isCorrect: false },
+          { label: "B", text: "An increase in toxin concentration at higher trophic levels", isCorrect: true },
+          { label: "C", text: "The rapid growth of algae in nutrient-rich water", isCorrect: false },
+          { label: "D", text: "The energy lost as heat at each trophic level", isCorrect: false },
+          { label: "E", text: "The decrease in species diversity at higher altitudes", isCorrect: false },
+        ],
+        explanation: "**Biomagnification** is the process by which **toxin concentrations increase** at successively higher trophic levels. Top predators accumulate the highest concentrations because they consume many organisms from lower levels, each of which already contains accumulated toxins. A classic example is **DDT** in bird eggs — top predatory birds like bald eagles had dangerously thin eggshells. **Mercury** in fish is another important example.",
+        difficulty: 2,
+        tags: ["biomagnification", "toxicology"],
+      },
+      {
+        stem: "Which biome has the greatest species biodiversity?",
+        choices: [
+          { label: "A", text: "Taiga (boreal forest)", isCorrect: false },
+          { label: "B", text: "Temperate deciduous forest", isCorrect: false },
+          { label: "C", text: "Tropical rainforest", isCorrect: true },
+          { label: "D", text: "Arctic tundra", isCorrect: false },
+          { label: "E", text: "Temperate grassland", isCorrect: false },
+        ],
+        explanation: "The **tropical rainforest** has the greatest **species biodiversity** of any terrestrial biome. Factors contributing to this include: high temperatures, high rainfall year-round, high primary productivity, and the availability of many ecological niches (e.g., canopy layers). Tropical rainforests cover only ~7% of Earth's surface but contain more than half of all species. The **taiga** is the largest terrestrial biome by area but has lower biodiversity.",
+        difficulty: 1,
+        tags: ["biomes", "biodiversity"],
+      },
+      {
+        stem: "K-selected species are characterized by:",
+        choices: [
+          { label: "A", text: "Rapid maturation, many offspring, and short lifespan", isCorrect: false },
+          { label: "B", text: "Type III survivorship curves", isCorrect: false },
+          { label: "C", text: "Populations that fluctuate widely and are often below carrying capacity", isCorrect: false },
+          { label: "D", text: "Slow maturation, few offspring, extensive parental care, and long lifespan", isCorrect: true },
+          { label: "E", text: "High reproductive rates with minimal energy investment per offspring", isCorrect: false },
+        ],
+        explanation: "**K-selected** species are adapted to stable environments where populations remain near **carrying capacity (K)**. They produce **few offspring**, invest heavily in **parental care**, mature slowly, and live long lives. They exhibit **Type I survivorship curves** (low mortality until old age). Examples: elephants, whales, humans. **r-selected** species are the opposite: many offspring, rapid reproduction, little parental care, and Type III survivorship curves (high early mortality).",
+        difficulty: 2,
+        tags: ["life history", "K-selected"],
+      },
+      {
+        stem: "Eutrophication of a lake is most commonly caused by:",
+        choices: [
+          { label: "A", text: "Acid rain lowering the pH of the water", isCorrect: false },
+          { label: "B", text: "Excess nitrogen and phosphorus runoff from fertilizers", isCorrect: true },
+          { label: "C", text: "Introduction of an invasive predator species", isCorrect: false },
+          { label: "D", text: "Depletion of the ozone layer", isCorrect: false },
+          { label: "E", text: "Thermal pollution from power plants", isCorrect: false },
+        ],
+        explanation: "**Eutrophication** occurs when excess nutrients (especially **nitrogen and phosphorus** from agricultural fertilizer runoff, sewage, and detergents) enter a water body. This stimulates explosive **algal blooms**. When the algae die, bacterial decomposition consumes dissolved oxygen, creating **hypoxic (low-oxygen) zones** (dead zones) that kill fish and other aquatic organisms. Phosphorus is often the **limiting nutrient** in freshwater systems.",
+        difficulty: 2,
+        tags: ["eutrophication", "water pollution"],
+      },
+      {
+        stem: "The competitive exclusion principle states that:",
+        choices: [
+          { label: "A", text: "Predators always eliminate their prey species", isCorrect: false },
+          { label: "B", text: "Two species competing for identical niches cannot coexist indefinitely", isCorrect: true },
+          { label: "C", text: "Organisms at higher trophic levels have greater fitness", isCorrect: false },
+          { label: "D", text: "Pioneer species must be eliminated before climax communities form", isCorrect: false },
+          { label: "E", text: "Mutualistic relationships always evolve between competing species", isCorrect: false },
+        ],
+        explanation: "The **competitive exclusion principle** (Gause's principle) states that two species that occupy the **exact same ecological niche** cannot coexist in the same habitat indefinitely — one will inevitably outcompete and exclude the other. Species can reduce competition through **resource partitioning** (dividing the niche), which allows similar species to coexist. This was demonstrated by Gause's experiments with *Paramecium* species.",
+        difficulty: 2,
+        tags: ["competition", "niche"],
+      },
+    ],
+  },
+  {
+    slug: "evolution",
+    title: "Evolution",
+    description: "Natural selection, speciation, phylogenetics, evidence for evolution, Hardy-Weinberg",
+    estimatedMinutes: 30,
+    lessons: [
+      {
+        slug: "natural-selection-speciation",
+        title: "Natural Selection & Speciation",
+        content: `# Natural Selection & Speciation
+
+Evolution is the change in allele frequencies in a population over time. Understanding the mechanisms of evolution and speciation is essential for the DAT.
+
+## Darwin's Theory of Natural Selection
+
+**Four conditions for natural selection:**
+
+1. **Variation:** Individuals in a population differ in traits (phenotypic variation)
+2. **Heritability:** Some of this variation is genetically inherited
+3. **Overproduction:** More offspring are produced than can survive
+4. **Differential survival and reproduction:** Individuals with favorable traits are more likely to survive and reproduce (fitness)
+
+> **High-Yield DAT Tip:** Natural selection acts on **phenotypes** (physical traits), not genotypes directly. However, because phenotypes are determined by genotypes, natural selection indirectly changes **allele frequencies** in the population. Evolution is a population-level phenomenon — individuals do NOT evolve; populations do.
+
+## Mechanisms of Evolution
+
+| Mechanism | Description | Effect |
+|-----------|-------------|--------|
+| **Natural selection** | Differential survival and reproduction based on fitness | Directional change in allele frequencies; ONLY mechanism that produces **adaptation** |
+| **Genetic drift** | Random changes in allele frequency due to chance (small populations) | Random loss/fixation of alleles; reduces genetic diversity |
+| **Gene flow (migration)** | Movement of alleles between populations | Homogenizes allele frequencies between populations |
+| **Mutation** | Random changes in DNA sequence | Introduces NEW alleles into the population (raw material for evolution) |
+| **Sexual selection** | Mate choice based on traits (intrasexual or intersexual selection) | Exaggerated traits (peacock tail, deer antlers) |
+
+> **DAT Tip:** Natural selection is the ONLY mechanism that leads to **adaptation** (increased fitness for the environment). Genetic drift, gene flow, and mutation are non-adaptive (random or non-directional). All four change allele frequencies and therefore cause evolution.
+
+### Types of Natural Selection
+
+| Type | Effect | Example |
+|------|--------|---------|
+| **Stabilizing** | Favors the intermediate phenotype; reduces variation | Human birth weight (~7-8 lbs optimal) |
+| **Directional** | Favors one extreme phenotype | Longer beaks in birds during drought (larger seeds) |
+| **Disruptive** | Favors both extremes; selects against intermediates | African seed-cracker finch beak sizes |
+| **Sexual selection** | Traits that increase mating success | Bright plumage in male birds |
+
+### Genetic Drift
+
+- Most significant in **small populations**
+- **Bottleneck effect:** Population dramatically reduced by catastrophic event → survivors may not represent original allele frequencies
+- **Founder effect:** Small group colonizes new area → carries only a subset of alleles from original population
+- Can lead to **fixation** (allele frequency → 1) or **loss** (allele frequency → 0) of alleles purely by chance
+
+## Speciation
+
+**Species definition (Biological Species Concept):** A group of organisms that can interbreed to produce **fertile offspring** and are reproductively isolated from other groups.
+
+### Types of Speciation
+
+| Type | Mechanism | Example |
+|------|-----------|---------|
+| **Allopatric speciation** | Geographic barrier physically separates population → isolated populations diverge | Grand Canyon separating squirrel populations |
+| **Sympatric speciation** | Speciation without geographic separation (e.g., polyploidy, habitat differentiation) | Polyploidy in plants; cichlid fish in same lake |
+| **Parapatric speciation** | Adjacent populations with limited gene flow diverge at zone of contact | Grass species adapting to heavy metal-contaminated soil |
+
+> **High-Yield DAT Tip:** **Allopatric speciation** (geographic isolation) is the most common type. **Sympatric speciation** occurs without geographic separation and is common in plants via **polyploidy** (having extra sets of chromosomes — the polyploid plant cannot mate with the diploid parent species, creating instant reproductive isolation).
+
+### Reproductive Isolating Mechanisms
+
+**Prezygotic barriers** (prevent formation of hybrid zygote):
+
+| Barrier | Description | Example |
+|---------|-------------|---------|
+| **Habitat isolation** | Species live in different habitats in same area | Ground squirrels in different elevations |
+| **Temporal isolation** | Species breed at different times | Spring vs. fall flowering plants |
+| **Behavioral isolation** | Different mating behaviors/signals | Bird song differences; firefly flash patterns |
+| **Mechanical isolation** | Reproductive structures incompatible | Differently shaped genitalia in insects |
+| **Gametic isolation** | Sperm cannot fertilize egg of other species | Sea urchin sperm-egg recognition proteins |
+
+**Postzygotic barriers** (hybrid zygote formed but problems arise):
+
+| Barrier | Description | Example |
+|---------|-------------|---------|
+| **Hybrid inviability** | Hybrid embryo does not develop properly | Sheep x goat hybrid fails |
+| **Hybrid sterility** | Hybrid is viable but sterile | **Mule** (horse x donkey) — cannot produce offspring |
+| **Hybrid breakdown** | F1 hybrid is fertile but F2 generation has reduced fitness | Some plant hybrids |
+
+> **DAT Tip:** The **mule** (horse x donkey) is the classic example of a **postzygotic barrier** — hybrid sterility. The two parent species have different chromosome numbers, so the hybrid cannot undergo proper meiosis to form viable gametes.
+`,
+        keyTerms: [
+          { term: "Natural Selection", definition: "Differential survival and reproduction of individuals with favorable traits; only mechanism producing adaptation" },
+          { term: "Genetic Drift", definition: "Random change in allele frequency most significant in small populations (bottleneck and founder effects)" },
+          { term: "Allopatric Speciation", definition: "Speciation caused by geographic isolation separating a population" },
+          { term: "Sympatric Speciation", definition: "Speciation without geographic separation; often via polyploidy in plants" },
+          { term: "Prezygotic Barrier", definition: "Reproductive isolation mechanism that prevents hybrid zygote formation" },
+          { term: "Postzygotic Barrier", definition: "Reproductive isolation mechanism that acts after hybrid zygote formation (inviability, sterility, breakdown)" },
+          { term: "Biological Species Concept", definition: "Species defined as populations that can interbreed to produce fertile offspring" },
+          { term: "Fitness", definition: "An organism's reproductive success relative to others in the population" },
+        ],
+      },
+      {
+        slug: "phylogenetics-evidence",
+        title: "Phylogenetics & Evidence for Evolution",
+        content: `# Phylogenetics & Evidence for Evolution
+
+Understanding how evolutionary relationships are determined and the evidence supporting evolution is critical for the DAT.
+
+## Evidence for Evolution
+
+### 1. Fossil Record
+
+- Fossils show the **chronological sequence** of life forms over time
+- **Transitional fossils** show intermediate forms between ancestral and descendant groups
+  - *Archaeopteryx* — features of both reptiles (teeth, clawed wings) and birds (feathers, wishbone)
+  - *Tiktaalik* — transitional form between fish and tetrapods (limb-like fins)
+- **Relative dating:** Determines age based on position in rock layers (stratigraphy); older fossils in deeper layers
+- **Radiometric dating:** Absolute age using radioactive isotope decay (e.g., Carbon-14 for recent fossils, Potassium-40 for older rocks)
+
+### 2. Comparative Anatomy
+
+| Type | Definition | Example |
+|------|-----------|---------|
+| **Homologous structures** | Similar structure, different function; result from **common ancestry** | Human arm, whale flipper, bat wing, horse leg (same underlying bone pattern) |
+| **Analogous structures** | Similar function, different structure; result from **convergent evolution** | Bird wing vs. insect wing (flight evolved independently) |
+| **Vestigial structures** | Reduced or non-functional remnants of structures that were functional in ancestors | Human appendix, wisdom teeth, tailbone (coccyx), whale pelvis bones |
+
+> **High-Yield DAT Tip:** **Homologous structures** = evidence for **divergent evolution** from a common ancestor. **Analogous structures** = evidence for **convergent evolution** (similar selective pressures produce similar adaptations independently). Know examples of each — they are heavily tested.
+
+### 3. Comparative Embryology
+
+- Embryos of different vertebrates look remarkably similar in early stages (pharyngeal pouches, post-anal tails)
+- Similarities in embryonic development suggest shared ancestry
+- Example: All vertebrate embryos develop **pharyngeal pouches** — these become gills in fish but ear/throat structures in mammals
+
+### 4. Molecular Biology (Most Powerful Evidence)
+
+- **DNA/protein sequence comparisons:** More similar sequences = more recent common ancestor
+- **Universal genetic code:** Nearly all organisms use the same codons for the same amino acids
+- **Shared genes:** Highly conserved genes (e.g., **Hox genes**, **cytochrome c**) found across diverse species
+- **Molecular clock:** Mutations accumulate at roughly constant rates; used to estimate divergence times
+
+> **DAT Tip:** **Cytochrome c** is a protein in the electron transport chain that is highly conserved across species. Comparing its amino acid sequences reveals evolutionary relationships — humans and chimps differ by 0 amino acids, humans and dogs differ by 11, humans and yeast differ by 44. More differences = more evolutionary distance.
+
+### 5. Biogeography
+
+- Distribution of species reflects evolutionary history and continental movement
+- **Island species** often resemble mainland ancestors but have diverged (Darwin's finches on the Galapagos)
+- **Continental drift** (plate tectonics) explains why similar fossils are found on different continents (e.g., *Glossopteris* fern on all southern continents → Gondwana)
+
+## Phylogenetics
+
+### Cladistics & Phylogenetic Trees
+
+- **Phylogenetic tree (cladogram):** Diagram showing evolutionary relationships based on shared derived characters
+- **Clade (monophyletic group):** An ancestor and ALL of its descendants
+- **Node:** Branching point representing a common ancestor
+- **Branch:** Line representing evolutionary lineage
+- **Root:** Base of tree representing the most recent common ancestor of all organisms on the tree
+
+### Key Terms
+
+| Term | Definition |
+|------|-----------|
+| **Shared derived character (synapomorphy)** | Trait shared by members of a clade but NOT by their outgroup ancestor; used to define clades |
+| **Ancestral character (plesiomorphy)** | Trait present in the ancestor; shared broadly (not useful for defining specific clades) |
+| **Outgroup** | Taxon outside the group of interest; used to root the tree and determine which characters are ancestral vs. derived |
+| **Parsimony** | Simplest tree (fewest evolutionary changes) is preferred |
+| **Homoplasy** | Similarity NOT due to common ancestry (convergent evolution, parallelism, reversals) |
+
+> **High-Yield DAT Tip:** When reading a cladogram, the key information is at the **nodes** (branching points), not the tips. Two taxa are most closely related if they share a **more recent common ancestor** (closer node). The order of taxa at the tips can be rotated around any node without changing the relationships.
+
+## Hardy-Weinberg Equilibrium (Review)
+
+The Hardy-Weinberg model describes a population in which allele frequencies do NOT change — i.e., evolution is NOT occurring.
+
+**Equations:** p + q = 1 and p² + 2pq + q² = 1
+
+**Five conditions (all must be met):**
+1. No mutation
+2. No natural selection
+3. No migration (gene flow)
+4. Large population (no genetic drift)
+5. Random mating
+
+> **DAT Tip:** In reality, NO population meets all five conditions — evolution is always occurring. Hardy-Weinberg serves as a **null model** (baseline) to detect whether evolution is occurring and which forces are acting on a population.
+
+## Patterns of Evolution
+
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| **Divergent evolution** | Related species become more different over time | Darwin's finches (different beak shapes from common ancestor) |
+| **Convergent evolution** | Unrelated species evolve similar traits independently | Dolphins and sharks (similar body shape for aquatic life) |
+| **Coevolution** | Two species exert selective pressures on each other, driving reciprocal adaptation | Flowers and pollinators; predator-prey arms races |
+| **Parallel evolution** | Similar evolutionary changes in related but independent lineages | Marsupial and placental mammal counterparts (similar ecological roles on different continents) |
+| **Adaptive radiation** | Rapid diversification from a common ancestor into many ecological niches | Darwin's finches; Hawaiian honeycreepers; Cambrian explosion |
+`,
+        keyTerms: [
+          { term: "Homologous Structures", definition: "Similar structures in different species due to common ancestry (e.g., vertebrate forelimbs)" },
+          { term: "Analogous Structures", definition: "Similar function but different origin; result of convergent evolution (e.g., bird wing vs. insect wing)" },
+          { term: "Vestigial Structures", definition: "Reduced or functionless remnants of structures that were functional in ancestors" },
+          { term: "Adaptive Radiation", definition: "Rapid diversification of a single lineage into many species filling different ecological niches" },
+          { term: "Convergent Evolution", definition: "Independent evolution of similar traits in unrelated species due to similar selective pressures" },
+          { term: "Cladogram", definition: "Branching diagram showing evolutionary relationships based on shared derived characters" },
+          { term: "Molecular Clock", definition: "Technique using mutation rate to estimate divergence times between species" },
+          { term: "Transitional Fossil", definition: "Fossil showing intermediate features between an ancestral group and its descendants (e.g., Archaeopteryx)" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "Natural selection acts directly on an organism's:",
+        choices: [
+          { label: "A", text: "Genotype", isCorrect: false },
+          { label: "B", text: "Phenotype", isCorrect: true },
+          { label: "C", text: "Karyotype", isCorrect: false },
+          { label: "D", text: "Ploidy level", isCorrect: false },
+          { label: "E", text: "Mutation rate", isCorrect: false },
+        ],
+        explanation: "Natural selection acts on **phenotypes** — the physical traits and behaviors that determine an organism's ability to survive and reproduce. While phenotypes are influenced by genotypes, selection cannot \"see\" the DNA sequence directly. An organism with a beneficial allele that is recessive and not expressed phenotypically will not be selected for until that allele produces a visible/functional phenotypic effect.",
+        difficulty: 1,
+        tags: ["natural selection", "phenotype"],
+      },
+      {
+        stem: "The human arm, whale flipper, and bat wing are examples of:",
+        choices: [
+          { label: "A", text: "Analogous structures resulting from convergent evolution", isCorrect: false },
+          { label: "B", text: "Homologous structures resulting from divergent evolution", isCorrect: true },
+          { label: "C", text: "Vestigial structures with no current function", isCorrect: false },
+          { label: "D", text: "Homoplasies with no evolutionary significance", isCorrect: false },
+          { label: "E", text: "Analogous structures resulting from parallel evolution", isCorrect: false },
+        ],
+        explanation: "The human arm, whale flipper, and bat wing share the **same underlying bone structure** (humerus, radius, ulna, carpals, phalanges) despite having different functions. These are **homologous structures** — they were inherited from a **common ancestor** and diverged over time as each lineage adapted to different environments. This is evidence of **divergent evolution**. **Analogous structures** (e.g., bird wing vs. insect wing) have similar functions but different underlying structures.",
+        difficulty: 1,
+        tags: ["homologous structures", "evidence for evolution"],
+      },
+      {
+        stem: "Allopatric speciation occurs when:",
+        choices: [
+          { label: "A", text: "A population speciates without any geographic barrier", isCorrect: false },
+          { label: "B", text: "A geographic barrier physically isolates populations that then diverge", isCorrect: true },
+          { label: "C", text: "Polyploidy creates instant reproductive isolation", isCorrect: false },
+          { label: "D", text: "Two adjacent populations develop differences at their contact zone", isCorrect: false },
+          { label: "E", text: "Temporal isolation prevents mating between sympatric populations", isCorrect: false },
+        ],
+        explanation: "**Allopatric speciation** (\"allo\" = other, \"patric\" = homeland) occurs when a **geographic barrier** (mountain range, river, ocean) physically separates a population into two or more isolated groups. Over time, mutation, genetic drift, and natural selection cause the isolated populations to diverge genetically. If they diverge sufficiently, they become reproductively isolated — separate species. This is the most common form of speciation.",
+        difficulty: 1,
+        tags: ["speciation", "allopatric"],
+      },
+      {
+        stem: "A mule (offspring of a horse and donkey) is sterile. This is an example of:",
+        choices: [
+          { label: "A", text: "Prezygotic isolation — gametic incompatibility", isCorrect: false },
+          { label: "B", text: "Prezygotic isolation — behavioral isolation", isCorrect: false },
+          { label: "C", text: "Postzygotic isolation — hybrid sterility", isCorrect: true },
+          { label: "D", text: "Postzygotic isolation — hybrid inviability", isCorrect: false },
+          { label: "E", text: "Postzygotic isolation — hybrid breakdown", isCorrect: false },
+        ],
+        explanation: "The mule is a classic example of **postzygotic isolation — hybrid sterility**. A horse (2n=64) and donkey (2n=62) can mate and produce a viable hybrid offspring (mule, 2n=63), but the mule is **sterile** because its odd number of chromosomes cannot pair properly during meiosis. The hybrid is viable (ruling out inviability) but cannot produce offspring (sterility). This maintains the species boundary between horses and donkeys.",
+        difficulty: 2,
+        tags: ["reproductive isolation", "postzygotic"],
+      },
+      {
+        stem: "Which of the following is the ONLY mechanism of evolution that produces adaptation?",
+        choices: [
+          { label: "A", text: "Genetic drift", isCorrect: false },
+          { label: "B", text: "Gene flow", isCorrect: false },
+          { label: "C", text: "Mutation", isCorrect: false },
+          { label: "D", text: "Natural selection", isCorrect: true },
+          { label: "E", text: "Non-random mating", isCorrect: false },
+        ],
+        explanation: "**Natural selection** is the only mechanism of evolution that produces **adaptation** — traits that increase an organism's fitness in its specific environment. Genetic drift is random (non-adaptive). Gene flow introduces alleles from other populations (not adaptive for the local environment). Mutation is random and most mutations are neutral or harmful. While all four mechanisms change allele frequencies (causing evolution), only natural selection is directional and adaptive.",
+        difficulty: 2,
+        tags: ["mechanisms of evolution", "adaptation"],
+      },
+      {
+        stem: "Convergent evolution is best illustrated by:",
+        choices: [
+          { label: "A", text: "The forelimbs of humans, cats, whales, and bats", isCorrect: false },
+          { label: "B", text: "The wings of birds and the wings of butterflies", isCorrect: true },
+          { label: "C", text: "Darwin's finches with different beak shapes on the Galapagos", isCorrect: false },
+          { label: "D", text: "The human appendix and wisdom teeth", isCorrect: false },
+          { label: "E", text: "The similar appearance of vertebrate embryos", isCorrect: false },
+        ],
+        explanation: "**Convergent evolution** occurs when **unrelated species** independently evolve similar traits in response to similar environmental pressures. Bird wings and butterfly wings both serve the function of flight but have **completely different underlying structures** (analogous structures). The vertebrate forelimbs are **homologous** (common ancestry → divergent evolution). Darwin's finches represent **adaptive radiation**. The appendix is a **vestigial structure**.",
+        difficulty: 2,
+        tags: ["convergent evolution", "analogous structures"],
+      },
+      {
+        stem: "On a phylogenetic tree, two species are most closely related if they:",
+        choices: [
+          { label: "A", text: "Are placed adjacent to each other at the tips of the tree", isCorrect: false },
+          { label: "B", text: "Share a more recent common ancestor (closer node)", isCorrect: true },
+          { label: "C", text: "Have the same number of synapomorphies", isCorrect: false },
+          { label: "D", text: "Live in the same geographic region", isCorrect: false },
+          { label: "E", text: "Have identical body sizes", isCorrect: false },
+        ],
+        explanation: "On a **phylogenetic tree (cladogram)**, relatedness is determined by the recency of **common ancestry** — two species are most closely related if they share the **most recent common ancestor** (nearest node/branching point). The position of tips (left, right, adjacent) can be rotated around any node without changing the evolutionary relationships shown. Being placed next to each other at the tips does NOT necessarily mean they are most closely related.",
+        difficulty: 2,
+        tags: ["phylogenetics", "cladogram"],
+      },
+      {
+        stem: "Adaptive radiation is characterized by:",
+        choices: [
+          { label: "A", text: "Gradual, uniform evolution of a single lineage", isCorrect: false },
+          { label: "B", text: "Convergence of unrelated species toward similar forms", isCorrect: false },
+          { label: "C", text: "Rapid diversification from a common ancestor into many species filling different niches", isCorrect: true },
+          { label: "D", text: "Extinction of all species in a clade except one survivor", isCorrect: false },
+          { label: "E", text: "Gene flow between isolated populations causing homogenization", isCorrect: false },
+        ],
+        explanation: "**Adaptive radiation** is the rapid diversification of a single ancestral lineage into many descendant species, each adapted to a different ecological niche. Classic examples include **Darwin's finches** (different beak shapes for different food sources), **Hawaiian honeycreepers**, and the **Cambrian explosion** (rapid diversification of animal phyla ~540 million years ago). It typically occurs when organisms colonize new environments with many open niches.",
+        difficulty: 2,
+        tags: ["adaptive radiation", "evolution"],
+      },
+      {
+        stem: "A vestigial structure such as the human coccyx (tailbone) is evidence for evolution because it suggests that:",
+        choices: [
+          { label: "A", text: "Humans are currently evolving tails", isCorrect: false },
+          { label: "B", text: "Humans descended from ancestors that had functional tails", isCorrect: true },
+          { label: "C", text: "The coccyx will develop into a tail in future generations", isCorrect: false },
+          { label: "D", text: "All primates currently have tails", isCorrect: false },
+          { label: "E", text: "The coccyx is an analogous structure to tails in other species", isCorrect: false },
+        ],
+        explanation: "**Vestigial structures** are reduced or non-functional remnants of structures that were fully functional in ancestral species. The human **coccyx** (tailbone) is homologous to the functional tails of our primate ancestors, providing evidence of **common descent**. Other examples: human wisdom teeth (reduced jaw), goosebumps (remnant of fur-raising muscles), whale pelvic bones (remnants from terrestrial ancestors). Vestigial structures are homologous, not analogous.",
+        difficulty: 1,
+        tags: ["vestigial structures", "evidence"],
+      },
+      {
+        stem: "The molecular clock hypothesis estimates evolutionary divergence times based on:",
+        choices: [
+          { label: "A", text: "The number of homologous structures shared between species", isCorrect: false },
+          { label: "B", text: "The rate of accumulation of neutral mutations in DNA or protein sequences", isCorrect: true },
+          { label: "C", text: "The geographic distance between species' habitats", isCorrect: false },
+          { label: "D", text: "The number of fossil intermediates found between two species", isCorrect: false },
+          { label: "E", text: "The rate of reproductive isolation between populations", isCorrect: false },
+        ],
+        explanation: "The **molecular clock** uses the rate at which **neutral mutations** accumulate in DNA or protein sequences over time to estimate when two species **diverged** from their common ancestor. The assumption is that neutral mutations accumulate at a roughly constant rate. By comparing the number of sequence differences between two species and calibrating with known divergence times (from the fossil record), scientists can estimate evolutionary timescales.",
+        difficulty: 3,
+        tags: ["molecular clock", "molecular evidence"],
+      },
+    ],
+  },
+  {
+    slug: "taxonomy-diversity",
+    title: "Taxonomy & Diversity",
+    description: "Classification (domains, kingdoms), plant biology (alternation of generations), animal phyla",
+    estimatedMinutes: 35,
+    lessons: [
+      {
+        slug: "classification-systems",
+        title: "Classification & Domains of Life",
+        content: `# Classification & Domains of Life
+
+Taxonomy is the science of classifying organisms into hierarchical groups based on shared characteristics and evolutionary relationships. For the DAT, you must know the classification hierarchy, the three domains, and key features of the kingdoms.
+
+## Linnaean Classification Hierarchy
+
+From broadest to most specific:
+
+**Domain → Kingdom → Phylum → Class → Order → Family → Genus → Species**
+
+> **DAT Tip:** Mnemonic: "**D**ear **K**ing **P**hilip **C**ame **O**ver **F**or **G**ood **S**paghetti" — Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species.
+
+### Binomial Nomenclature
+
+- Each species has a two-part scientific name: **Genus species** (e.g., *Homo sapiens*)
+- Genus is **capitalized**, species is **lowercase**
+- Always italicized (or underlined when handwritten)
+
+## Three Domains of Life
+
+| Domain | Cell Type | Key Features | Kingdoms |
+|--------|----------|-------------|----------|
+| **Bacteria** | Prokaryotic | Peptidoglycan cell wall; circular DNA; 70S ribosomes; binary fission | Kingdom Bacteria (Eubacteria) |
+| **Archaea** | Prokaryotic | No peptidoglycan; unique membrane lipids (ether linkages, branched chains); many extremophiles | Kingdom Archaea (Archaebacteria) |
+| **Eukarya** | Eukaryotic | Membrane-bound nucleus and organelles; linear DNA; 80S ribosomes | Protista, Fungi, Plantae, Animalia |
+
+> **High-Yield DAT Tip:** Archaea superficially resemble bacteria (both prokaryotic) but are actually more closely related to **Eukarya** based on molecular evidence (RNA polymerase structure, ribosomal RNA sequences, presence of histones). Archaea lack peptidoglycan in their cell walls — this is a key distinguishing feature from bacteria.
+
+### Archaea Extremophiles
+
+| Type | Environment | Example |
+|------|------------|---------|
+| **Thermophiles** | Extreme heat (hot springs, hydrothermal vents) | *Thermus aquaticus* (source of Taq polymerase for PCR) |
+| **Halophiles** | Extreme salt concentration | *Halobacterium* (salt lakes) |
+| **Methanogens** | Anaerobic; produce methane | Gut of ruminants, swamps |
+| **Acidophiles** | Extremely acidic environments | Acid mine drainage |
+
+## Eukaryotic Kingdoms
+
+### Kingdom Protista
+
+- **Diverse, mostly unicellular eukaryotes** (a "catch-all" kingdom)
+- Includes: algae (photosynthetic protists), protozoa (heterotrophic protists), slime molds
+
+| Group | Characteristics | Examples |
+|-------|----------------|---------|
+| **Algae** | Photosynthetic; aquatic; produce O₂ | Green algae, brown algae, diatoms |
+| **Protozoa** | Heterotrophic; motile | *Amoeba* (pseudopods), *Paramecium* (cilia), *Euglena* (flagellum) |
+| **Slime molds** | Decomposers; can aggregate into multicellular forms | *Dictyostelium* |
+
+### Kingdom Fungi
+
+- **Eukaryotic heterotrophs** with **chitin cell walls**
+- Obtain nutrition by **absorption** (secrete enzymes extracellularly, absorb digested nutrients)
+- Body made of **hyphae** (filaments) forming a **mycelium** (network)
+- Reproduce sexually and asexually via **spores**
+- Contain **ergosterol** in cell membranes (target of antifungal drugs)
+
+| Phylum | Common Name | Spore Type | Example |
+|--------|------------|-----------|---------|
+| **Zygomycota** | Bread molds | Zygospores (sexual) | *Rhizopus* (black bread mold) |
+| **Ascomycota** | Sac fungi | Ascospores (in asci) | *Saccharomyces* (yeast), *Penicillium*, truffles, morels |
+| **Basidiomycota** | Club fungi | Basidiospores (on basidia) | Mushrooms, puffballs, rusts, smuts |
+
+**Important symbioses:**
+- **Mycorrhizae:** Mutualistic association between fungi and plant roots (fungus helps absorb water/minerals; plant provides sugars)
+- **Lichens:** Mutualistic association between fungus and photosynthetic partner (alga or cyanobacterium)
+
+### Kingdom Plantae
+
+- **Multicellular, photosynthetic eukaryotes** with **cellulose cell walls**
+- Contain **chloroplasts** (chlorophyll a and b)
+- Alternation of generations (sporophyte and gametophyte)
+- See next lesson for details
+
+### Kingdom Animalia
+
+- **Multicellular, heterotrophic eukaryotes** with **NO cell walls**
+- Most have **specialized tissues and organ systems**
+- Most are **motile** at some life stage
+- Develop from a **blastula** during embryonic development
+- See next lesson for animal phyla details
+`,
+        keyTerms: [
+          { term: "Taxonomy", definition: "Science of classifying organisms into hierarchical groups based on shared characteristics" },
+          { term: "Binomial Nomenclature", definition: "Two-part naming system: Genus species (e.g., Homo sapiens)" },
+          { term: "Domain Bacteria", definition: "Prokaryotes with peptidoglycan cell walls, circular DNA, and 70S ribosomes" },
+          { term: "Domain Archaea", definition: "Prokaryotes without peptidoglycan; unique membrane lipids; many extremophiles; closer to Eukarya" },
+          { term: "Domain Eukarya", definition: "Organisms with membrane-bound nucleus and organelles; includes protists, fungi, plants, and animals" },
+          { term: "Mycorrhizae", definition: "Mutualistic association between fungi and plant roots; enhances nutrient absorption" },
+          { term: "Lichen", definition: "Mutualistic association between a fungus and a photosynthetic alga or cyanobacterium" },
+          { term: "Chitin", definition: "Polysaccharide forming fungal cell walls; also found in arthropod exoskeletons" },
+        ],
+      },
+      {
+        slug: "plant-animal-diversity",
+        title: "Plant Biology & Animal Phyla",
+        content: `# Plant Biology & Animal Phyla
+
+Understanding plant life cycles (alternation of generations) and the major animal phyla is essential for the DAT.
+
+## Plant Biology
+
+### Alternation of Generations
+
+All plants have a life cycle that alternates between two multicellular forms:
+
+| Generation | Ploidy | Produces | Via |
+|-----------|--------|----------|-----|
+| **Sporophyte** (diploid, 2n) | Diploid | **Spores** (haploid) | **Meiosis** |
+| **Gametophyte** (haploid, n) | Haploid | **Gametes** (eggs, sperm) | **Mitosis** |
+
+**Cycle:** Sporophyte (2n) → meiosis → spores (n) → mitosis → Gametophyte (n) → mitosis → gametes (n) → fertilization → Sporophyte (2n)
+
+> **High-Yield DAT Tip:** In **bryophytes** (mosses), the **gametophyte** is the dominant (larger, longer-lived) generation. In **ferns, gymnosperms, and angiosperms**, the **sporophyte** is dominant. As plants evolved, the sporophyte became increasingly dominant and the gametophyte became reduced.
+
+### Major Plant Groups
+
+| Group | Vascular Tissue? | Seeds? | Flowers? | Dominant Generation | Examples |
+|-------|-----------------|--------|----------|-------------------|---------|
+| **Bryophytes** | No (nonvascular) | No | No | **Gametophyte** | Mosses, liverworts, hornworts |
+| **Seedless vascular plants** | Yes | No | No | Sporophyte | Ferns, horsetails, club mosses |
+| **Gymnosperms** | Yes | Yes (naked seeds in cones) | No | Sporophyte | Conifers (pine, spruce), cycads, ginkgo |
+| **Angiosperms** | Yes | Yes (enclosed in fruit) | **Yes** | Sporophyte | All flowering plants; most diverse plant group |
+
+### Angiosperms: Monocots vs. Dicots
+
+| Feature | Monocots | Dicots (Eudicots) |
+|---------|---------|---------|
+| **Cotyledons** | 1 | 2 |
+| **Leaf venation** | Parallel | Netlike (branching) |
+| **Flower parts** | Multiples of **3** | Multiples of **4 or 5** |
+| **Vascular bundles in stem** | Scattered | Ring arrangement |
+| **Root system** | Fibrous | Taproot |
+| **Examples** | Grasses, corn, lilies, orchids | Roses, beans, oaks, sunflowers |
+
+> **DAT Tip:** Monocots = **1** cotyledon, parallel veins, flower parts in **3**s. Dicots = **2** cotyledons, net veins, flower parts in **4s or 5s**. Grasses (corn, wheat, rice) are monocots. Beans and roses are dicots.
+
+### Plant Tissues (Brief Review)
+
+| Tissue | Function |
+|--------|----------|
+| **Xylem** | Transports **water and minerals** UP from roots (dead cells at maturity — tracheids and vessel elements) |
+| **Phloem** | Transports **sugars (sucrose)** from source to sink (living cells — sieve tube elements + companion cells) |
+| **Meristem** | Undifferentiated stem cells for growth (apical = length; lateral = width) |
+
+## Animal Phyla
+
+### Key Animal Characteristics
+
+| Feature | Options |
+|---------|---------|
+| **Symmetry** | **Asymmetry** (sponges), **Radial** (cnidarians, echinoderms), **Bilateral** (most animals) |
+| **Germ layers** | **Diploblastic** (2 layers: ectoderm, endoderm — cnidarians) vs. **Triploblastic** (3 layers: ectoderm, mesoderm, endoderm — most animals) |
+| **Body cavity** | **Acoelomate** (no body cavity — flatworms), **Pseudocoelomate** (partial cavity — roundworms), **Coelomate** (true body cavity lined with mesoderm — most complex animals) |
+| **Development** | **Protostome** (mouth forms first — mollusks, arthropods, annelids) vs. **Deuterostome** (anus forms first — echinoderms, chordates) |
+
+> **High-Yield DAT Tip:** **Deuterostomes** include **echinoderms** (sea stars) and **chordates** (vertebrates) — the anus forms first from the blastopore. **Protostomes** include **arthropods**, **mollusks**, and **annelids** — the mouth forms first. This developmental distinction is a common DAT question.
+
+### Major Animal Phyla
+
+| Phylum | Key Features | Examples |
+|--------|-------------|---------|
+| **Porifera** | Sponges; **asymmetry**; no true tissues; filter feeders; **choanocytes** (collar cells) | Bath sponge |
+| **Cnidaria** | Radial symmetry; **diploblastic**; **cnidocytes** (stinging cells); polyp and medusa forms; gastrovascular cavity | Jellyfish, corals, hydra, sea anemones |
+| **Platyhelminthes** | Flatworms; bilateral; **acoelomate**; triploblastic; some parasitic (tapeworms, flukes) | Planaria, tapeworms, flukes |
+| **Nematoda** | Roundworms; **pseudocoelomate**; complete digestive tract (mouth + anus); many parasitic | *Ascaris*, hookworms, pinworms |
+| **Annelida** | Segmented worms; **coelomate**; closed circulatory system; **metamerism** (true segmentation) | Earthworms, leeches, polychaetes |
+| **Mollusca** | Soft body; **mantle** (secretes shell); muscular **foot**; **open circulatory system** (except cephalopods) | Snails (gastropods), clams (bivalves), squid/octopus (cephalopods) |
+| **Arthropoda** | **Largest phylum**; exoskeleton of **chitin**; **jointed appendages**; open circulatory system; undergo **ecdysis** (molting) | Insects, spiders, crustaceans, centipedes |
+| **Echinodermata** | **Deuterostomes**; radial symmetry (adults); **water vascular system**; tube feet; **endoskeleton** of calcium carbonate; no cephalization | Sea stars, sea urchins, sand dollars |
+| **Chordata** | **Deuterostomes**; 4 key features (at some life stage): **notochord**, dorsal hollow nerve cord, pharyngeal slits, post-anal tail | Vertebrates (fish, amphibians, reptiles, birds, mammals), lancelets, tunicates |
+
+> **High-Yield DAT Tip:** The **four chordate characteristics** (notochord, dorsal hollow nerve cord, pharyngeal slits/pouches, post-anal tail) are present at **some point** during development. In humans: the notochord becomes the nucleus pulposus of intervertebral discs, the nerve cord becomes the spinal cord, pharyngeal pouches become ear/throat structures, and the tail regresses (coccyx remains).
+
+### Arthropod Subgroups
+
+| Subgroup | Legs | Body Sections | Examples |
+|----------|------|--------------|---------|
+| **Insects** | 6 (3 pairs) | Head, thorax, abdomen | Ants, beetles, butterflies, flies |
+| **Arachnids** | 8 (4 pairs) | Cephalothorax, abdomen | Spiders, scorpions, ticks, mites |
+| **Crustaceans** | 10+ (5+ pairs) | Cephalothorax, abdomen | Crabs, lobsters, shrimp, barnacles |
+| **Myriapods** | Many pairs | Head + many segments | Centipedes (1 pair/segment), millipedes (2 pairs/segment) |
+`,
+        keyTerms: [
+          { term: "Alternation of Generations", definition: "Plant life cycle alternating between diploid sporophyte and haploid gametophyte stages" },
+          { term: "Sporophyte", definition: "Diploid (2n) plant generation that produces haploid spores via meiosis" },
+          { term: "Gametophyte", definition: "Haploid (n) plant generation that produces gametes via mitosis" },
+          { term: "Angiosperm", definition: "Flowering plant with seeds enclosed in fruit; most diverse plant group" },
+          { term: "Deuterostome", definition: "Animal whose anus develops first from the blastopore; includes echinoderms and chordates" },
+          { term: "Arthropoda", definition: "Largest animal phylum; jointed appendages, chitin exoskeleton, open circulatory system" },
+          { term: "Chordata", definition: "Phylum defined by notochord, dorsal hollow nerve cord, pharyngeal slits, and post-anal tail" },
+          { term: "Xylem", definition: "Plant vascular tissue that transports water and minerals upward; composed of dead cells" },
+        ],
+      },
+    ],
+    questions: [
+      {
+        stem: "The correct taxonomic hierarchy from broadest to most specific is:",
+        choices: [
+          { label: "A", text: "Kingdom, Phylum, Class, Order, Family, Genus, Species", isCorrect: false },
+          { label: "B", text: "Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species", isCorrect: true },
+          { label: "C", text: "Domain, Phylum, Kingdom, Class, Family, Order, Genus, Species", isCorrect: false },
+          { label: "D", text: "Kingdom, Domain, Phylum, Order, Class, Family, Genus, Species", isCorrect: false },
+          { label: "E", text: "Species, Genus, Family, Order, Class, Phylum, Kingdom, Domain", isCorrect: false },
+        ],
+        explanation: "The correct hierarchy from broadest to most specific is: **Domain → Kingdom → Phylum → Class → Order → Family → Genus → Species**. Mnemonic: \"Dear King Philip Came Over For Good Spaghetti.\" Choice E lists them in reverse order (most specific to broadest). Domain was added above Kingdom after the discovery that Archaea are distinct from Bacteria.",
+        difficulty: 1,
+        tags: ["taxonomy", "classification"],
+      },
+      {
+        stem: "Archaea differ from Bacteria primarily because Archaea:",
+        choices: [
+          { label: "A", text: "Have a membrane-bound nucleus", isCorrect: false },
+          { label: "B", text: "Lack peptidoglycan in their cell walls", isCorrect: true },
+          { label: "C", text: "Have 80S ribosomes", isCorrect: false },
+          { label: "D", text: "Are all photosynthetic", isCorrect: false },
+          { label: "E", text: "Reproduce by mitosis", isCorrect: false },
+        ],
+        explanation: "**Archaea** are prokaryotes (no membrane-bound nucleus, 70S ribosomes) like bacteria, but they **lack peptidoglycan** in their cell walls. Their cell membranes contain unique **ether-linked branched lipids** (rather than ester-linked lipids in bacteria). Molecular evidence (rRNA sequences, RNA polymerase, histones) shows Archaea are actually more closely related to **Eukarya** than to Bacteria.",
+        difficulty: 2,
+        tags: ["Archaea", "domains"],
+      },
+      {
+        stem: "In the alternation of generations in plants, the sporophyte is:",
+        choices: [
+          { label: "A", text: "Haploid and produces gametes by meiosis", isCorrect: false },
+          { label: "B", text: "Diploid and produces spores by meiosis", isCorrect: true },
+          { label: "C", text: "Haploid and produces spores by mitosis", isCorrect: false },
+          { label: "D", text: "Diploid and produces gametes by mitosis", isCorrect: false },
+          { label: "E", text: "Triploid and produces seeds by fertilization", isCorrect: false },
+        ],
+        explanation: "The **sporophyte** is the **diploid (2n)** generation that produces **haploid spores** via **meiosis**. These spores develop into the **gametophyte** (haploid, n), which produces **gametes** via **mitosis**. Fertilization of gametes restores the diploid state, producing a new sporophyte. In ferns, gymnosperms, and angiosperms, the sporophyte is the dominant (visible) generation. In bryophytes (mosses), the gametophyte is dominant.",
+        difficulty: 2,
+        tags: ["alternation of generations", "plant biology"],
+      },
+      {
+        stem: "Which animal phylum is characterized by jointed appendages, a chitinous exoskeleton, and is the most species-rich phylum?",
+        choices: [
+          { label: "A", text: "Mollusca", isCorrect: false },
+          { label: "B", text: "Annelida", isCorrect: false },
+          { label: "C", text: "Chordata", isCorrect: false },
+          { label: "D", text: "Arthropoda", isCorrect: true },
+          { label: "E", text: "Echinodermata", isCorrect: false },
+        ],
+        explanation: "**Arthropoda** is the **largest animal phylum** by far, containing more species than all other animal phyla combined. Key features: **jointed appendages**, exoskeleton made of **chitin**, segmented body, open circulatory system, and growth by **ecdysis (molting)**. Subgroups include insects (6 legs), arachnids (8 legs), crustaceans (10+ legs), and myriapods (many legs).",
+        difficulty: 1,
+        tags: ["animal phyla", "Arthropoda"],
+      },
+      {
+        stem: "Deuterostomes differ from protostomes in that deuterostomes:",
+        choices: [
+          { label: "A", text: "Have the mouth develop first from the blastopore", isCorrect: false },
+          { label: "B", text: "Have the anus develop first from the blastopore", isCorrect: true },
+          { label: "C", text: "Are all invertebrates", isCorrect: false },
+          { label: "D", text: "Lack a true body cavity (acoelomate)", isCorrect: false },
+          { label: "E", text: "Have an open circulatory system", isCorrect: false },
+        ],
+        explanation: "In **deuterostomes**, the **anus** develops first from the blastopore during embryonic development (\"deutero\" = second, \"stome\" = mouth — the mouth forms second). Deuterostomes include **echinoderms** and **chordates**. In **protostomes**, the mouth develops first from the blastopore; they include arthropods, mollusks, and annelids. This developmental distinction is a fundamental way to classify animals.",
+        difficulty: 2,
+        tags: ["deuterostome", "protostome"],
+      },
+      {
+        stem: "Fungi obtain nutrition by:",
+        choices: [
+          { label: "A", text: "Photosynthesis using chloroplasts", isCorrect: false },
+          { label: "B", text: "Ingesting food particles by phagocytosis", isCorrect: false },
+          { label: "C", text: "Absorbing nutrients after extracellular digestion via secreted enzymes", isCorrect: true },
+          { label: "D", text: "Chemosynthesis using inorganic compounds", isCorrect: false },
+          { label: "E", text: "Parasitizing host cells intracellularly", isCorrect: false },
+        ],
+        explanation: "Fungi are **heterotrophs** that obtain nutrition by **absorption**. They secrete **extracellular enzymes** (exoenzymes) that break down organic material outside their body, then **absorb** the digested nutrients through their cell walls. This differentiates them from animals (which ingest food and digest it internally) and plants (which are autotrophic via photosynthesis). Fungi can be decomposers, parasites, or mutualistic symbionts.",
+        difficulty: 1,
+        tags: ["fungi", "nutrition"],
+      },
+      {
+        stem: "Which of the following is a characteristic shared by all members of Phylum Chordata at some point during their development?",
+        choices: [
+          { label: "A", text: "Vertebral column", isCorrect: false },
+          { label: "B", text: "Lungs for gas exchange", isCorrect: false },
+          { label: "C", text: "Notochord", isCorrect: true },
+          { label: "D", text: "Four-chambered heart", isCorrect: false },
+          { label: "E", text: "Endothermy", isCorrect: false },
+        ],
+        explanation: "All chordates possess four defining features at **some point during development**: (1) **notochord** (flexible rod), (2) **dorsal hollow nerve cord**, (3) **pharyngeal slits/pouches**, and (4) **post-anal tail**. Not all chordates are vertebrates — lancelets and tunicates are invertebrate chordates. The vertebral column (choice A) is found only in vertebrates (subphylum Vertebrata). Lungs, four-chambered hearts, and endothermy are found only in specific vertebrate groups.",
+        difficulty: 2,
+        tags: ["Chordata", "animal phyla"],
+      },
+      {
+        stem: "Angiosperms differ from gymnosperms primarily because angiosperms:",
+        choices: [
+          { label: "A", text: "Have vascular tissue (xylem and phloem)", isCorrect: false },
+          { label: "B", text: "Produce seeds enclosed within a fruit and have flowers", isCorrect: true },
+          { label: "C", text: "Have a dominant sporophyte generation", isCorrect: false },
+          { label: "D", text: "Can perform photosynthesis", isCorrect: false },
+          { label: "E", text: "Have cellulose cell walls", isCorrect: false },
+        ],
+        explanation: "**Angiosperms** (flowering plants) are distinguished from gymnosperms by having **flowers** (reproductive structures) and **seeds enclosed within a fruit** (\"angio\" = vessel/container). Both angiosperms and gymnosperms have vascular tissue, dominant sporophyte generations, photosynthesis, and cellulose cell walls. Gymnosperms have **naked seeds** in cones (\"gymno\" = naked). Angiosperms are the most diverse and successful group of land plants.",
+        difficulty: 1,
+        tags: ["angiosperms", "plant diversity"],
+      },
+      {
+        stem: "Monocots can be distinguished from dicots by:",
+        choices: [
+          { label: "A", text: "Presence of seeds", isCorrect: false },
+          { label: "B", text: "Parallel leaf venation and flower parts in multiples of three", isCorrect: true },
+          { label: "C", text: "Ability to produce flowers", isCorrect: false },
+          { label: "D", text: "Having a dominant gametophyte generation", isCorrect: false },
+          { label: "E", text: "Lack of vascular tissue", isCorrect: false },
+        ],
+        explanation: "**Monocots** have: 1 cotyledon (seed leaf), **parallel leaf venation**, flower parts in **multiples of 3**, scattered vascular bundles in the stem, and fibrous root systems. **Dicots** have: 2 cotyledons, net-like (branching) venation, flower parts in 4s or 5s, ring-arranged vascular bundles, and taproots. Both monocots and dicots are angiosperms (flowering plants with seeds and vascular tissue), and both have dominant sporophyte generations.",
+        difficulty: 2,
+        tags: ["monocots", "dicots"],
+      },
+      {
+        stem: "Echinoderms (such as sea stars) are classified as deuterostomes, which places them in the same developmental group as:",
+        choices: [
+          { label: "A", text: "Arthropods", isCorrect: false },
+          { label: "B", text: "Annelids", isCorrect: false },
+          { label: "C", text: "Mollusks", isCorrect: false },
+          { label: "D", text: "Chordates", isCorrect: true },
+          { label: "E", text: "Flatworms", isCorrect: false },
+        ],
+        explanation: "**Echinoderms** and **chordates** are both **deuterostomes** — the anus develops first from the blastopore. Despite their very different adult body plans (echinoderms have radial symmetry with a water vascular system; chordates have bilateral symmetry with a notochord), they share this fundamental embryological characteristic. **Arthropods, annelids, mollusks, and flatworms** are all **protostomes** (mouth develops first).",
+        difficulty: 2,
+        tags: ["echinoderms", "deuterostome"],
+      },
+    ],
+  },
 ];

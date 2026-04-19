@@ -2,6 +2,18 @@
 // Will migrate to Supabase later
 
 const STORAGE_KEY = "dat-prep-progress";
+const DATA_VERSION = "2"; // Bump this to reset all user data on next load
+const VERSION_KEY = "dat-prep-version";
+
+// Auto-reset if data version changed (new content deployed)
+if (typeof window !== "undefined") {
+  const storedVersion = localStorage.getItem(VERSION_KEY);
+  if (storedVersion !== DATA_VERSION) {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("dat-prep-exam-attempts");
+    localStorage.setItem(VERSION_KEY, DATA_VERSION);
+  }
+}
 
 export interface QuizResult {
   chapterSlug: string;
