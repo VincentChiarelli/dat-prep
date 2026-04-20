@@ -6,6 +6,22 @@ import { BIOLOGY_CHAPTERS } from "./sample-content";
 import { GENCHEM_CHAPTERS, OCHEM_CHAPTERS } from "./content-chemistry";
 import type { ExamQuestion } from "./exam-engine";
 
+// Dynamic imports for content that may not exist yet
+let PAT_CHAPTERS: typeof BIOLOGY_CHAPTERS = [];
+let READING_CHAPTERS: typeof BIOLOGY_CHAPTERS = [];
+let QUANT_CHAPTERS: typeof BIOLOGY_CHAPTERS = [];
+
+try {
+  const pat = require("./content-pat");
+  PAT_CHAPTERS = pat.PAT_CHAPTERS || [];
+} catch { /* not ready */ }
+
+try {
+  const other = require("./content-other");
+  READING_CHAPTERS = other.READING_CHAPTERS || [];
+  QUANT_CHAPTERS = other.QUANT_CHAPTERS || [];
+} catch { /* not ready */ }
+
 let _cachedQuestions: ExamQuestion[] | null = null;
 
 function extractQuestions(
@@ -41,6 +57,9 @@ export function getAllQuestions(): ExamQuestion[] {
     ...extractQuestions(BIOLOGY_CHAPTERS, "biology"),
     ...extractQuestions(GENCHEM_CHAPTERS, "general-chemistry"),
     ...extractQuestions(OCHEM_CHAPTERS, "organic-chemistry"),
+    ...extractQuestions(PAT_CHAPTERS, "perceptual-ability"),
+    ...extractQuestions(READING_CHAPTERS, "reading-comprehension"),
+    ...extractQuestions(QUANT_CHAPTERS, "quantitative-reasoning"),
   ];
   _cachedQuestions = all;
   return all;

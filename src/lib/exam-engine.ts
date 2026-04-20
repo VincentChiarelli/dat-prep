@@ -290,6 +290,89 @@ export const EXAM_CONFIGS: ExamConfig[] = [
     totalQuestions: 20,
     totalTimeMinutes: 10,
   },
+
+  // ── PERCEPTUAL ABILITY ──
+  {
+    id: "pat-quick",
+    title: "PAT — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "perceptual-ability", sectionName: "Perceptual Ability", questionCount: 10, timeLimitMinutes: 8 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 8,
+  },
+  {
+    id: "pat-section-exam",
+    title: "PAT — Section Exam",
+    type: "section",
+    sections: [
+      { sectionSlug: "perceptual-ability", sectionName: "Perceptual Ability", questionCount: 45, timeLimitMinutes: 30 },
+    ],
+    totalQuestions: 45,
+    totalTimeMinutes: 30,
+  },
+
+  // ── READING COMPREHENSION ──
+  {
+    id: "reading-quick",
+    title: "Reading Comprehension — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "reading-comprehension", sectionName: "Reading Comprehension", questionCount: 10, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 12,
+  },
+  {
+    id: "reading-section-exam",
+    title: "Reading Comprehension — Section Exam",
+    type: "section",
+    sections: [
+      { sectionSlug: "reading-comprehension", sectionName: "Reading Comprehension", questionCount: 30, timeLimitMinutes: 30 },
+    ],
+    totalQuestions: 30,
+    totalTimeMinutes: 30,
+  },
+
+  // ── QUANTITATIVE REASONING ──
+  {
+    id: "quant-quick",
+    title: "Quantitative Reasoning — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "quantitative-reasoning", sectionName: "Quantitative Reasoning", questionCount: 10, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 12,
+  },
+  {
+    id: "quant-section-exam",
+    title: "Quantitative Reasoning — Section Exam",
+    type: "section",
+    sections: [
+      { sectionSlug: "quantitative-reasoning", sectionName: "Quantitative Reasoning", questionCount: 40, timeLimitMinutes: 45 },
+    ],
+    totalQuestions: 40,
+    totalTimeMinutes: 45,
+  },
+
+  // ── COMPLETE DAT SIMULATION ──
+  {
+    id: "dat-full-simulation",
+    title: "Complete DAT Simulation",
+    type: "full",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 40, timeLimitMinutes: 30 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "perceptual-ability", sectionName: "Perceptual Ability", questionCount: 45, timeLimitMinutes: 30 },
+      { sectionSlug: "reading-comprehension", sectionName: "Reading Comprehension", questionCount: 25, timeLimitMinutes: 30 },
+      { sectionSlug: "quantitative-reasoning", sectionName: "Quantitative Reasoning", questionCount: 40, timeLimitMinutes: 45 },
+    ],
+    totalQuestions: 210,
+    totalTimeMinutes: 195,
+  },
 ];
 
 /**

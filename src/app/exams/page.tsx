@@ -29,6 +29,9 @@ export default function ExamsPage() {
     ...getChaptersForSection("biology").map(c => ({ ...c, sectionSlug: "biology", sectionName: "Biology", icon: "🧬" })),
     ...getChaptersForSection("general-chemistry").map(c => ({ ...c, sectionSlug: "general-chemistry", sectionName: "Gen Chem", icon: "⚗️" })),
     ...getChaptersForSection("organic-chemistry").map(c => ({ ...c, sectionSlug: "organic-chemistry", sectionName: "OChem", icon: "🔬" })),
+    ...getChaptersForSection("perceptual-ability").map(c => ({ ...c, sectionSlug: "perceptual-ability", sectionName: "PAT", icon: "🎯" })),
+    ...getChaptersForSection("reading-comprehension").map(c => ({ ...c, sectionSlug: "reading-comprehension", sectionName: "Reading", icon: "📖" })),
+    ...getChaptersForSection("quantitative-reasoning").map(c => ({ ...c, sectionSlug: "quantitative-reasoning", sectionName: "Quant", icon: "📐" })),
   ].filter((c) => c.questions.length > 0);
 
   return (
