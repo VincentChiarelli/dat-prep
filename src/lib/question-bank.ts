@@ -1,23 +1,10 @@
 /**
  * Question Bank — aggregates all questions from all content files
- * into a single searchable pool for the exam engine.
  */
 
 import { BIOLOGY_CHAPTERS } from "./sample-content";
+import { GENCHEM_CHAPTERS, OCHEM_CHAPTERS } from "./content-chemistry";
 import type { ExamQuestion } from "./exam-engine";
-
-// Will import chemistry content once available
-let GENCHEM_CHAPTERS: typeof BIOLOGY_CHAPTERS = [];
-let OCHEM_CHAPTERS: typeof BIOLOGY_CHAPTERS = [];
-
-try {
-  // Dynamic imports will work once the files exist
-  const chem = require("./content-chemistry");
-  GENCHEM_CHAPTERS = chem.GENCHEM_CHAPTERS || [];
-  OCHEM_CHAPTERS = chem.OCHEM_CHAPTERS || [];
-} catch {
-  // Files don't exist yet — that's fine
-}
 
 let _cachedQuestions: ExamQuestion[] | null = null;
 
@@ -26,7 +13,6 @@ function extractQuestions(
   sectionSlug: string
 ): ExamQuestion[] {
   const questions: ExamQuestion[] = [];
-
   for (const chapter of chapters) {
     for (let i = 0; i < chapter.questions.length; i++) {
       const q = chapter.questions[i];
@@ -46,19 +32,16 @@ function extractQuestions(
       });
     }
   }
-
   return questions;
 }
 
 export function getAllQuestions(): ExamQuestion[] {
   if (_cachedQuestions) return _cachedQuestions;
-
   const all: ExamQuestion[] = [
     ...extractQuestions(BIOLOGY_CHAPTERS, "biology"),
     ...extractQuestions(GENCHEM_CHAPTERS, "general-chemistry"),
     ...extractQuestions(OCHEM_CHAPTERS, "organic-chemistry"),
   ];
-
   _cachedQuestions = all;
   return all;
 }

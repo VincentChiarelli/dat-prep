@@ -4,13 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { DAT_SECTIONS } from "@/lib/dat-constants";
-import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
-
-function getChaptersForSection(slug: string) {
-  if (slug === "biology") return BIOLOGY_CHAPTERS;
-  // Will add chemistry chapters when available
-  return [];
-}
+import { getChaptersForSection } from "@/lib/content-map";
 
 interface TextbookNavProps {
   sectionSlug?: string;

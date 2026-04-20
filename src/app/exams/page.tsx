@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getQuizResults, type QuizResult } from "@/lib/progress";
 import { EXAM_CONFIGS, getExamAttempts, type ExamAttempt } from "@/lib/exam-engine";
 import { getQuestionStats } from "@/lib/question-bank";
-import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
+import { getChaptersForSection } from "@/lib/content-map";
 import { AppLayout } from "@/components/app-layout";
 
 export default function ExamsPage() {
@@ -25,7 +25,11 @@ export default function ExamsPage() {
   ];
   const avgScore = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : null;
 
-  const availableChapterQuizzes = BIOLOGY_CHAPTERS.filter((c) => c.questions.length > 0);
+  const allChapterQuizzes = [
+    ...getChaptersForSection("biology").map(c => ({ ...c, sectionSlug: "biology", sectionName: "Biology", icon: "🧬" })),
+    ...getChaptersForSection("general-chemistry").map(c => ({ ...c, sectionSlug: "general-chemistry", sectionName: "Gen Chem", icon: "⚗️" })),
+    ...getChaptersForSection("organic-chemistry").map(c => ({ ...c, sectionSlug: "organic-chemistry", sectionName: "OChem", icon: "🔬" })),
+  ].filter((c) => c.questions.length > 0);
 
   return (
     <AppLayout>
@@ -106,17 +110,17 @@ export default function ExamsPage() {
         </div>
 
         {/* Chapter Quizzes */}
-        <h2 className="text-lg font-semibold mb-4">Chapter Quizzes — Biology</h2>
+        <h2 className="text-lg font-semibold mb-4">Chapter Quizzes — All Sections</h2>
         <div className="space-y-3 mb-10">
-          {availableChapterQuizzes.map((chapter) => {
+          {allChapterQuizzes.map((chapter) => {
             const scores = quizScores.filter((s) => s.chapterSlug === chapter.slug);
             const best = scores.length > 0 ? Math.max(...scores.map((s) => s.percent)) : null;
             return (
-              <div key={chapter.slug} className="flex items-center gap-4 bg-white rounded-xl border border-[var(--color-border)] p-4">
-                <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-lg">🧬</div>
+              <div key={`${chapter.sectionSlug}-${chapter.slug}`} className="flex items-center gap-4 bg-white rounded-xl border border-[var(--color-border)] p-4">
+                <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-lg">{chapter.icon}</div>
                 <div className="flex-1">
                   <div className="font-medium">{chapter.title}</div>
-                  <div className="text-xs text-[var(--color-text-muted)]">{chapter.questions.length} questions</div>
+                  <div className="text-xs text-[var(--color-text-muted)]">{chapter.sectionName} &middot; {chapter.questions.length} questions</div>
                 </div>
                 {best !== null && (
                   <div className="text-right mr-4">
@@ -124,7 +128,7 @@ export default function ExamsPage() {
                     <div className="text-xs text-[var(--color-text-muted)]">{scores.length} attempt{scores.length !== 1 ? "s" : ""}</div>
                   </div>
                 )}
-                <Link href={`/study/biology/${chapter.slug}`} className="text-sm font-medium bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg hover:bg-[var(--color-primary-dark)]">
+                <Link href={`/study/${chapter.sectionSlug}/${chapter.slug}`} className="text-sm font-medium bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg hover:bg-[var(--color-primary-dark)]">
                   {best !== null ? "Retake" : "Start"}
                 </Link>
               </div>

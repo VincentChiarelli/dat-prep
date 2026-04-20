@@ -4,17 +4,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { DAT_SECTIONS } from "@/lib/dat-constants";
 import { AppLayout } from "@/components/app-layout";
-import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
+import { getChaptersForSection } from "@/lib/content-map";
 import {
   getStudyStats,
   getCompletedLessonsForSection,
   type StudyStats,
 } from "@/lib/progress";
-
-function getChaptersForSection(slug: string) {
-  if (slug === "biology") return BIOLOGY_CHAPTERS;
-  return [];
-}
 
 function getTotalLessonsForSection(slug: string): number {
   const chapters = getChaptersForSection(slug);

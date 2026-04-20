@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DAT_SECTIONS } from "@/lib/dat-constants";
-import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
+import { getChaptersForSection } from "@/lib/content-map";
 
 export default async function SectionPage({ params }: { params: Promise<{ sectionSlug: string }> }) {
   const { sectionSlug } = await params;
@@ -10,8 +10,7 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
     return <div className="p-8 text-center text-[var(--color-text-muted)]">Section not found</div>;
   }
 
-  // For now, only Biology has real content
-  const chapters = sectionSlug === "biology" ? BIOLOGY_CHAPTERS : [];
+  const chapters = getChaptersForSection(sectionSlug);
 
   return (
     <div className="min-h-screen">

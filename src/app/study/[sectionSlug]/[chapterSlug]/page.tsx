@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { DAT_SECTIONS } from "@/lib/dat-constants";
-import { BIOLOGY_CHAPTERS } from "@/lib/sample-content";
+import { getChaptersForSection } from "@/lib/content-map";
 import {
   markLessonComplete,
   isLessonComplete,
@@ -23,7 +23,7 @@ export default function ChapterPage() {
   const chapterSlug = params.chapterSlug as string;
 
   const section = DAT_SECTIONS.find((s) => s.slug === sectionSlug);
-  const chapters = sectionSlug === "biology" ? BIOLOGY_CHAPTERS : [];
+  const chapters = getChaptersForSection(sectionSlug);
   const chapter = chapters.find((c) => c.slug === chapterSlug);
 
   const [currentLesson, setCurrentLesson] = useState(0);
