@@ -91,16 +91,68 @@ export function generateExamQuestions(
  * Pre-built exam configs
  */
 export const EXAM_CONFIGS: ExamConfig[] = [
+  // ── FULL DAT PRACTICE EXAMS ──
   {
-    id: "bio-chapter-quiz",
-    title: "Biology — Quick Quiz",
-    type: "mini",
+    id: "dat-practice-1",
+    title: "DAT Practice Exam #1",
+    type: "full",
     sections: [
-      { sectionSlug: "biology", sectionName: "Biology", questionCount: 10, timeLimitMinutes: 15 },
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 40, timeLimitMinutes: 30 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 30 },
     ],
-    totalQuestions: 10,
-    totalTimeMinutes: 15,
+    totalQuestions: 100,
+    totalTimeMinutes: 90,
   },
+  {
+    id: "dat-practice-2",
+    title: "DAT Practice Exam #2",
+    type: "full",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 40, timeLimitMinutes: 30 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+    ],
+    totalQuestions: 100,
+    totalTimeMinutes: 90,
+  },
+  {
+    id: "dat-practice-3",
+    title: "DAT Practice Exam #3",
+    type: "full",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 40, timeLimitMinutes: 30 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+    ],
+    totalQuestions: 100,
+    totalTimeMinutes: 90,
+  },
+
+  // ── MIDTERM EXAMS ──
+  {
+    id: "midterm-bio",
+    title: "Biology Midterm",
+    type: "section",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 60, timeLimitMinutes: 45 },
+    ],
+    totalQuestions: 60,
+    totalTimeMinutes: 45,
+  },
+  {
+    id: "midterm-chem",
+    title: "Chemistry Midterm (Gen + Organic)",
+    type: "full",
+    sections: [
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 25 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 25 },
+    ],
+    totalQuestions: 60,
+    totalTimeMinutes: 50,
+  },
+
+  // ── SECTION EXAMS ──
   {
     id: "bio-section-exam",
     title: "Biology — Section Exam",
@@ -110,16 +162,6 @@ export const EXAM_CONFIGS: ExamConfig[] = [
     ],
     totalQuestions: 40,
     totalTimeMinutes: 30,
-  },
-  {
-    id: "genchem-chapter-quiz",
-    title: "General Chemistry — Quick Quiz",
-    type: "mini",
-    sections: [
-      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 10, timeLimitMinutes: 15 },
-    ],
-    totalQuestions: 10,
-    totalTimeMinutes: 15,
   },
   {
     id: "genchem-section-exam",
@@ -132,16 +174,6 @@ export const EXAM_CONFIGS: ExamConfig[] = [
     totalTimeMinutes: 25,
   },
   {
-    id: "ochem-chapter-quiz",
-    title: "Organic Chemistry — Quick Quiz",
-    type: "mini",
-    sections: [
-      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 10, timeLimitMinutes: 15 },
-    ],
-    totalQuestions: 10,
-    totalTimeMinutes: 15,
-  },
-  {
     id: "ochem-section-exam",
     title: "Organic Chemistry — Section Exam",
     type: "section",
@@ -151,18 +183,66 @@ export const EXAM_CONFIGS: ExamConfig[] = [
     totalQuestions: 30,
     totalTimeMinutes: 25,
   },
+
+  // ── QUICK QUIZZES (10 questions each) ──
   {
-    id: "science-full",
-    title: "Survey of Natural Sciences — Full Exam",
+    id: "bio-quick",
+    title: "Biology — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 10, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 12,
+  },
+  {
+    id: "genchem-quick",
+    title: "General Chemistry — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 10, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 12,
+  },
+  {
+    id: "ochem-quick",
+    title: "Organic Chemistry — Quick Quiz",
+    type: "mini",
+    sections: [
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 10, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 10,
+    totalTimeMinutes: 12,
+  },
+
+  // ── CHECKPOINT EXAMS (mixed, 40 questions) ──
+  {
+    id: "checkpoint-1",
+    title: "Checkpoint Exam #1",
     type: "full",
     sections: [
-      { sectionSlug: "biology", sectionName: "Biology", questionCount: 40, timeLimitMinutes: 30 },
-      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 30, timeLimitMinutes: 30 },
-      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 30, timeLimitMinutes: 30 },
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 16, timeLimitMinutes: 12 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 12, timeLimitMinutes: 10 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 12, timeLimitMinutes: 10 },
     ],
-    totalQuestions: 100,
-    totalTimeMinutes: 90,
+    totalQuestions: 40,
+    totalTimeMinutes: 32,
   },
+  {
+    id: "checkpoint-2",
+    title: "Checkpoint Exam #2",
+    type: "full",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 16, timeLimitMinutes: 12 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 12, timeLimitMinutes: 10 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 12, timeLimitMinutes: 10 },
+    ],
+    totalQuestions: 40,
+    totalTimeMinutes: 32,
+  },
+
+  // ── MIXED PRACTICE ──
   {
     id: "mixed-20",
     title: "Mixed Practice — 20 Questions",
@@ -174,6 +254,41 @@ export const EXAM_CONFIGS: ExamConfig[] = [
     ],
     totalQuestions: 20,
     totalTimeMinutes: 16,
+  },
+  {
+    id: "mixed-50",
+    title: "Mixed Practice — 50 Questions",
+    type: "full",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 20, timeLimitMinutes: 15 },
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 15, timeLimitMinutes: 12 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 15, timeLimitMinutes: 12 },
+    ],
+    totalQuestions: 50,
+    totalTimeMinutes: 39,
+  },
+
+  // ── SPEED ROUNDS ──
+  {
+    id: "speed-bio",
+    title: "Biology Speed Round",
+    type: "mini",
+    sections: [
+      { sectionSlug: "biology", sectionName: "Biology", questionCount: 20, timeLimitMinutes: 10 },
+    ],
+    totalQuestions: 20,
+    totalTimeMinutes: 10,
+  },
+  {
+    id: "speed-chem",
+    title: "Chemistry Speed Round",
+    type: "mini",
+    sections: [
+      { sectionSlug: "general-chemistry", sectionName: "General Chemistry", questionCount: 10, timeLimitMinutes: 5 },
+      { sectionSlug: "organic-chemistry", sectionName: "Organic Chemistry", questionCount: 10, timeLimitMinutes: 5 },
+    ],
+    totalQuestions: 20,
+    totalTimeMinutes: 10,
   },
 ];
 
