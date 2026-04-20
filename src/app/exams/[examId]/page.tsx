@@ -255,7 +255,7 @@ export default function ExamPage() {
 
       <div className="flex flex-1 max-w-5xl mx-auto w-full">
         {/* Question nav sidebar */}
-        <aside className="w-16 border-r border-[var(--color-border)] py-4 px-2 shrink-0 overflow-y-auto">
+        <aside className="w-16 border-r border-[var(--color-border)] py-4 px-2 shrink-0 overflow-y-auto hidden md:block">
           <div className="grid grid-cols-2 gap-1">
             {questions.map((_, i) => {
               const isAnswered = answers[questions[i].id];
@@ -281,7 +281,7 @@ export default function ExamPage() {
         </aside>
 
         {/* Question */}
-        <main className="flex-1 py-8 px-8">
+        <main className="flex-1 py-6 px-4 md:py-8 md:px-8">
           <div className="max-w-2xl mx-auto">
             <div className="flex items-center justify-between mb-6">
               <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wide font-semibold">

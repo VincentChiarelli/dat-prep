@@ -42,7 +42,7 @@ export default function ExamsPage() {
         <p className="text-[var(--color-text-secondary)] text-sm mb-8">Timed exams with randomized questions. Take them multiple times — questions shuffle each attempt.</p>
 
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           <div className="bg-white rounded-xl border border-[var(--color-border)] p-4 text-center">
             <div className="text-2xl font-bold text-[var(--color-primary)]">{questionCount}</div>
             <div className="text-xs text-[var(--color-text-muted)] mt-1">Questions in Bank</div>
@@ -65,7 +65,7 @@ export default function ExamsPage() {
 
         {/* Practice Exams */}
         <h2 className="text-lg font-semibold mb-4">Practice Exams</h2>
-        <div className="grid grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
           {EXAM_CONFIGS.map((exam) => {
             const attempts = examAttempts.filter((a) => a.examId === exam.id);
             const best = attempts.length > 0 ? Math.max(...attempts.map((a) => a.overallPercent)) : null;

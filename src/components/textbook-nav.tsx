@@ -37,7 +37,7 @@ export function TextbookNav({ sectionSlug, chapterSlug }: TextbookNavProps) {
   });
 
   return (
-    <div className="w-72 bg-white border-r border-[var(--color-border)] flex flex-col h-screen sticky top-0 overflow-hidden">
+    <div className="w-72 bg-white border-r border-[var(--color-border)] flex-col h-screen sticky top-0 overflow-hidden hidden md:flex">
       {/* Header */}
       <div className="flex items-center justify-between px-4 h-14 border-b border-[var(--color-border)]">
         <h2 className="font-semibold text-sm">Textbook</h2>

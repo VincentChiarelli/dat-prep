@@ -24,7 +24,7 @@ export default function Home() {
           <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
           Adaptive learning powered by science
         </div>
-        <h1 className="text-5xl font-bold tracking-tight leading-tight mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
           Study smarter.<br />
           <span className="text-[var(--color-primary)]">Score higher.</span>
         </h1>
@@ -44,7 +44,7 @@ export default function Home() {
 
       {/* Stats */}
       <section className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { value: "51", label: "Chapters" },
             { value: "1,200+", label: "Practice Questions" },
