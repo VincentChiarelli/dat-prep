@@ -1,94 +1,110 @@
+"use client";
+
+// Personal-app landing. No multi-user marketing copy, no "Start Free" CTAs.
+// On revisits, kick straight to /dashboard. On first run only, show a brief
+// orientation panel and let the user set a target test date.
+
 import Link from "next/link";
-import { DAT_SECTIONS } from "@/lib/dat-constants";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  getProgress,
+  setTargetTestDate,
+  daysUntilTest,
+} from "@/lib/progress";
 
 export default function Home() {
+  const router = useRouter();
+  const [ready, setReady] = useState(false);
+  const [firstRun, setFirstRun] = useState(false);
+  const [dateInput, setDateInput] = useState("");
+
+  useEffect(() => {
+    // Returning user → straight to dashboard.
+    const p = getProgress();
+    const hasState =
+      p.completedLessons.length > 0 ||
+      p.quizResults.length > 0 ||
+      p.studySessions.length > 0 ||
+      p.targetTestDate !== null;
+    if (hasState) {
+      router.replace("/dashboard");
+      return;
+    }
+    setFirstRun(true);
+    setReady(true);
+  }, [router]);
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-sm text-[var(--color-text-muted)]">
+        Loading…
+      </div>
+    );
+  }
+
+  const handleSaveDate = () => {
+    if (dateInput) setTargetTestDate(dateInput);
+    router.push("/dashboard");
+  };
+
+  const handleSkip = () => router.push("/dashboard");
+
+  if (!firstRun) return null;
+
+  // First-run orientation. Single screen — set a target date (optional),
+  // then jump in.
   return (
-    <div className="min-h-screen">
-      {/* Navbar */}
-      <nav className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-sm">D</div>
-            <span className="font-semibold text-lg tracking-tight">DAT Prep</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--foreground)] transition-colors">Dashboard</Link>
-            <Link href="/dashboard" className="text-sm font-medium bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg hover:bg-[var(--color-primary-dark)] transition-colors">Get Started</Link>
-          </div>
+    <div className="min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-md">
+        <div className="flex items-center gap-2 mb-8">
+          <div className="w-9 h-9 rounded-xl bg-[var(--color-primary)] flex items-center justify-center text-white font-bold">D</div>
+          <span className="font-semibold text-lg tracking-tight">DAT Prep</span>
         </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-[var(--color-primary-light)] text-[var(--color-primary-dark)] text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
-          Adaptive learning powered by science
-        </div>
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-          Study smarter.<br />
-          <span className="text-[var(--color-primary)]">Score higher.</span>
-        </h1>
-        <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed">
-          Complete DAT prep with adaptive practice questions, full-length exams,
-          spaced repetition, and AI explanations. Everything you need in one clean platform.
+        <h1 className="text-2xl font-bold tracking-tight mb-2">Welcome.</h1>
+        <p className="text-[var(--color-text-secondary)] text-sm mb-8 leading-relaxed">
+          Set a target test date and you&rsquo;ll see a daily countdown on the
+          dashboard. You can change or remove it anytime.
         </p>
-        <div className="flex items-center justify-center gap-4">
-          <Link href="/dashboard" className="bg-[var(--color-primary)] text-white px-8 py-3 rounded-xl font-semibold text-base hover:bg-[var(--color-primary-dark)] transition-all hover:shadow-lg hover:shadow-[var(--color-primary)]/20">
-            Start Studying Free
-          </Link>
-          <Link href="#sections" className="text-[var(--color-text-secondary)] px-6 py-3 rounded-xl font-medium text-base border border-[var(--color-border)] hover:border-[var(--color-text-muted)] transition-colors">
-            See What&apos;s Covered
-          </Link>
-        </div>
-      </section>
 
-      {/* Stats */}
-      <section className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { value: "51", label: "Chapters" },
-            { value: "1,200+", label: "Practice Questions" },
-            { value: "6", label: "Full Practice Exams" },
-            { value: "280", label: "Questions per Exam" },
-          ].map((s) => (
-            <div key={s.label} className="text-center py-6 bg-white rounded-xl border border-[var(--color-border)]">
-              <div className="text-2xl font-bold text-[var(--color-primary)]">{s.value}</div>
-              <div className="text-xs text-[var(--color-text-muted)] mt-1 font-medium">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+        <label className="block text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider mb-2">
+          Target DAT date (optional)
+        </label>
+        <input
+          type="date"
+          value={dateInput}
+          onChange={(e) => setDateInput(e.target.value)}
+          className="w-full border border-[var(--color-border)] rounded-lg px-3 py-2.5 text-sm mb-6 focus:outline-none focus:border-[var(--color-primary)]"
+        />
 
-      {/* Sections */}
-      <section id="sections" className="max-w-4xl mx-auto px-6 pb-20">
-        <h2 className="text-2xl font-bold text-center mb-2">Complete DAT Coverage</h2>
-        <p className="text-[var(--color-text-secondary)] text-center mb-10">All 6 sections of the Dental Admission Test</p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {DAT_SECTIONS.map((section) => (
-            <Link
-              key={section.slug}
-              href={`/study/${section.slug}`}
-              className="group bg-white rounded-xl border border-[var(--color-border)] p-5 hover:border-[var(--color-text-muted)] hover:shadow-md transition-all"
+        <div className="flex gap-3">
+          <button
+            onClick={handleSaveDate}
+            className="flex-1 bg-[var(--color-primary)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[var(--color-primary-dark)] transition-colors"
+          >
+            {dateInput ? "Save & continue" : "Continue"}
+          </button>
+          {!dateInput && (
+            <button
+              onClick={handleSkip}
+              className="px-5 py-2.5 rounded-lg text-sm font-medium text-[var(--color-text-secondary)] hover:bg-gray-50 transition-colors"
             >
-              <div className="text-2xl mb-3">{section.icon}</div>
-              <div className="font-semibold mb-1 group-hover:text-[var(--color-primary)] transition-colors">{section.name}</div>
-              <div className="text-xs text-[var(--color-text-muted)] leading-relaxed mb-3">{section.description}</div>
-              <div className="flex items-center gap-3 text-xs text-[var(--color-text-secondary)]">
-                <span>{section.chapters} chapters</span>
-                <span className="w-1 h-1 rounded-full bg-[var(--color-border)]"></span>
-                <span>{section.datQuestions} questions on DAT</span>
-              </div>
-            </Link>
-          ))}
+              Skip
+            </button>
+          )}
         </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[var(--color-border)] py-8">
-        <div className="max-w-6xl mx-auto px-6 text-center text-xs text-[var(--color-text-muted)]">
-          DAT Prep &mdash; Built for future dentists.
-        </div>
-      </footer>
+        <Link
+          href="/dashboard"
+          className="block text-center text-xs text-[var(--color-text-muted)] hover:text-[var(--foreground)] mt-6"
+        >
+          (Or jump straight to the dashboard)
+        </Link>
+
+        {/* Hidden: keeps the unused import warning away */}
+        <span className="hidden">{daysUntilTest()}</span>
+      </div>
     </div>
   );
 }

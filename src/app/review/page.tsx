@@ -1,11 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { AppLayout } from "@/components/app-layout";
 import { getAllQuestions } from "@/lib/question-bank";
+import {
+  getBookmarkedQuestionIds,
+  getIncorrectQuestionIds,
+  toggleBookmark,
+  isBookmarked,
+  markIncorrect,
+  clearIncorrect,
+} from "@/lib/progress";
 import type { ExamQuestion } from "@/lib/exam-engine";
+
+type ReviewMode =
+  | "all"
+  | "bookmarks"
+  | "missed"
+  | "hard"
+  | "biology"
+  | "general-chemistry"
+  | "organic-chemistry"
+  | "perceptual-ability"
+  | "reading-comprehension"
+  | "quantitative-reasoning";
+
+const MODE_LABELS: Record<ReviewMode, string> = {
+  all: "All",
+  bookmarks: "★ Bookmarks",
+  missed: "Missed",
+  hard: "Hard (D3)",
+  biology: "Biology",
+  "general-chemistry": "Gen Chem",
+  "organic-chemistry": "Org Chem",
+  "perceptual-ability": "PAT",
+  "reading-comprehension": "Reading",
+  "quantitative-reasoning": "Quant",
+};
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -16,19 +51,48 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export default function ReviewPage() {
+function ReviewInner() {
+  const searchParams = useSearchParams();
+  const initialMode = (searchParams.get("mode") as ReviewMode) || "all";
+
+  const [mode, setMode] = useState<ReviewMode>(initialMode);
   const [questions, setQuestions] = useState<ExamQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
-  const [mode, setMode] = useState<"all" | "biology" | "general-chemistry" | "organic-chemistry">("all");
+  const [starred, setStarred] = useState(false);
+  const [poolEmpty, setPoolEmpty] = useState(false);
 
-  const loadQuestions = (filterMode: string) => {
-    const all = getAllQuestions();
-    const filtered = filterMode === "all" ? all : all.filter((q) => q.sectionSlug === filterMode);
-    const shuffled = shuffle(filtered).slice(0, 20);
-    // Shuffle choices too
+  // The full question bank — memoized so we don't re-extract on every render.
+  const allQuestions = useMemo(() => getAllQuestions(), []);
+
+  const loadQuestions = (filterMode: ReviewMode) => {
+    let pool: ExamQuestion[];
+    if (filterMode === "all") {
+      pool = allQuestions;
+    } else if (filterMode === "bookmarks") {
+      const ids = new Set(getBookmarkedQuestionIds());
+      pool = allQuestions.filter((q) => ids.has(q.id));
+    } else if (filterMode === "missed") {
+      const ids = new Set(getIncorrectQuestionIds());
+      pool = allQuestions.filter((q) => ids.has(q.id));
+    } else if (filterMode === "hard") {
+      pool = allQuestions.filter((q) => q.difficulty >= 3);
+    } else {
+      pool = allQuestions.filter((q) => q.sectionSlug === filterMode);
+    }
+
+    if (pool.length === 0) {
+      setQuestions([]);
+      setPoolEmpty(true);
+      return;
+    }
+    setPoolEmpty(false);
+
+    const shuffled = shuffle(pool).slice(0, 20);
+    // Shuffle choices within each question too — keeps the user from
+    // memorizing positions instead of content.
     const randomized = shuffled.map((q) => ({
       ...q,
       choices: shuffle(q.choices).map((c, i) => ({ ...c, label: String.fromCharCode(65 + i) })),
@@ -42,7 +106,45 @@ export default function ReviewPage() {
 
   useEffect(() => {
     loadQuestions(mode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
+
+  // Sync the bookmark star whenever the question changes.
+  useEffect(() => {
+    if (questions.length > 0) {
+      setStarred(isBookmarked(questions[currentIndex].id));
+    }
+  }, [currentIndex, questions]);
+
+  if (poolEmpty) {
+    return (
+      <AppLayout>
+        <div className="h-14 border-b border-[var(--color-border)] flex items-center px-4 md:px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10 pl-14 md:pl-6">
+          <h1 className="font-semibold">Quick Review</h1>
+        </div>
+        <div className="max-w-2xl mx-auto px-4 md:px-6 py-12 text-center">
+          <div className="text-4xl mb-4">
+            {mode === "bookmarks" ? "☆" : mode === "missed" ? "🎯" : "📭"}
+          </div>
+          <div className="font-semibold mb-2">
+            {mode === "bookmarks"
+              ? "No bookmarked questions yet"
+              : mode === "missed"
+              ? "No missed questions to review"
+              : "No questions in this filter"}
+          </div>
+          <div className="text-sm text-[var(--color-text-muted)] mb-6">
+            {mode === "bookmarks"
+              ? "Tap the ☆ next to any quiz question to bookmark it for later review."
+              : mode === "missed"
+              ? "When you miss a question on a chapter quiz, it will show up here."
+              : "Try a different filter."}
+          </div>
+          <ModeBar mode={mode} setMode={setMode} />
+        </div>
+      </AppLayout>
+    );
+  }
 
   if (questions.length === 0) {
     return (
@@ -62,12 +164,21 @@ export default function ReviewPage() {
     setSelected(label);
     setRevealed(true);
     const isRight = q.choices.find((c) => c.label === label)?.isCorrect;
-    setScore((prev) => ({ correct: prev.correct + (isRight ? 1 : 0), total: prev.total + 1 }));
+    setScore((prev) => ({
+      correct: prev.correct + (isRight ? 1 : 0),
+      total: prev.total + 1,
+    }));
+    // Auto-tracking for the missed-question queue: getting it right while
+    // reviewing removes it from the queue; getting it wrong adds it.
+    if (isRight) {
+      clearIncorrect(q.id);
+    } else {
+      markIncorrect(q.id);
+    }
   };
 
   const handleNext = () => {
     if (isLast) {
-      // Reshuffle for another round
       loadQuestions(mode);
       return;
     }
@@ -76,49 +187,28 @@ export default function ReviewPage() {
     setRevealed(false);
   };
 
+  const handleStar = () => {
+    const nowStarred = toggleBookmark(q.id);
+    setStarred(nowStarred);
+  };
+
   return (
     <AppLayout>
-      <div className="h-14 border-b border-[var(--color-border)] flex items-center justify-between px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10">
-        <h1 className="font-semibold">Quick Review</h1>
-        <div className="flex items-center gap-3 text-sm">
-          <span className="text-[var(--color-text-muted)]">{score.correct}/{score.total} correct</span>
+      <div className="h-14 border-b border-[var(--color-border)] flex items-center justify-between px-4 md:px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10 pl-14 md:pl-6 gap-2">
+        <h1 className="font-semibold truncate">Quick Review</h1>
+        <div className="flex items-center gap-3 text-sm shrink-0">
+          <span className="text-[var(--color-text-muted)] hidden sm:inline">{score.correct}/{score.total} correct</span>
           <span className="font-mono font-bold" style={{ color: score.total > 0 && score.correct / score.total >= 0.7 ? "#16A34A" : "#D97706" }}>
             {score.total > 0 ? Math.round((score.correct / score.total) * 100) + "%" : "—"}
           </span>
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 py-8">
-        {/* Filter tabs */}
-        <div className="flex items-center gap-2 mb-8 flex-wrap">
-          {[
-            { key: "all", label: "All Sections" },
-            { key: "biology", label: "Biology" },
-            { key: "general-chemistry", label: "Gen Chem" },
-            { key: "organic-chemistry", label: "Organic Chem" },
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setMode(tab.key as typeof mode)}
-              className={`text-sm px-4 py-2 rounded-lg border transition-colors ${
-                mode === tab.key
-                  ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
-                  : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-muted)]"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-          <button
-            onClick={() => loadQuestions(mode)}
-            className="text-sm px-3 py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--foreground)] ml-auto"
-          >
-            🔄 Shuffle
-          </button>
-        </div>
+      <div className="max-w-2xl mx-auto px-4 md:px-6 py-6 md:py-8">
+        <ModeBar mode={mode} setMode={setMode} onShuffle={() => loadQuestions(mode)} />
 
         {/* Progress */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 my-6">
           <div className="flex-1 h-1.5 bg-[var(--color-border)] rounded-full overflow-hidden">
             <div
               className="h-full bg-[var(--color-primary)] rounded-full transition-all duration-300"
@@ -129,14 +219,24 @@ export default function ReviewPage() {
         </div>
 
         {/* Question card */}
-        <div className="bg-white rounded-2xl border border-[var(--color-border)] p-8 shadow-sm">
-          <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider mb-4 font-semibold">
-            {q.sectionSlug.replace(/-/g, " ")} &middot; {q.tags?.[0] || "General"}
+        <div className="bg-white rounded-2xl border border-[var(--color-border)] p-5 md:p-8 shadow-sm">
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-semibold">
+              {q.sectionSlug.replace(/-/g, " ")} &middot; D{q.difficulty} &middot; {q.tags?.[0] || "General"}
+            </div>
+            <button
+              onClick={handleStar}
+              className="text-xl shrink-0 transition-transform hover:scale-110"
+              aria-label={starred ? "Remove bookmark" : "Bookmark question"}
+              title={starred ? "Bookmarked" : "Bookmark for review"}
+            >
+              {starred ? "★" : "☆"}
+            </button>
           </div>
 
-          <div className="text-lg font-medium leading-relaxed mb-8">{q.stem}</div>
+          <div className="text-base md:text-lg font-medium leading-relaxed mb-6 md:mb-8">{q.stem}</div>
 
-          <div className="space-y-3">
+          <div className="space-y-2 md:space-y-3">
             {q.choices.map((choice) => {
               let borderColor = "var(--color-border)";
               let bg = "transparent";
@@ -153,11 +253,11 @@ export default function ReviewPage() {
                   key={choice.label}
                   onClick={() => handleSelect(choice.label)}
                   disabled={revealed}
-                  className={`w-full text-left flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${ring}`}
+                  className={`w-full text-left flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl border-2 transition-all text-sm md:text-base ${ring}`}
                   style={{ borderColor, backgroundColor: bg }}
                 >
                   <span
-                    className="w-9 h-9 rounded-full border-2 flex items-center justify-center text-sm font-bold shrink-0"
+                    className="w-8 h-8 md:w-9 md:h-9 rounded-full border-2 flex items-center justify-center text-xs md:text-sm font-bold shrink-0"
                     style={{ borderColor, color: revealed && choice.isCorrect ? "#16A34A" : undefined }}
                   >
                     {choice.label}
@@ -170,10 +270,10 @@ export default function ReviewPage() {
 
           {/* Explanation */}
           {revealed && (
-            <div className={`mt-6 p-5 rounded-xl text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
+            <div className={`mt-6 p-4 md:p-5 rounded-xl text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
               <div className="font-semibold mb-2 text-base">{isCorrect ? "✓ Correct!" : `✗ The answer is ${correct?.label}`}</div>
               <div className="prose prose-sm max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{q.explanation}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>{q.explanation}</ReactMarkdown>
               </div>
             </div>
           )}
@@ -183,14 +283,64 @@ export default function ReviewPage() {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={handleNext}
-                className="bg-[var(--color-primary)] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:bg-[var(--color-primary-dark)] transition-colors"
+                className="bg-[var(--color-primary)] text-white px-5 md:px-6 py-3 rounded-xl font-semibold text-sm hover:bg-[var(--color-primary-dark)] transition-colors"
               >
-                {isLast ? "New Round →" : "Next Question →"}
+                {isLast ? "New Round →" : "Next →"}
               </button>
             </div>
           )}
         </div>
       </div>
     </AppLayout>
+  );
+}
+
+function ModeBar({
+  mode,
+  setMode,
+  onShuffle,
+}: {
+  mode: ReviewMode;
+  setMode: (m: ReviewMode) => void;
+  onShuffle?: () => void;
+}) {
+  const tabs: ReviewMode[] = [
+    "all", "bookmarks", "missed", "hard",
+    "biology", "general-chemistry", "organic-chemistry",
+    "perceptual-ability", "reading-comprehension", "quantitative-reasoning",
+  ];
+  return (
+    <div className="flex items-center gap-2 flex-wrap">
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          onClick={() => setMode(tab)}
+          className={`text-xs md:text-sm px-3 py-1.5 md:px-4 md:py-2 rounded-lg border transition-colors ${
+            mode === tab
+              ? "bg-[var(--color-primary)] text-white border-[var(--color-primary)]"
+              : "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-muted)]"
+          }`}
+        >
+          {MODE_LABELS[tab]}
+        </button>
+      ))}
+      {onShuffle && (
+        <button
+          onClick={onShuffle}
+          className="text-xs md:text-sm px-3 py-1.5 md:px-3 md:py-2 rounded-lg border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--foreground)] ml-auto"
+        >
+          🔄 Shuffle
+        </button>
+      )}
+    </div>
+  );
+}
+
+export default function ReviewPage() {
+  // useSearchParams() needs a Suspense boundary in Next 16 / React 19.
+  return (
+    <Suspense fallback={<AppLayout><div className="flex items-center justify-center min-h-screen text-[var(--color-text-muted)]">Loading…</div></AppLayout>}>
+      <ReviewInner />
+    </Suspense>
   );
 }

@@ -2,7 +2,7 @@
 // Will migrate to Supabase later
 
 const STORAGE_KEY = "dat-prep-progress";
-const DATA_VERSION = "2"; // Bump this to reset all user data on next load
+const DATA_VERSION = "3"; // Bump this to reset all user data on next load
 const VERSION_KEY = "dat-prep-version";
 
 // Auto-reset if data version changed (new content deployed)
@@ -36,6 +36,10 @@ export interface ProgressData {
   studySessions: StudySession[];
   lastStudiedPath: string | null; // e.g., "/study/biology/cell-biology"
   lastActiveDate: string | null; // ISO date
+  // ── Personalization (single-user app) ─────────────────────────────────
+  targetTestDate: string | null;       // ISO date (YYYY-MM-DD) of upcoming DAT
+  bookmarkedQuestions: string[];       // question IDs the user starred
+  incorrectQuestionIds: string[];      // accumulated wrong-answer IDs (for SR review)
 }
 
 const DEFAULT_PROGRESS: ProgressData = {
@@ -45,6 +49,9 @@ const DEFAULT_PROGRESS: ProgressData = {
   studySessions: [],
   lastStudiedPath: null,
   lastActiveDate: null,
+  targetTestDate: null,
+  bookmarkedQuestions: [],
+  incorrectQuestionIds: [],
 };
 
 function isBrowser(): boolean {
@@ -250,4 +257,86 @@ export function getCompletedLessonsForChapter(sectionSlug: string, chapterSlug: 
 export function resetProgress(): void {
   if (!isBrowser()) return;
   localStorage.removeItem(STORAGE_KEY);
+}
+
+// ── Test-date countdown ────────────────────────────────────────────────
+
+export function getTargetTestDate(): string | null {
+  return getProgress().targetTestDate;
+}
+
+export function setTargetTestDate(isoDate: string | null): void {
+  const p = getProgress();
+  p.targetTestDate = isoDate;
+  saveProgress(p);
+}
+
+export function daysUntilTest(): number | null {
+  const target = getTargetTestDate();
+  if (!target) return null;
+  // Compare in local time at day granularity
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const t = new Date(target + "T00:00:00");
+  const diff = Math.round((t.getTime() - today.getTime()) / 86400000);
+  return diff;
+}
+
+// ── Bookmarks ─────────────────────────────────────────────────────────
+
+export function isBookmarked(questionId: string): boolean {
+  return getProgress().bookmarkedQuestions.includes(questionId);
+}
+
+export function toggleBookmark(questionId: string): boolean {
+  const p = getProgress();
+  const i = p.bookmarkedQuestions.indexOf(questionId);
+  if (i >= 0) {
+    p.bookmarkedQuestions.splice(i, 1);
+    saveProgress(p);
+    return false;
+  }
+  p.bookmarkedQuestions.push(questionId);
+  saveProgress(p);
+  return true;
+}
+
+export function getBookmarkedQuestionIds(): string[] {
+  return [...getProgress().bookmarkedQuestions];
+}
+
+// ── Incorrect-question tracking (review-queue source) ───────────────
+
+export function markIncorrect(questionId: string): void {
+  const p = getProgress();
+  if (!p.incorrectQuestionIds.includes(questionId)) {
+    p.incorrectQuestionIds.push(questionId);
+    saveProgress(p);
+  }
+}
+
+export function clearIncorrect(questionId: string): void {
+  // Called when the user gets the question right in a follow-up review.
+  const p = getProgress();
+  const i = p.incorrectQuestionIds.indexOf(questionId);
+  if (i >= 0) {
+    p.incorrectQuestionIds.splice(i, 1);
+    saveProgress(p);
+  }
+}
+
+export function getIncorrectQuestionIds(): string[] {
+  return [...getProgress().incorrectQuestionIds];
+}
+
+// ── Section mastery (used on dashboard cards) ───────────────────────
+
+export function getSectionMastery(sectionSlug: string): number {
+  // Average percent across all quiz results for this section.
+  // Returns 0 when no quizzes have been taken in the section.
+  const p = getProgress();
+  const sectionResults = p.quizResults.filter((r) => r.sectionSlug === sectionSlug);
+  if (sectionResults.length === 0) return 0;
+  const sum = sectionResults.reduce((s, r) => s + r.percent, 0);
+  return Math.round(sum / sectionResults.length);
 }

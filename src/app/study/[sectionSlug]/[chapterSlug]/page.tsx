@@ -13,6 +13,9 @@ import {
   isLessonComplete,
   saveQuizScore,
   logStudyTime,
+  toggleBookmark,
+  isBookmarked,
+  markIncorrect,
   type QuizResult,
 } from "@/lib/progress";
 import { AppLayout } from "@/components/app-layout";
@@ -36,6 +39,10 @@ export default function ChapterPage() {
   const [showTerms, setShowTerms] = useState(false);
   const [completedLessons, setCompletedLessons] = useState<Set<string>>(new Set());
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
+  // Hard-mode quiz filter — restrict the chapter quiz to difficulty 3+ questions.
+  const [hardMode, setHardMode] = useState(false);
+  // Bookmark state mirrored from progress; rendered next to each question.
+  const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
 
   // Study time tracking
   const sessionStartRef = useRef<number>(Date.now());
@@ -62,6 +69,14 @@ export default function ChapterPage() {
       }
     }
     setCompletedLessons(completed);
+
+    // Hydrate bookmark state for this chapter's questions.
+    const bm = new Set<string>();
+    chapter.questions.forEach((_, i) => {
+      const qid = `${sectionSlug}-${chapterSlug}-${i}`;
+      if (isBookmarked(qid)) bm.add(qid);
+    });
+    setBookmarks(bm);
   }, [sectionSlug, chapterSlug, chapter]);
 
   if (!section || !chapter || chapter.lessons.length === 0) {
@@ -80,8 +95,17 @@ export default function ChapterPage() {
 
   const lesson = chapter.lessons[currentLesson];
   const isLastLesson = currentLesson === chapter.lessons.length - 1;
+  // Quiz pool — narrowed to difficulty-3 only when Hard mode is on. We
+  // preserve original-index identity via a parallel array of quiz IDs so
+  // bookmarks and incorrect-tracking key on the same id question-bank.ts
+  // assigns: `${sectionSlug}-${chapterSlug}-${index-into-chapter.questions}`.
+  const quizPool = chapter.questions.map((q, idx) => ({ q, originalIndex: idx }));
+  const filteredQuizPool = hardMode
+    ? quizPool.filter(({ q }) => q.difficulty >= 3)
+    : quizPool;
+  const quizQuestions = filteredQuizPool;
   const quizScore = quizSubmitted
-    ? chapter.questions.filter((q, i) => {
+    ? quizQuestions.filter(({ q }, i) => {
         const selected = quizAnswers[i];
         return q.choices.find((c) => c.label === selected)?.isCorrect;
       }).length
@@ -113,56 +137,119 @@ export default function ChapterPage() {
 
   const handleSubmitQuiz = () => {
     setQuizSubmitted(true);
-    const score = chapter.questions.filter((q, i) => {
+    let score = 0;
+    quizQuestions.forEach(({ q, originalIndex }, i) => {
       const selected = quizAnswers[i];
-      return q.choices.find((c) => c.label === selected)?.isCorrect;
-    }).length;
-    const result = saveQuizScore(sectionSlug, chapterSlug, score, chapter.questions.length);
+      const correct = q.choices.find((c) => c.label === selected)?.isCorrect;
+      const qid = `${sectionSlug}-${chapterSlug}-${originalIndex}`;
+      if (correct) {
+        score += 1;
+      } else if (selected) {
+        // Only mark as missed if user actually answered (not blank skips).
+        markIncorrect(qid);
+      }
+    });
+    const result = saveQuizScore(sectionSlug, chapterSlug, score, quizQuestions.length);
     setQuizResult(result);
     window.scrollTo(0, 0);
   };
 
+  const handleToggleBookmark = (questionId: string) => {
+    const nowBookmarked = toggleBookmark(questionId);
+    setBookmarks((prev) => {
+      const next = new Set(prev);
+      if (nowBookmarked) next.add(questionId);
+      else next.delete(questionId);
+      return next;
+    });
+  };
+
   if (showQuiz) {
+    if (quizQuestions.length === 0) {
+      return (
+        <AppLayout>
+          <div className="min-h-screen flex items-center justify-center px-6">
+            <div className="text-center max-w-sm">
+              <div className="text-4xl mb-4">😶</div>
+              <div className="font-semibold mb-2">No hard-mode questions in this chapter</div>
+              <div className="text-sm text-[var(--color-text-muted)] mb-4">
+                This chapter doesn&apos;t have any difficulty-3 questions yet. Turn off Hard mode to see all questions.
+              </div>
+              <button
+                onClick={() => setHardMode(false)}
+                className="bg-[var(--color-primary)] text-white px-5 py-2 rounded-lg text-sm font-semibold"
+              >
+                Turn off Hard mode
+              </button>
+            </div>
+          </div>
+        </AppLayout>
+      );
+    }
     return (
       <AppLayout>
         <div className="min-h-screen">
         <nav className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-          <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-            <button onClick={() => { setShowQuiz(false); setQuizSubmitted(false); setQuizAnswers({}); setQuizResult(null); }} className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--foreground)]">
-              &larr; Back to Lesson
+          <div className="max-w-4xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between gap-2 pl-14 md:pl-6">
+            <button onClick={() => { setShowQuiz(false); setQuizSubmitted(false); setQuizAnswers({}); setQuizResult(null); }} className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--foreground)] shrink-0">
+              <span className="hidden sm:inline">&larr; Back to Lesson</span>
+              <span className="sm:hidden">&larr;</span>
             </button>
-            <span className="text-sm font-medium">Chapter Quiz: {chapter.title}</span>
+            <span className="text-sm font-medium truncate hidden md:inline">Chapter Quiz: {chapter.title}</span>
             {!quizSubmitted && (
               <button
                 onClick={handleSubmitQuiz}
-                className="text-sm font-medium bg-[var(--color-primary)] text-white px-4 py-1.5 rounded-lg disabled:opacity-40"
-                disabled={Object.keys(quizAnswers).length < chapter.questions.length}
+                className="text-sm font-medium bg-[var(--color-primary)] text-white px-3 md:px-4 py-1.5 rounded-lg disabled:opacity-40 shrink-0"
+                disabled={Object.keys(quizAnswers).length < quizQuestions.length}
               >
-                Submit ({Object.keys(quizAnswers).length}/{chapter.questions.length})
+                Submit ({Object.keys(quizAnswers).length}/{quizQuestions.length})
               </button>
             )}
             {quizSubmitted && (
-              <span className="text-sm font-bold" style={{ color: quizScore / chapter.questions.length >= 0.8 ? "#16A34A" : "#D97706" }}>
-                {quizScore}/{chapter.questions.length} ({Math.round((quizScore / chapter.questions.length) * 100)}%)
+              <span className="text-sm font-bold shrink-0" style={{ color: quizScore / quizQuestions.length >= 0.8 ? "#16A34A" : "#D97706" }}>
+                {quizScore}/{quizQuestions.length} ({Math.round((quizScore / quizQuestions.length) * 100)}%)
               </span>
             )}
           </div>
         </nav>
 
-        <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
-          {/* Instant feedback toggle */}
+        <div className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-8 space-y-6">
+          {/* Mobile chapter-quiz title */}
+          <div className="md:hidden text-sm font-medium text-[var(--color-text-secondary)]">
+            Chapter Quiz · {chapter.title}
+          </div>
+
+          {/* Instant feedback + Hard-mode toggles */}
           {!quizSubmitted && (
-            <div className="flex items-center justify-between bg-white rounded-xl border border-[var(--color-border)] p-4">
-              <div>
-                <div className="text-sm font-medium">Instant Feedback</div>
-                <div className="text-xs text-[var(--color-text-muted)]">See explanations immediately after answering each question</div>
+            <div className="bg-white rounded-xl border border-[var(--color-border)] p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-medium">Instant Feedback</div>
+                  <div className="text-xs text-[var(--color-text-muted)]">See explanations immediately after answering each question</div>
+                </div>
+                <button
+                  onClick={() => setInstantFeedback(!instantFeedback)}
+                  className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${instantFeedback ? "bg-[var(--color-primary)]" : "bg-gray-200"}`}
+                  aria-label="Toggle instant feedback"
+                >
+                  <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${instantFeedback ? "translate-x-5" : ""}`} />
+                </button>
               </div>
-              <button
-                onClick={() => setInstantFeedback(!instantFeedback)}
-                className={`relative w-11 h-6 rounded-full transition-colors ${instantFeedback ? "bg-[var(--color-primary)]" : "bg-gray-200"}`}
-              >
-                <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${instantFeedback ? "translate-x-5" : ""}`} />
-              </button>
+              <div className="flex items-center justify-between border-t border-[var(--color-border)] pt-3">
+                <div>
+                  <div className="text-sm font-medium">Hard mode</div>
+                  <div className="text-xs text-[var(--color-text-muted)]">
+                    Show only difficulty-3 questions ({chapter.questions.filter((q) => q.difficulty >= 3).length} in this chapter)
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setHardMode(!hardMode); setQuizAnswers({}); setRevealedQuestions(new Set()); }}
+                  className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${hardMode ? "bg-red-600" : "bg-gray-200"}`}
+                  aria-label="Toggle hard mode"
+                >
+                  <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${hardMode ? "translate-x-5" : ""}`} />
+                </button>
+              </div>
             </div>
           )}
 
@@ -191,21 +278,31 @@ export default function ChapterPage() {
             </div>
           )}
 
-          {chapter.questions.map((q, qi) => {
+          {quizQuestions.map(({ q, originalIndex }, qi) => {
             const selected = quizAnswers[qi];
             const correct = q.choices.find((c) => c.isCorrect)?.label;
             const isCorrect = selected === correct;
+            const qid = `${sectionSlug}-${chapterSlug}-${originalIndex}`;
+            const starred = bookmarks.has(qid);
 
             return (
-              <div key={qi} className="bg-white rounded-xl border border-[var(--color-border)] p-6">
+              <div key={qid} className="bg-white rounded-xl border border-[var(--color-border)] p-4 md:p-6">
                 <div className="flex items-start gap-3 mb-4">
                   <span className="w-7 h-7 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] flex items-center justify-center text-xs font-bold shrink-0">
                     {qi + 1}
                   </span>
-                  <div className="text-sm font-medium leading-relaxed">{q.stem}</div>
+                  <div className="text-sm font-medium leading-relaxed flex-1">{q.stem}</div>
+                  <button
+                    onClick={() => handleToggleBookmark(qid)}
+                    className="text-xl shrink-0 transition-transform hover:scale-110"
+                    aria-label={starred ? "Remove bookmark" : "Bookmark question"}
+                    title={starred ? "Bookmarked — click to unstar" : "Bookmark for review"}
+                  >
+                    {starred ? "★" : "☆"}
+                  </button>
                 </div>
 
-                <div className="space-y-2 ml-10">
+                <div className="space-y-2 md:ml-10">
                   {q.choices.map((choice) => {
                     let borderColor = "var(--color-border)";
                     let bg = "transparent";
@@ -240,7 +337,7 @@ export default function ChapterPage() {
                 </div>
 
                 {(quizSubmitted || revealedQuestions.has(qi)) && (
-                  <div className={`mt-4 ml-10 p-4 rounded-lg text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
+                  <div className={`mt-4 md:ml-10 p-4 rounded-lg text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
                     <div className="font-semibold mb-1">{isCorrect ? "✓ Correct!" : `✗ Incorrect — the answer is ${correct}`}</div>
                     <div className="prose prose-sm max-w-none"><ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {q.explanation}
@@ -279,10 +376,35 @@ export default function ChapterPage() {
       <TextbookNav sectionSlug={sectionSlug} chapterSlug={chapterSlug} />
       <div className="flex-1 min-w-0 flex flex-col">
       {/* Top bar */}
-      <div className="h-14 border-b border-[var(--color-border)] flex items-center px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10">
-        <span className="text-sm text-[var(--color-text-muted)]">{section.name}</span>
-        <span className="mx-2 text-[var(--color-border)]">/</span>
-        <span className="text-sm font-medium">{chapter.title}</span>
+      <div className="h-14 border-b border-[var(--color-border)] flex items-center px-4 md:px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10 pl-14 md:pl-6">
+        <span className="text-sm text-[var(--color-text-muted)] truncate">{section.name}</span>
+        <span className="mx-2 text-[var(--color-border)] hidden sm:inline">/</span>
+        <span className="text-sm font-medium truncate hidden sm:inline">{chapter.title}</span>
+      </div>
+
+      {/* Mobile lesson selector — replaces the desktop-only sidebar.
+          Sticky under the top bar so it stays accessible while scrolling
+          through long lessons. Hidden on desktop where the sidebar shows. */}
+      <div className="md:hidden sticky top-14 z-10 bg-white/95 backdrop-blur-sm border-b border-[var(--color-border)] px-4 py-2 flex items-center gap-2">
+        <select
+          value={currentLesson}
+          onChange={(e) => { setCurrentLesson(Number(e.target.value)); setShowTerms(false); window.scrollTo(0, 0); }}
+          className="flex-1 min-w-0 text-sm border border-[var(--color-border)] rounded-lg px-2.5 py-1.5 bg-white focus:outline-none focus:border-[var(--color-primary)]"
+        >
+          {chapter.lessons.map((l, i) => (
+            <option key={l.slug} value={i}>
+              {completedLessons.has(l.slug) ? "✓ " : ""}{i + 1}. {l.title}
+            </option>
+          ))}
+        </select>
+        {chapter.questions.length > 0 && (
+          <button
+            onClick={handleStartQuiz}
+            className="text-xs font-medium bg-[var(--color-primary)] text-white px-3 py-1.5 rounded-lg shrink-0"
+          >
+            Quiz ({chapter.questions.length})
+          </button>
+        )}
       </div>
 
       <div className="flex flex-1 w-full">
@@ -336,7 +458,7 @@ export default function ChapterPage() {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 py-8 px-8 overflow-y-auto">
+        <main className="flex-1 py-6 px-4 md:py-8 md:px-8 overflow-y-auto">
           <article className="max-w-3xl">
             {/* Lesson content */}
             <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-table:text-sm prose-th:bg-gray-50 prose-th:p-2 prose-td:p-2 prose-blockquote:border-l-[var(--color-primary)] prose-blockquote:bg-[var(--color-primary-light)] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[var(--color-primary-dark)] prose-strong:text-[var(--foreground)]">

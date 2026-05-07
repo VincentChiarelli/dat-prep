@@ -8,6 +8,11 @@ import { getChaptersForSection } from "@/lib/content-map";
 import {
   getStudyStats,
   getCompletedLessonsForSection,
+  getTargetTestDate,
+  setTargetTestDate,
+  daysUntilTest,
+  getBookmarkedQuestionIds,
+  getIncorrectQuestionIds,
   type StudyStats,
 } from "@/lib/progress";
 
@@ -41,6 +46,11 @@ function findContinuePath(stats: StudyStats): string | null {
 export default function Dashboard() {
   const [stats, setStats] = useState<StudyStats | null>(null);
   const [sectionProgress, setSectionProgress] = useState<Record<string, number>>({});
+  const [testDate, setTestDate] = useState<string | null>(null);
+  const [editingDate, setEditingDate] = useState(false);
+  const [dateInput, setDateInput] = useState("");
+  const [bookmarkCount, setBookmarkCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
 
   useEffect(() => {
     const s = getStudyStats();
@@ -52,7 +62,23 @@ export default function Dashboard() {
       progress[section.slug] = completed.length;
     }
     setSectionProgress(progress);
+    setTestDate(getTargetTestDate());
+    setBookmarkCount(getBookmarkedQuestionIds().length);
+    setIncorrectCount(getIncorrectQuestionIds().length);
   }, []);
+
+  const handleSaveDate = () => {
+    setTargetTestDate(dateInput || null);
+    setTestDate(dateInput || null);
+    setEditingDate(false);
+  };
+  const handleClearDate = () => {
+    setTargetTestDate(null);
+    setTestDate(null);
+    setDateInput("");
+    setEditingDate(false);
+  };
+  const days = daysUntilTest();
 
   const continuePath = stats ? findContinuePath(stats) : null;
 
@@ -61,9 +87,9 @@ export default function Dashboard() {
       <div className="h-14 border-b border-[var(--color-border)] flex items-center px-6 sticky top-0 bg-white/80 backdrop-blur-sm z-10">
         <h1 className="font-semibold">Dashboard</h1>
       </div>
-      <div className="max-w-5xl mx-auto px-6 py-8">
+      <div className="max-w-5xl mx-auto px-4 md:px-6 py-6 md:py-8 pt-16 md:pt-8">
         {/* Welcome header */}
-        <div className="mb-8 flex items-end justify-between">
+        <div className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold mb-1">Welcome back</h1>
             <p className="text-[var(--color-text-secondary)] text-sm">Pick up where you left off or start a new section.</p>
@@ -71,10 +97,58 @@ export default function Dashboard() {
           {continuePath && (
             <Link
               href={continuePath}
-              className="bg-[var(--color-primary)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[var(--color-primary-dark)] transition-colors"
+              className="bg-[var(--color-primary)] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[var(--color-primary-dark)] transition-colors text-center"
             >
               Continue Studying
             </Link>
+          )}
+        </div>
+
+        {/* Test-date countdown */}
+        <div className="mb-6 bg-white rounded-xl border border-[var(--color-border)] p-4 md:p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          {editingDate ? (
+            <>
+              <div className="flex flex-col md:flex-row md:items-center gap-3 flex-1">
+                <span className="text-sm text-[var(--color-text-secondary)]">Target DAT date:</span>
+                <input
+                  type="date"
+                  value={dateInput || testDate || ""}
+                  onChange={(e) => setDateInput(e.target.value)}
+                  className="border border-[var(--color-border)] rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <button onClick={handleSaveDate} className="bg-[var(--color-primary)] text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-[var(--color-primary-dark)]">Save</button>
+                {testDate && (
+                  <button onClick={handleClearDate} className="text-sm text-red-600 hover:text-red-700 font-medium">Clear</button>
+                )}
+                <button onClick={() => setEditingDate(false)} className="text-sm text-[var(--color-text-muted)] hover:text-[var(--foreground)]">Cancel</button>
+              </div>
+            </>
+          ) : testDate ? (
+            <>
+              <div>
+                <div className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-semibold mb-1">Days until DAT</div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-bold" style={{ color: days !== null && days <= 14 ? "#DC2626" : days !== null && days <= 30 ? "#D97706" : "var(--color-primary)" }}>
+                    {days !== null ? (days >= 0 ? days : "passed") : "—"}
+                  </span>
+                  <span className="text-sm text-[var(--color-text-muted)]">
+                    {days !== null && days >= 0 ? `· ${new Date(testDate + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}` : ""}
+                  </span>
+                </div>
+              </div>
+              <button onClick={() => { setDateInput(testDate); setEditingDate(true); }} className="text-sm text-[var(--color-primary)] hover:underline self-start md:self-auto">
+                Edit
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="text-sm text-[var(--color-text-secondary)]">Set a target test date for a daily countdown.</div>
+              <button onClick={() => setEditingDate(true)} className="text-sm text-[var(--color-primary)] hover:underline font-medium self-start md:self-auto">
+                Set test date
+              </button>
+            </>
           )}
         </div>
 
@@ -115,6 +189,42 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
+
+        {/* Review queues — bookmarks + missed-question shortcuts */}
+        {(bookmarkCount > 0 || incorrectCount > 0) && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+            {incorrectCount > 0 && (
+              <Link
+                href="/review?mode=missed"
+                className="group bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center justify-between hover:border-amber-400 transition-colors"
+              >
+                <div>
+                  <div className="text-xs text-amber-700 uppercase tracking-wider font-semibold mb-1">Missed-question review</div>
+                  <div className="text-sm text-amber-900">
+                    <span className="text-2xl font-bold">{incorrectCount}</span>
+                    <span className="ml-2">{incorrectCount === 1 ? "question" : "questions"} to retry</span>
+                  </div>
+                </div>
+                <span className="text-amber-700 group-hover:translate-x-0.5 transition-transform">→</span>
+              </Link>
+            )}
+            {bookmarkCount > 0 && (
+              <Link
+                href="/review?mode=bookmarks"
+                className="group bg-[var(--color-primary-light)] border border-[var(--color-primary)]/20 rounded-xl p-4 flex items-center justify-between hover:border-[var(--color-primary)]/40 transition-colors"
+              >
+                <div>
+                  <div className="text-xs text-[var(--color-primary-dark)] uppercase tracking-wider font-semibold mb-1">Bookmarked</div>
+                  <div className="text-sm text-[var(--color-primary-dark)]">
+                    <span className="text-2xl font-bold">{bookmarkCount}</span>
+                    <span className="ml-2">starred {bookmarkCount === 1 ? "question" : "questions"}</span>
+                  </div>
+                </div>
+                <span className="text-[var(--color-primary-dark)] group-hover:translate-x-0.5 transition-transform">→</span>
+              </Link>
+            )}
+          </div>
+        )}
 
         {/* Average quiz score banner */}
         {stats && stats.averageQuizScore !== null && (
