@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { DAT_SECTIONS } from "@/lib/dat-constants";
 import { getChaptersForSection } from "@/lib/content-map";
 import {
@@ -241,7 +242,7 @@ export default function ChapterPage() {
                 {(quizSubmitted || revealedQuestions.has(qi)) && (
                   <div className={`mt-4 ml-10 p-4 rounded-lg text-sm leading-relaxed ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
                     <div className="font-semibold mb-1">{isCorrect ? "✓ Correct!" : `✗ Incorrect — the answer is ${correct}`}</div>
-                    <div className="prose prose-sm max-w-none"><ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <div className="prose prose-sm max-w-none"><ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {q.explanation}
                     </ReactMarkdown></div>
                   </div>
@@ -339,7 +340,7 @@ export default function ChapterPage() {
           <article className="max-w-3xl">
             {/* Lesson content */}
             <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-table:text-sm prose-th:bg-gray-50 prose-th:p-2 prose-td:p-2 prose-blockquote:border-l-[var(--color-primary)] prose-blockquote:bg-[var(--color-primary-light)] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[var(--color-primary-dark)] prose-strong:text-[var(--foreground)]">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                 {lesson.content}
               </ReactMarkdown>
             </div>
