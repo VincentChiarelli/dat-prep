@@ -13,6 +13,11 @@ import {
   daysUntilTest,
   getBookmarkedQuestionIds,
   getIncorrectQuestionIds,
+  getDueQuestionIds,
+  getMasteredCount,
+  getDailyGoal,
+  setDailyGoal,
+  getQuestionsAnsweredToday,
   type StudyStats,
 } from "@/lib/progress";
 
@@ -51,6 +56,12 @@ export default function Dashboard() {
   const [dateInput, setDateInput] = useState("");
   const [bookmarkCount, setBookmarkCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
+  const [dueCount, setDueCount] = useState(0);
+  const [masteredCount, setMasteredCount] = useState(0);
+  const [dailyGoal, setDailyGoalState] = useState(30);
+  const [answeredToday, setAnsweredToday] = useState(0);
+  const [editingGoal, setEditingGoal] = useState(false);
+  const [goalInput, setGoalInput] = useState("");
 
   useEffect(() => {
     const s = getStudyStats();
@@ -65,7 +76,19 @@ export default function Dashboard() {
     setTestDate(getTargetTestDate());
     setBookmarkCount(getBookmarkedQuestionIds().length);
     setIncorrectCount(getIncorrectQuestionIds().length);
+    setDueCount(getDueQuestionIds().length);
+    setMasteredCount(getMasteredCount());
+    setDailyGoalState(getDailyGoal());
+    setAnsweredToday(getQuestionsAnsweredToday());
   }, []);
+
+  const handleSaveGoal = () => {
+    const n = Math.max(0, parseInt(goalInput || "0", 10) || 0);
+    setDailyGoal(n);
+    setDailyGoalState(n);
+    setEditingGoal(false);
+  };
+  const goalProgress = dailyGoal > 0 ? Math.min(answeredToday / dailyGoal, 1) : 0;
 
   const handleSaveDate = () => {
     setTargetTestDate(dateInput || null);
@@ -150,6 +173,106 @@ export default function Dashboard() {
               </button>
             </>
           )}
+        </div>
+
+        {/* Spaced-repetition + daily-goal row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+          {/* Due today (SR queue) */}
+          <Link
+            href="/review?mode=due"
+            className={`group rounded-xl border p-4 flex items-center justify-between transition-colors ${
+              dueCount > 0
+                ? "bg-[var(--color-primary-light)] border-[var(--color-primary)]/30 hover:border-[var(--color-primary)]"
+                : "bg-white border-[var(--color-border)] hover:border-[var(--color-text-muted)]"
+            }`}
+          >
+            <div>
+              <div className="text-xs uppercase tracking-wider font-semibold mb-1" style={{ color: dueCount > 0 ? "var(--color-primary-dark)" : "var(--color-text-muted)" }}>
+                🔁 Spaced repetition
+              </div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold" style={{ color: dueCount > 0 ? "var(--color-primary)" : "var(--color-text-muted)" }}>
+                  {dueCount}
+                </span>
+                <span className="text-sm text-[var(--color-text-secondary)]">
+                  due today
+                </span>
+              </div>
+              {masteredCount > 0 && (
+                <div className="text-xs text-[var(--color-text-muted)] mt-1">
+                  {masteredCount} {masteredCount === 1 ? "question" : "questions"} mastered (3+ in a row)
+                </div>
+              )}
+            </div>
+            <span className="text-xl group-hover:translate-x-0.5 transition-transform" style={{ color: dueCount > 0 ? "var(--color-primary)" : "var(--color-text-muted)" }}>→</span>
+          </Link>
+
+          {/* Daily goal ring */}
+          <div className="bg-white rounded-xl border border-[var(--color-border)] p-4 flex items-center justify-between gap-4">
+            {/* SVG progress ring */}
+            <div className="relative shrink-0">
+              <svg width="64" height="64" viewBox="0 0 64 64" className="-rotate-90">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-border)" strokeWidth="6" />
+                <circle
+                  cx="32"
+                  cy="32"
+                  r="28"
+                  fill="none"
+                  stroke={goalProgress >= 1 ? "#16A34A" : "var(--color-primary)"}
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={2 * Math.PI * 28}
+                  strokeDashoffset={(1 - goalProgress) * 2 * Math.PI * 28}
+                  className="transition-all duration-500"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-xs font-bold leading-tight">
+                <span>{answeredToday}</span>
+                <span className="text-[10px] text-[var(--color-text-muted)]">/{dailyGoal || "∞"}</span>
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              {editingGoal ? (
+                <div className="space-y-2">
+                  <div className="text-xs uppercase tracking-wider font-semibold text-[var(--color-text-muted)]">Daily goal</div>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="0"
+                      max="500"
+                      value={goalInput}
+                      onChange={(e) => setGoalInput(e.target.value)}
+                      placeholder={String(dailyGoal)}
+                      className="w-16 border border-[var(--color-border)] rounded-md px-2 py-1 text-sm focus:outline-none focus:border-[var(--color-primary)]"
+                    />
+                    <button onClick={handleSaveGoal} className="text-xs font-medium bg-[var(--color-primary)] text-white px-2.5 py-1 rounded-md hover:bg-[var(--color-primary-dark)]">Save</button>
+                    <button onClick={() => setEditingGoal(false)} className="text-xs text-[var(--color-text-muted)] hover:text-[var(--foreground)]">Cancel</button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="text-xs uppercase tracking-wider font-semibold text-[var(--color-text-muted)] mb-1">Daily goal</div>
+                  <div className="text-sm">
+                    {dailyGoal > 0 ? (
+                      goalProgress >= 1 ? (
+                        <span className="font-bold text-green-700">Goal hit. 🎯 Keep going if you&rsquo;re feeling it.</span>
+                      ) : (
+                        <span><span className="font-bold">{Math.max(0, dailyGoal - answeredToday)}</span> {dailyGoal - answeredToday === 1 ? "question" : "questions"} to go today</span>
+                      )
+                    ) : (
+                      <span className="text-[var(--color-text-muted)]">No goal set</span>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => { setGoalInput(String(dailyGoal)); setEditingGoal(true); }}
+                    className="text-xs text-[var(--color-primary)] hover:underline mt-1"
+                  >
+                    {dailyGoal > 0 ? "Edit goal" : "Set goal"}
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Stats row */}

@@ -10,15 +10,16 @@ import { getAllQuestions } from "@/lib/question-bank";
 import {
   getBookmarkedQuestionIds,
   getIncorrectQuestionIds,
+  getDueQuestionIds,
   toggleBookmark,
   isBookmarked,
-  markIncorrect,
-  clearIncorrect,
+  recordQuestionAttempt,
 } from "@/lib/progress";
 import type { ExamQuestion } from "@/lib/exam-engine";
 
 type ReviewMode =
   | "all"
+  | "due"
   | "bookmarks"
   | "missed"
   | "hard"
@@ -31,6 +32,7 @@ type ReviewMode =
 
 const MODE_LABELS: Record<ReviewMode, string> = {
   all: "All",
+  due: "🔁 Due today",
   bookmarks: "★ Bookmarks",
   missed: "Missed",
   hard: "Hard (D3)",
@@ -71,6 +73,9 @@ function ReviewInner() {
     let pool: ExamQuestion[];
     if (filterMode === "all") {
       pool = allQuestions;
+    } else if (filterMode === "due") {
+      const ids = new Set(getDueQuestionIds());
+      pool = allQuestions.filter((q) => ids.has(q.id));
     } else if (filterMode === "bookmarks") {
       const ids = new Set(getBookmarkedQuestionIds());
       pool = allQuestions.filter((q) => ids.has(q.id));
@@ -124,13 +129,15 @@ function ReviewInner() {
         </div>
         <div className="max-w-2xl mx-auto px-4 md:px-6 py-12 text-center">
           <div className="text-4xl mb-4">
-            {mode === "bookmarks" ? "☆" : mode === "missed" ? "🎯" : "📭"}
+            {mode === "bookmarks" ? "☆" : mode === "missed" ? "🎯" : mode === "due" ? "✨" : "📭"}
           </div>
           <div className="font-semibold mb-2">
             {mode === "bookmarks"
               ? "No bookmarked questions yet"
               : mode === "missed"
               ? "No missed questions to review"
+              : mode === "due"
+              ? "Nothing due today"
               : "No questions in this filter"}
           </div>
           <div className="text-sm text-[var(--color-text-muted)] mb-6">
@@ -138,6 +145,8 @@ function ReviewInner() {
               ? "Tap the ☆ next to any quiz question to bookmark it for later review."
               : mode === "missed"
               ? "When you miss a question on a chapter quiz, it will show up here."
+              : mode === "due"
+              ? "Spaced-repetition queue is empty. Take a chapter quiz to start scheduling reviews."
               : "Try a different filter."}
           </div>
           <ModeBar mode={mode} setMode={setMode} />
@@ -168,13 +177,10 @@ function ReviewInner() {
       correct: prev.correct + (isRight ? 1 : 0),
       total: prev.total + 1,
     }));
-    // Auto-tracking for the missed-question queue: getting it right while
-    // reviewing removes it from the queue; getting it wrong adds it.
-    if (isRight) {
-      clearIncorrect(q.id);
-    } else {
-      markIncorrect(q.id);
-    }
+    // SR record — schedules next review interval and updates streak.
+    // Also keeps the missed-question queue in sync (right answer removes
+    // from the queue, wrong adds to it).
+    recordQuestionAttempt(q.id, !!isRight);
   };
 
   const handleNext = () => {
@@ -305,7 +311,7 @@ function ModeBar({
   onShuffle?: () => void;
 }) {
   const tabs: ReviewMode[] = [
-    "all", "bookmarks", "missed", "hard",
+    "due", "all", "bookmarks", "missed", "hard",
     "biology", "general-chemistry", "organic-chemistry",
     "perceptual-ability", "reading-comprehension", "quantitative-reasoning",
   ];

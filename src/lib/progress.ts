@@ -2,7 +2,7 @@
 // Will migrate to Supabase later
 
 const STORAGE_KEY = "dat-prep-progress";
-const DATA_VERSION = "3"; // Bump this to reset all user data on next load
+const DATA_VERSION = "4"; // Bump this to reset all user data on next load
 const VERSION_KEY = "dat-prep-version";
 
 // Auto-reset if data version changed (new content deployed)
@@ -29,6 +29,18 @@ export interface StudySession {
   minutes: number;
 }
 
+// Per-question history. Drives the spaced-repetition queue + per-question
+// "mastered" badge. Stored as a map keyed by question id (the same id
+// question-bank.ts assigns: `${sectionSlug}-${chapterSlug}-${index}`).
+export interface QuestionStats {
+  timesSeen: number;
+  timesCorrect: number;
+  streak: number;             // consecutive correct answers (resets on miss)
+  lastSeen: string;           // ISO datetime of last attempt
+  nextReviewDate: string;     // ISO date — when to surface this question again
+  intervalDays: number;       // current SM-2-lite interval; doubles on success
+}
+
 export interface ProgressData {
   completedLessons: string[]; // Format: "sectionSlug/chapterSlug/lessonSlug"
   quizResults: QuizResult[];
@@ -40,6 +52,10 @@ export interface ProgressData {
   targetTestDate: string | null;       // ISO date (YYYY-MM-DD) of upcoming DAT
   bookmarkedQuestions: string[];       // question IDs the user starred
   incorrectQuestionIds: string[];      // accumulated wrong-answer IDs (for SR review)
+  // ── v4: spaced repetition + daily goal + lesson notes ─────────────────
+  questionHistory: Record<string, QuestionStats>;  // per-question stats
+  dailyGoal: number;                                // target questions per day (0 = no goal)
+  lessonNotes: Record<string, string>;              // key: "sectionSlug/chapterSlug/lessonSlug"
 }
 
 const DEFAULT_PROGRESS: ProgressData = {
@@ -52,6 +68,9 @@ const DEFAULT_PROGRESS: ProgressData = {
   targetTestDate: null,
   bookmarkedQuestions: [],
   incorrectQuestionIds: [],
+  questionHistory: {},
+  dailyGoal: 30,
+  lessonNotes: {},
 };
 
 function isBrowser(): boolean {
@@ -339,4 +358,121 @@ export function getSectionMastery(sectionSlug: string): number {
   if (sectionResults.length === 0) return 0;
   const sum = sectionResults.reduce((s, r) => s + r.percent, 0);
   return Math.round(sum / sectionResults.length);
+}
+
+// ── Spaced repetition (SM-2-lite) ───────────────────────────────────
+//
+// Each question's nextReviewDate gets pushed out further on success and
+// reset to "tomorrow" on a miss. Intervals: 1 → 3 → 7 → 14 → 30 → 90 days.
+// Three correct in a row = "mastered" (streak ≥ 3).
+
+const SR_INTERVALS = [1, 3, 7, 14, 30, 90] as const;
+
+function todayISO(): string {
+  return new Date().toISOString().split("T")[0];
+}
+
+function addDaysISO(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().split("T")[0];
+}
+
+export function recordQuestionAttempt(questionId: string, correct: boolean): QuestionStats {
+  const p = getProgress();
+  const prev = p.questionHistory[questionId];
+  const timesSeen = (prev?.timesSeen || 0) + 1;
+  const timesCorrect = (prev?.timesCorrect || 0) + (correct ? 1 : 0);
+  let streak: number;
+  let intervalDays: number;
+  if (correct) {
+    streak = (prev?.streak || 0) + 1;
+    // Index into the interval ladder by streak (capped at the last bucket).
+    const idx = Math.min(streak - 1, SR_INTERVALS.length - 1);
+    intervalDays = SR_INTERVALS[idx];
+  } else {
+    streak = 0;
+    intervalDays = 1; // see it again tomorrow
+  }
+  const stats: QuestionStats = {
+    timesSeen,
+    timesCorrect,
+    streak,
+    lastSeen: new Date().toISOString(),
+    nextReviewDate: addDaysISO(intervalDays),
+    intervalDays,
+  };
+  p.questionHistory[questionId] = stats;
+  // Mirror into legacy incorrectQuestionIds so existing UI keeps working
+  // until callers migrate fully to questionHistory.
+  if (correct) {
+    const i = p.incorrectQuestionIds.indexOf(questionId);
+    if (i >= 0) p.incorrectQuestionIds.splice(i, 1);
+  } else if (!p.incorrectQuestionIds.includes(questionId)) {
+    p.incorrectQuestionIds.push(questionId);
+  }
+  saveProgress(p);
+  return stats;
+}
+
+export function getQuestionStats(questionId: string): QuestionStats | null {
+  return getProgress().questionHistory[questionId] || null;
+}
+
+export function getDueQuestionIds(asOf?: Date): string[] {
+  // Returns question ids whose nextReviewDate is on or before today.
+  // Sort: never-seen-but-tracked (lastSeen oldest first), then most-overdue first.
+  const today = (asOf || new Date()).toISOString().split("T")[0];
+  const p = getProgress();
+  return Object.entries(p.questionHistory)
+    .filter(([, s]) => s.nextReviewDate <= today)
+    .sort(([, a], [, b]) => a.nextReviewDate.localeCompare(b.nextReviewDate))
+    .map(([id]) => id);
+}
+
+export function getMasteredCount(): number {
+  // Streak ≥ 3 = mastered.
+  return Object.values(getProgress().questionHistory).filter((s) => s.streak >= 3).length;
+}
+
+// ── Daily goal ──────────────────────────────────────────────────────
+
+export function getDailyGoal(): number {
+  return getProgress().dailyGoal;
+}
+
+export function setDailyGoal(n: number): void {
+  const p = getProgress();
+  p.dailyGoal = Math.max(0, Math.floor(n));
+  saveProgress(p);
+}
+
+export function getQuestionsAnsweredToday(): number {
+  // Count attempts whose lastSeen falls on today's local date.
+  const today = todayISO();
+  const p = getProgress();
+  return Object.values(p.questionHistory).filter((s) => s.lastSeen.startsWith(today)).length;
+}
+
+// ── Lesson notes ────────────────────────────────────────────────────
+
+export function getLessonNote(sectionSlug: string, chapterSlug: string, lessonSlug: string): string {
+  const key = `${sectionSlug}/${chapterSlug}/${lessonSlug}`;
+  return getProgress().lessonNotes[key] || "";
+}
+
+export function setLessonNote(
+  sectionSlug: string,
+  chapterSlug: string,
+  lessonSlug: string,
+  text: string,
+): void {
+  const key = `${sectionSlug}/${chapterSlug}/${lessonSlug}`;
+  const p = getProgress();
+  if (text.trim()) {
+    p.lessonNotes[key] = text;
+  } else {
+    delete p.lessonNotes[key];
+  }
+  saveProgress(p);
 }

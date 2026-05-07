@@ -15,7 +15,9 @@ import {
   logStudyTime,
   toggleBookmark,
   isBookmarked,
-  markIncorrect,
+  recordQuestionAttempt,
+  getLessonNote,
+  setLessonNote,
   type QuizResult,
 } from "@/lib/progress";
 import { AppLayout } from "@/components/app-layout";
@@ -43,6 +45,9 @@ export default function ChapterPage() {
   const [hardMode, setHardMode] = useState(false);
   // Bookmark state mirrored from progress; rendered next to each question.
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
+  // Per-lesson notes (mirrored from localStorage).
+  const [noteText, setNoteText] = useState("");
+  const [noteSaved, setNoteSaved] = useState<"idle" | "saved">("idle");
 
   // Study time tracking
   const sessionStartRef = useRef<number>(Date.now());
@@ -78,6 +83,25 @@ export default function ChapterPage() {
     });
     setBookmarks(bm);
   }, [sectionSlug, chapterSlug, chapter]);
+
+  // Hydrate the lesson note when the active lesson changes.
+  useEffect(() => {
+    if (!chapter) return;
+    const activeLesson = chapter.lessons[currentLesson];
+    if (!activeLesson) return;
+    setNoteText(getLessonNote(sectionSlug, chapterSlug, activeLesson.slug));
+    setNoteSaved("idle");
+  }, [sectionSlug, chapterSlug, chapter, currentLesson]);
+
+  const handleSaveNote = (text: string) => {
+    if (!chapter) return;
+    const activeLesson = chapter.lessons[currentLesson];
+    if (!activeLesson) return;
+    setLessonNote(sectionSlug, chapterSlug, activeLesson.slug, text);
+    setNoteSaved("saved");
+    // Auto-fade the "Saved ✓" indicator.
+    setTimeout(() => setNoteSaved("idle"), 1500);
+  };
 
   if (!section || !chapter || chapter.lessons.length === 0) {
     return (
@@ -140,14 +164,13 @@ export default function ChapterPage() {
     let score = 0;
     quizQuestions.forEach(({ q, originalIndex }, i) => {
       const selected = quizAnswers[i];
-      const correct = q.choices.find((c) => c.label === selected)?.isCorrect;
+      const isRight = q.choices.find((c) => c.label === selected)?.isCorrect ?? false;
       const qid = `${sectionSlug}-${chapterSlug}-${originalIndex}`;
-      if (correct) {
-        score += 1;
-      } else if (selected) {
-        // Only mark as missed if user actually answered (not blank skips).
-        markIncorrect(qid);
-      }
+      if (isRight) score += 1;
+      // Skip blank/skipped questions for SR — only score what the user
+      // actually attempted. (Submitting with blanks would otherwise
+      // pollute the SR queue with confidence-0 attempts.)
+      if (selected) recordQuestionAttempt(qid, isRight);
     });
     const result = saveQuizScore(sectionSlug, chapterSlug, score, quizQuestions.length);
     setQuizResult(result);
@@ -489,6 +512,26 @@ export default function ChapterPage() {
                 )}
               </div>
             )}
+
+            {/* Personal notes (per lesson) — auto-saves on blur. The textarea
+                doubles as a scratchpad for mnemonics, formula reminders,
+                and "watch out for X on test day" reminders. */}
+            <div className="mt-8 border border-[var(--color-border)] rounded-xl overflow-hidden">
+              <div className="px-4 md:px-5 py-3 bg-gray-50 text-sm font-semibold flex items-center justify-between">
+                <span>📝 My notes</span>
+                <span className="text-xs text-[var(--color-text-muted)] font-normal">
+                  {noteSaved === "saved" ? "Saved ✓" : noteText ? "Auto-saves on blur" : ""}
+                </span>
+              </div>
+              <textarea
+                value={noteText}
+                onChange={(e) => setNoteText(e.target.value)}
+                onBlur={() => handleSaveNote(noteText)}
+                placeholder="Mnemonics, formulas to remember, things you keep mixing up…"
+                rows={4}
+                className="w-full px-4 md:px-5 py-3 text-sm leading-relaxed font-sans bg-white focus:outline-none resize-y min-h-[80px]"
+              />
+            </div>
 
             {/* Mark Complete button */}
             {!completedLessons.has(lesson.slug) && (
