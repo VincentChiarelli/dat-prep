@@ -20,14 +20,14 @@ function Callout({ kind, children }: { kind: CalloutKind; children: ReactNode })
   const s = CALLOUT_STYLES[kind];
   return (
     <aside
-      className="not-prose my-6 rounded-xl border-l-4 px-5 py-4"
+      className="my-6 rounded-xl border-l-4 px-5 py-4"
       style={{ borderLeftColor: s.border, backgroundColor: s.bg, color: s.text }}
     >
       <div className="flex items-center gap-2 mb-1.5 text-xs font-bold uppercase tracking-wider">
         <span className="text-sm">{s.icon}</span>
         <span>{s.label}</span>
       </div>
-      <div className="text-sm leading-relaxed space-y-2 [&_p]:m-0 [&_strong]:font-bold [&_em]:italic [&_code]:bg-white/40 [&_code]:px-1 [&_code]:rounded [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5">
+      <div className="text-[14.5px] leading-relaxed space-y-2">
         {children}
       </div>
     </aside>
@@ -45,38 +45,75 @@ function extractText(node: ReactNode): string {
   return "";
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getHastClassName(node: any): string {
+  const cls = node?.children?.[0]?.properties?.className;
+  if (Array.isArray(cls)) return cls.join(" ");
+  if (typeof cls === "string") return cls;
+  return "";
+}
+
 export function TextbookRenderer({ markdown }: { markdown: string }) {
   return (
-    <div className="prose prose-slate max-w-none
-      prose-headings:font-bold prose-headings:tracking-tight
-      prose-h1:text-3xl prose-h1:mb-3 prose-h1:mt-0
-      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[var(--color-border)]
-      prose-h3:text-xl prose-h3:mt-7 prose-h3:mb-2
-      prose-h4:text-base prose-h4:mt-5 prose-h4:mb-2 prose-h4:font-semibold prose-h4:text-[var(--color-primary-dark)]
-      prose-p:leading-[1.75] prose-p:text-[15px] prose-p:text-[var(--foreground)]
-      prose-li:leading-[1.7] prose-li:text-[15px]
-      prose-strong:text-[var(--foreground)] prose-strong:font-semibold
-      prose-table:text-sm prose-th:bg-gray-50 prose-th:p-2 prose-th:text-left
-      prose-td:p-2 prose-td:align-top
-      prose-code:bg-[var(--color-primary-light)] prose-code:text-[var(--color-primary-dark)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-[13px] prose-code:before:content-[''] prose-code:after:content-['']
-      prose-blockquote:border-l-[var(--color-primary)] prose-blockquote:bg-[var(--color-primary-light)] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[var(--color-primary-dark)]
-    ">
+    <div className="textbook max-w-none text-[15.5px] text-slate-900 leading-[1.75]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          // Diagram fenced code: ```diagram\nslug-here\n```
+          h1: ({ children }) => (
+            <h1 className="text-3xl font-bold tracking-tight mb-4 mt-0 text-slate-900">{children}</h1>
+          ),
+          h2: ({ children }) => (
+            <h2 className="text-2xl font-bold tracking-tight mt-12 mb-3 pb-2 border-b border-slate-200 text-slate-900">{children}</h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="text-xl font-bold tracking-tight mt-8 mb-2 text-slate-900">{children}</h3>
+          ),
+          h4: ({ children }) => (
+            <h4 className="text-base font-semibold mt-5 mb-2 text-[var(--color-primary-dark)]">{children}</h4>
+          ),
+          p: ({ children }) => (
+            <p className="my-4 leading-[1.78] text-[15.5px] text-slate-800">{children}</p>
+          ),
+          ul: ({ children }) => (
+            <ul className="my-4 ml-6 list-disc space-y-1.5 text-[15.5px] text-slate-800 marker:text-[var(--color-primary)]">{children}</ul>
+          ),
+          ol: ({ children }) => (
+            <ol className="my-4 ml-6 list-decimal space-y-1.5 text-[15.5px] text-slate-800 marker:text-[var(--color-primary)]">{children}</ol>
+          ),
+          li: ({ children }) => <li className="leading-[1.7]">{children}</li>,
+          strong: ({ children }) => <strong className="font-semibold text-slate-900">{children}</strong>,
+          em: ({ children }) => <em className="italic">{children}</em>,
+          a: ({ children, href }) => (
+            <a href={href} className="text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-primary-dark)]">
+              {children}
+            </a>
+          ),
+          hr: () => <hr className="my-8 border-slate-200" />,
+          // Wrapper for fenced code blocks: unwrap <pre> when the body is a diagram
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          pre: ({ node, children }: any) => {
+            const cls = getHastClassName(node);
+            if (cls.includes("language-diagram")) {
+              return <>{children}</>;
+            }
+            return (
+              <pre className="my-5 overflow-x-auto rounded-lg bg-slate-900 text-slate-100 text-[13px] p-4 font-mono">
+                {children}
+              </pre>
+            );
+          },
           code({ className, children }) {
             const lang = (className || "").replace("language-", "");
             if (lang === "diagram") {
               const lines = extractText(children).trim().split("\n");
               const slug = lines[0].trim();
-              const title = lines[1]?.startsWith("title:") ? lines[1].slice(6).trim() : undefined;
+              const title = lines.find((l) => l.startsWith("title:"))?.slice(6).trim();
               const caption = lines.find((l) => l.startsWith("caption:"))?.slice(8).trim();
               const num = lines.find((l) => l.startsWith("number:"))?.slice(7).trim();
               const Component = getDiagram(slug);
               if (!Component) {
                 return (
-                  <div className="not-prose my-4 rounded border border-dashed border-orange-300 bg-orange-50 px-4 py-3 text-xs text-orange-700">
+                  <div className="my-4 rounded border border-dashed border-orange-300 bg-orange-50 px-4 py-3 text-xs text-orange-700">
                     Missing diagram: <code className="font-mono">{slug}</code>
                   </div>
                 );
@@ -87,12 +124,18 @@ export function TextbookRenderer({ markdown }: { markdown: string }) {
                 </Figure>
               );
             }
-            // Inline code (default)
+            // Inline code or non-diagram fenced code
+            const isInline = !className;
+            if (isInline) {
+              return (
+                <code className="bg-[var(--color-primary-light)] text-[var(--color-primary-dark)] px-1.5 py-0.5 rounded font-mono text-[13.5px]">
+                  {children}
+                </code>
+              );
+            }
             return <code className={className}>{children}</code>;
           },
-          // Callout via blockquote-prefix
           blockquote({ children }) {
-            // Walk children to find first text content
             const firstText = extractText(children).trimStart();
             const match = firstText.match(/^!(high-yield|clinical|mnemonic|tip|warning|definition)\b\s*/);
             if (match) {
@@ -113,17 +156,18 @@ export function TextbookRenderer({ markdown }: { markdown: string }) {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const inner = (node as any).props.children;
                     const stripText = (n: ReactNode): ReactNode => {
-                      if (typeof n === "string") return n.replace(match[0], "");
+                      if (typeof n === "string") {
+                        return n.replace(/^\s*!(high-yield|clinical|mnemonic|tip|warning|definition)\b\s*/, "");
+                      }
                       if (Array.isArray(n)) {
                         let done = false;
                         return n.map((x) => {
-                          if (!done && typeof x === "string" && match[0] && x.includes(match[0])) {
-                            done = true;
-                            return x.replace(match[0], "");
-                          }
-                          if (!done && typeof x === "string" && x.trimStart().startsWith("!" + kind)) {
-                            done = true;
-                            return x.replace(/^\s*!(high-yield|clinical|mnemonic|tip|warning|definition)\b\s*/, "");
+                          if (!done && typeof x === "string") {
+                            const stripped = x.replace(/^\s*!(high-yield|clinical|mnemonic|tip|warning|definition)\b\s*/, "");
+                            if (stripped !== x) {
+                              done = true;
+                              return stripped;
+                            }
                           }
                           return x;
                         });
@@ -138,15 +182,18 @@ export function TextbookRenderer({ markdown }: { markdown: string }) {
               };
               return <Callout kind={kind}>{stripFirstParagraph(children)}</Callout>;
             }
-            return <blockquote>{children}</blockquote>;
+            return (
+              <blockquote className="my-5 border-l-4 border-[var(--color-primary)] bg-[var(--color-primary-light)] py-3 px-5 text-[var(--color-primary-dark)] rounded-r-lg">
+                {children}
+              </blockquote>
+            );
           },
-          // Standalone image → figure with caption from alt
           img({ src, alt }) {
+            if (!src) return null;
             const altText = String(alt || "");
             const [main, caption] = altText.split(" | ");
-            if (!src) return null;
             return (
-              <Figure title={caption ? main : undefined} caption={caption || (main && `${main}`)}>
+              <Figure title={caption ? main : undefined} caption={caption || main}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={String(src)} alt={main} className="max-h-[480px] object-contain" />
               </Figure>
@@ -154,16 +201,19 @@ export function TextbookRenderer({ markdown }: { markdown: string }) {
           },
           table({ children }) {
             return (
-              <div className="not-prose my-6 overflow-x-auto rounded-xl border border-[var(--color-border)]">
-                <table className="w-full text-sm">{children}</table>
+              <div className="my-6 overflow-x-auto rounded-xl border border-slate-200">
+                <table className="w-full text-sm border-collapse">{children}</table>
               </div>
             );
           },
+          thead: ({ children }) => <thead>{children}</thead>,
+          tbody: ({ children }) => <tbody>{children}</tbody>,
+          tr: ({ children }) => <tr className="border-b border-slate-200 last:border-b-0">{children}</tr>,
           th({ children }) {
-            return <th className="bg-gray-50 text-left p-3 font-semibold text-xs uppercase tracking-wider text-[var(--color-text-secondary)] border-b border-[var(--color-border)]">{children}</th>;
+            return <th className="bg-slate-50 text-left p-3 font-semibold text-xs uppercase tracking-wider text-slate-600">{children}</th>;
           },
           td({ children }) {
-            return <td className="p-3 align-top border-b border-[var(--color-border)] last:border-b-0">{children}</td>;
+            return <td className="p-3 align-top text-[14px] text-slate-800">{children}</td>;
           },
         }}
       >
