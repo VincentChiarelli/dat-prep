@@ -22,6 +22,7 @@ import {
 } from "@/lib/progress";
 import { AppLayout } from "@/components/app-layout";
 import { TextbookNav } from "@/components/textbook-nav";
+import { TextbookRenderer } from "@/components/textbook-renderer";
 
 export default function ChapterPage() {
   const params = useParams();
@@ -484,11 +485,7 @@ export default function ChapterPage() {
         <main className="flex-1 py-6 px-4 md:py-8 md:px-8 overflow-y-auto">
           <article className="max-w-3xl">
             {/* Lesson content */}
-            <div className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-table:text-sm prose-th:bg-gray-50 prose-th:p-2 prose-td:p-2 prose-blockquote:border-l-[var(--color-primary)] prose-blockquote:bg-[var(--color-primary-light)] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-[var(--color-primary-dark)] prose-strong:text-[var(--foreground)]">
-              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                {lesson.content}
-              </ReactMarkdown>
-            </div>
+            <TextbookRenderer markdown={lesson.content} />
 
             {/* Key Terms */}
             {lesson.keyTerms && lesson.keyTerms.length > 0 && (

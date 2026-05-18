@@ -12,74 +12,173 @@ export const BIOLOGY_CHAPTERS = [
         title: "Cell Structure & Organelles",
         content: `# Cell Structure & Organelles
 
-All living organisms are composed of cells — the basic unit of life. For the DAT, you need to understand both **prokaryotic** and **eukaryotic** cells and their key differences.
+Every living thing on Earth is made of cells, and every cell — whether it forms the surface of your tongue, the wall of a bacterium, or the mesophyll of a maple leaf — has to solve the same handful of problems. It needs a boundary that separates inside from outside, a way to store and read out genetic instructions, machinery for building proteins, a system for managing energy, and a strategy for moving material from place to place. The DAT will test you on which structures handle which job, how those structures look, and which cells have which features. Roughly a quarter of biology questions trace back to this single lesson, so it's worth slowing down here.
 
-## Prokaryotic vs. Eukaryotic Cells
+The deepest division in cell biology is between **prokaryotes** and **eukaryotes** — a split that happened roughly 1.5–2 billion years ago and is reflected in essentially every modern organism.
 
-| Feature | Prokaryotic | Eukaryotic |
-|---------|------------|------------|
-| Nucleus | No (nucleoid region) | Yes (membrane-bound) |
-| Size | 1-10 μm | 10-100 μm |
-| DNA | Circular, single chromosome | Linear, multiple chromosomes |
-| Organelles | Few, no membrane-bound | Many membrane-bound |
-| Examples | Bacteria, Archaea | Animals, Plants, Fungi |
+\`\`\`diagram
+prokaryote-vs-eukaryote
+number: 1.1
+title: Prokaryotic vs. eukaryotic cell organization
+caption: Prokaryotes (Bacteria, Archaea) lack membrane-bound organelles and store their DNA in a nucleoid region. Eukaryotes (animals, plants, fungi, protists) are 10–100× larger and compartmentalize functions into a nucleus, mitochondria, ER, Golgi, and other organelles.
+\`\`\`
 
-## Key Organelles
+## Prokaryotes vs. Eukaryotes
 
-### Nucleus
-- Contains DNA organized into **chromosomes**
-- Surrounded by a **double membrane** (nuclear envelope) with nuclear pores
-- Contains the **nucleolus** — site of ribosomal RNA (rRNA) synthesis
-- **Key for DAT:** The nucleus is the control center of the cell
+The features below are the ones the DAT tests over and over — memorize the table cold, then read the prose for the *why*.
 
-### Mitochondria
-- **Powerhouse of the cell** — site of aerobic cellular respiration
-- Has its own DNA (maternal inheritance)
-- **Double membrane:** outer membrane is smooth, inner membrane has **cristae** (folds)
-- Produces **ATP** via the electron transport chain
-- Matrix contains enzymes for the **Krebs cycle**
+| Feature | Prokaryote | Eukaryote |
+|---------|-----------|-----------|
+| Nucleus | No — DNA in **nucleoid** region | Yes — membrane-bound nucleus |
+| Size | 1–10 μm | 10–100 μm |
+| DNA | Single **circular** chromosome | Multiple **linear** chromosomes |
+| Membrane-bound organelles | None | Many |
+| Ribosomes | **70S** (50S + 30S) | **80S** (60S + 40S) |
+| Cell wall | Peptidoglycan (bacteria) | Cellulose (plants) / chitin (fungi) / none (animals) |
+| Examples | Bacteria, Archaea | Animals, plants, fungi, protists |
 
-### Endoplasmic Reticulum (ER)
-- **Rough ER (RER):** Studded with ribosomes → protein synthesis & modification
-- **Smooth ER (SER):** No ribosomes → lipid synthesis, detoxification, Ca²⁺ storage
-- Continuous with the nuclear envelope
+The reason eukaryotes can be ten to a hundred times larger than prokaryotes is **compartmentalization**. A prokaryote runs every chemical reaction in one undivided pool of cytoplasm — it can't easily concentrate enzymes or maintain a localized pH. A eukaryote walls off each major reaction into its own membrane-bound compartment, which lets it run incompatible chemistries side by side (acidic digestion in a lysosome, neutral protein folding in the ER, alkaline matrix in a mitochondrion) and lets it grow large enough to support a complex multicellular body plan.
+
+> !mnemonic
+> **"Prokaryotes are pro at being small."** Pro = before the nucleus (Greek *karyon* = kernel/nut). **Eu**karyotes have a **true** nucleus. The 70S vs 80S ribosome difference is why antibiotics like streptomycin and erythromycin selectively kill bacteria without harming you.
+
+## The Nucleus — the Control Center
+
+The nucleus is the largest organelle in most eukaryotic cells and houses essentially all the cell's genetic material. It is surrounded by a **nuclear envelope**, a double-membrane barrier perforated by **nuclear pores** — large protein complexes that selectively allow mRNA out and proteins in. Inside, DNA is wound around histone proteins to form **chromatin**, and during cell division this chromatin condenses into discrete **chromosomes** you can see under a light microscope.
+
+The dark spot inside the nucleus is the **nucleolus** — not a separate organelle, just a region where **ribosomal RNA (rRNA)** is transcribed and assembled with proteins into ribosomal subunits. Those subunits then leave through the nuclear pores and join in the cytoplasm to translate mRNA. A cell making lots of protein (like a plasma B cell pumping out antibodies) has a huge, dark nucleolus; a quiet cell has a tiny one.
+
+> !high-yield
+> The nuclear envelope is **continuous with the rough ER**. This continuity is how proteins translated on the rough ER end up inserted in the right place — there is one connected membrane system from the nuclear envelope through the ER and out to vesicles.
+
+## Mitochondria — the Powerhouse
+
+Mitochondria generate the cell's ATP, the energy currency that powers everything from active transport to muscle contraction. They are double-membraned, with a **smooth outer membrane** and a heavily folded **inner membrane** whose folds are called **cristae**. The inner-membrane folds enormously increase the surface area available for the **electron transport chain (ETC)** — the protein complexes that pump protons out of the matrix to set up the gradient that drives ATP synthase.
+
+\`\`\`diagram
+mitochondrion
+number: 1.2
+title: Mitochondrion structure and where the steps of cellular respiration happen
+caption: The matrix (inside the inner membrane) hosts the Krebs cycle. The inner membrane is studded with the electron transport chain and ATP synthase. The space between the two membranes accumulates protons (H⁺) during electron transport, building the gradient that drives ATP synthesis.
+\`\`\`
+
+Each compartment hosts a specific stage of aerobic respiration:
+
+- **Cytoplasm** (outside the mitochondrion): **glycolysis** → 2 ATP, 2 NADH, 2 pyruvate per glucose
+- **Matrix**: **pyruvate decarboxylation** + **Krebs (citric acid) cycle** → CO₂, NADH, FADH₂
+- **Inner membrane**: **electron transport chain** + **oxidative phosphorylation** → up to 34 ATP
+
+Mitochondria carry their own **circular DNA (mtDNA)** and their own **70S ribosomes** — strong evidence for the **endosymbiotic theory**: mitochondria descend from a free-living α-proteobacterium that was engulfed by an ancestral eukaryote ~1.5 billion years ago and never left. Because sperm contribute essentially zero mitochondria to a zygote, **all your mitochondria came from your mother** (maternal inheritance).
+
+> !clinical
+> Mitochondrial myopathies (e.g., MELAS, Leber's hereditary optic neuropathy) are passed exclusively through the maternal line. An affected mother passes the disease to every child; an affected father passes it to none.
+
+## The Endomembrane System — Protein Traffic
+
+Most proteins destined to be secreted, inserted into the plasma membrane, or shipped to a lysosome travel through a coordinated pipeline: **nucleus → rough ER → vesicle → Golgi → vesicle → final destination.** This is the endomembrane system, and learning it as one connected flow — rather than four unrelated organelles — is how the high-scorers remember it.
+
+\`\`\`diagram
+endomembrane-flow
+number: 1.3
+title: The endomembrane system as a single conveyor belt
+caption: mRNA exits the nucleus and is translated on ribosomes studding the rough ER. Folded proteins bud off in vesicles, fuse with the Golgi cis face, move through cisternae as they're modified, and exit the trans face in vesicles destined for the plasma membrane (exocytosis) or other organelles.
+\`\`\`
+
+### Rough Endoplasmic Reticulum (RER)
+
+The rough ER is "rough" because **ribosomes** are bound to its cytoplasmic surface. Proteins translated on these ribosomes are threaded directly into the ER lumen as they're being made, where they fold, get tagged with sugars, and bud off in transport vesicles. Any protein that will end up in the plasma membrane, in a lysosome, or secreted from the cell starts here. Cells that secrete a lot — pancreatic acinar cells (digestive enzymes), plasma B cells (antibodies) — have massive amounts of rough ER.
+
+### Smooth Endoplasmic Reticulum (SER)
+
+The smooth ER has no ribosomes. Its jobs are:
+
+- **Lipid and steroid synthesis** — abundant in adrenal cortex (steroid hormones) and testes
+- **Detoxification of drugs and toxins** — abundant in liver hepatocytes (cytochrome P450 system)
+- **Calcium storage** — the **sarcoplasmic reticulum** of skeletal muscle is a specialized SER that stores and releases Ca²⁺ for contraction
 
 ### Golgi Apparatus
-- **Modifies, packages, and sorts** proteins from the ER
-- **Cis face** (receiving) → medial → **trans face** (shipping)
-- Adds carbohydrate groups (**glycosylation**)
-- Forms lysosomes and secretory vesicles
+
+Vesicles from the rough ER fuse with the Golgi's **cis face**. As proteins move through the medial cisternae toward the **trans face**, they get sorted, further modified (more glycosylation, phosphorylation, sulfation), and packaged into the correct outbound vesicle. The Golgi is the cell's shipping department: **cis = receiving, trans = shipping**.
 
 ### Lysosomes
-- Contain **hydrolytic enzymes** (pH ~5, acidic)
-- Break down macromolecules, old organelles (**autophagy**), and foreign material
-- **Tay-Sachs disease:** lysosomal storage disorder (missing hexosaminidase A)
 
-### Ribosomes
-- Made of **rRNA + protein**
-- **70S** in prokaryotes (50S + 30S subunits)
-- **80S** in eukaryotes (60S + 40S subunits)
-- Free ribosomes → cytoplasmic proteins
-- Bound ribosomes (on RER) → secreted/membrane proteins
+Lysosomes are membrane-bound bags of **acidic hydrolytic enzymes** (optimum pH ≈ 5). The membrane keeps those enzymes from digesting the rest of the cell. They handle three jobs:
 
-### Cytoskeleton
-Three types of protein fibers:
-1. **Microfilaments** (actin) — 7nm — muscle contraction, cell movement, cleavage furrow
-2. **Intermediate filaments** (keratin, etc.) — 10nm — structural support
-3. **Microtubules** (tubulin) — 25nm — chromosome movement, cilia/flagella, cell shape
+1. **Phagocytosis** — fusing with phagosomes to digest engulfed bacteria
+2. **Autophagy** — recycling damaged or worn-out organelles
+3. **Crinophagy** — degrading excess secretory vesicles
 
-> **High-Yield DAT Tip:** Know the sizes: microfilaments (7nm) < intermediate filaments (10nm) < microtubules (25nm)
+> !clinical
+> **Tay-Sachs disease** is the classic lysosomal storage disorder. A defective hexosaminidase A enzyme can't break down GM2 ganglioside, which accumulates in neurons and destroys them — most fatally in Ashkenazi Jewish infants. **I-cell disease** is the textbook tagging defect: lysosomal enzymes don't get their **mannose-6-phosphate** tag in the Golgi, so they're shipped out of the cell instead of into lysosomes.
 
-## Plant Cell Unique Structures
-- **Cell wall** — rigid cellulose structure outside the cell membrane
-- **Chloroplasts** — photosynthesis (contain thylakoids → grana → stroma)
-- **Central vacuole** — large, maintains turgor pressure
-- **Plasmodesmata** — channels between adjacent plant cells
+## Ribosomes — Protein Factories
 
-## Key Terms
-- **Endosymbiotic theory:** Mitochondria and chloroplasts were once free-living prokaryotes
-- **Apoptosis:** Programmed cell death
-- **Autophagy:** Self-digestion of damaged organelles via lysosomes
+Ribosomes translate mRNA into protein. They come in two flavors that the DAT loves to ask about:
+
+- **70S** (prokaryotes and mitochondria): 50S large subunit + 30S small subunit
+- **80S** (eukaryotic cytoplasm): 60S large subunit + 40S small subunit
+
+Note the Svedberg numbers don't add (70S = 50 + 30) because S is a sedimentation rate, not a mass — it depends on shape as well as size. Free ribosomes (floating in the cytoplasm) translate proteins that stay in the cytoplasm. Bound ribosomes (on the rough ER) translate proteins that will be secreted or membrane-bound.
+
+> !high-yield
+> The 70S/80S distinction is why many antibiotics work without poisoning you. **Aminoglycosides** (streptomycin, gentamicin) and **tetracyclines** target the 30S subunit; **macrolides** (erythromycin) and **chloramphenicol** target the 50S subunit — both unique to bacterial 70S ribosomes. **Mitochondrial 70S ribosomes** are why some of these antibiotics have mitochondrial side effects.
+
+## Cytoskeleton — Internal Scaffolding
+
+The cytoskeleton is a dynamic network of protein fibers that gives the cell shape, anchors organelles, drives intracellular transport, enables cell division, and powers cell motility. There are three filament families, and the DAT loves to test you on **size order** and **which fiber does what**.
+
+\`\`\`diagram
+cytoskeleton-sizes
+number: 1.4
+title: The three cytoskeletal filaments at scale
+caption: Microfilaments (7 nm, actin) are thin and solid; intermediate filaments (10 nm, keratin/vimentin) are rope-like; microtubules (25 nm, α/β-tubulin dimers) are hollow tubes. The size order — 7 &lt; 10 &lt; 25 nm — is high-yield.
+\`\`\`
+
+**Microfilaments** are double-stranded helices of polymerized **actin** monomers. They are the smallest at 7 nm and the most dynamic — they polymerize and depolymerize rapidly to drive amoeboid movement, the contractile ring during cytokinesis, and the thin filaments of muscle that interact with myosin to produce contraction.
+
+**Intermediate filaments** are rope-like assemblies of various structural proteins: **keratin** in skin and hair, **vimentin** in connective tissue, **desmin** in muscle, **neurofilaments** in axons, and **lamins** lining the nuclear envelope. They sit at 10 nm and are the most stable of the three — their job is mechanical resistance to stretching.
+
+**Microtubules** are hollow cylinders built from **α-tubulin** and **β-tubulin** heterodimers arranged in 13 protofilaments. They are the largest at 25 nm and the most versatile. They form the **mitotic spindle** that segregates chromosomes; the **cilia and flagella** that beat using a **9+2 axoneme** arrangement; the tracks along which motor proteins (**kinesin** toward the + end, **dynein** toward the − end) move cargo; and the structural core of **centrioles**.
+
+> !mnemonic
+> **Sizes: 7, 10, 25 nm — microfilaments are smallest, microtubules are biggest.**
+> **9+2 = cilia and flagella** (nine outer pairs around a central two).
+> **9+0 = centrioles and basal bodies** (no central pair).
+> Anti-cancer drug **paclitaxel (Taxol)** stabilizes microtubules so the mitotic spindle can't disassemble; **vincristine** prevents microtubule assembly. Both kill dividing cells.
+
+## Plant, Animal, and Fungal Cells — What's Unique
+
+Most organelles are universal across eukaryotes, but a few features are diagnostic:
+
+| Feature | Animal | Plant | Fungus |
+|---------|--------|-------|--------|
+| Cell wall | None | **Cellulose** | **Chitin** |
+| Chloroplasts | No | **Yes** | No |
+| Large central vacuole | No | **Yes** (turgor pressure) | Small vacuoles |
+| Centrioles | Yes | No | No |
+| Lysosomes | Yes | Rare (vacuole does this job) | Yes |
+| Plasmodesmata | No | **Yes** (cytoplasmic channels) | No |
+
+**Chloroplasts**, like mitochondria, are double-membraned, carry their own circular DNA, divide by binary fission, and trace back to endosymbiosis — but from a cyanobacterium rather than a proteobacterium. Inside, stacks of **thylakoid** discs (**grana**) sit in a fluid **stroma**. Light reactions (water splitting, ATP and NADPH production) happen in the thylakoid membrane; the Calvin cycle (carbon fixation) happens in the stroma.
+
+The plant **central vacuole** can occupy 90% of the cell volume. By holding water and dissolved solutes, it pushes the plasma membrane against the cell wall and generates **turgor pressure** — the reason a non-wilted plant stem is rigid.
+
+## Endosymbiotic Theory — One Idea, Two Organelles
+
+The endosymbiotic theory, championed by Lynn Margulis, holds that mitochondria and chloroplasts were once free-living prokaryotes engulfed by an ancestral eukaryote. The evidence is consistent and worth memorizing as one block — it's a popular DAT question:
+
+1. They have their own **circular DNA**, distinct from nuclear DNA
+2. They have their own **70S ribosomes** (prokaryotic-sized)
+3. They are bounded by a **double membrane** (the inner one is the original prokaryotic membrane; the outer one is the engulfing vesicle)
+4. They **replicate by binary fission**, independently of the cell cycle
+5. They are sensitive to **antibiotics that target bacteria** (chloramphenicol, streptomycin)
+
+> !high-yield
+> Whenever the DAT asks "which organelle has its own DNA?" the answer is **mitochondria** (and **chloroplasts** in plants). Whenever it asks "what evidence supports endosymbiotic theory?", picture this list of five.
+
+## Putting It Together
+
+A useful mental map: imagine a manufacturing complex. The **nucleus** is corporate headquarters where the instructions are stored. The **rough ER** is the assembly line, fed by **ribosomes** translating those instructions. The **Golgi** is the shipping department that labels and routes finished products. The **lysosomes** are the recycling center. The **mitochondria** are the power plant. The **cytoskeleton** is the building's frame and conveyor belts. The **plasma membrane** is the shipping dock and security wall. Every DAT cell-biology question is just asking you which of those rooms a particular task happens in.
 `,
         keyTerms: [
           { term: "Prokaryote", definition: "Cell without a membrane-bound nucleus (bacteria, archaea)" },
@@ -96,63 +195,127 @@ Three types of protein fibers:
         title: "Membrane Transport",
         content: `# Membrane Transport
 
-The cell membrane is a **selectively permeable** barrier that controls what enters and exits the cell. Understanding transport mechanisms is essential for the DAT.
+A cell's plasma membrane is its border. Everything the cell takes in, everything it secretes, and every signal it receives has to cross this 6 nm-thick lipid bilayer or be carried across by a protein embedded in it. Membrane transport is therefore one of biology's universal control points — the membrane decides what gets in, what stays out, and what gets actively expelled. The DAT will test the same handful of mechanisms over and over, and once you internalize them, virtually any "how does X cross the membrane?" question becomes a 10-second answer.
 
-## Membrane Structure — Fluid Mosaic Model
+## The Fluid Mosaic Model
 
-The cell membrane consists of:
-- **Phospholipid bilayer** — hydrophilic heads face out, hydrophobic tails face in
-- **Cholesterol** — stabilizes membrane fluidity
-- **Integral proteins** — span the entire membrane (channels, carriers, receptors)
-- **Peripheral proteins** — attached to the surface (signaling, structural)
-- **Glycoproteins/Glycolipids** — cell recognition and signaling
+The current model of membrane structure is the **fluid mosaic model** proposed by Singer and Nicolson in 1972. The name is precise: the membrane is **fluid** (lipids and proteins can move laterally within the bilayer) and a **mosaic** (it's a heterogeneous patchwork of phospholipids, sterols, proteins, and attached carbohydrates).
 
-## Passive Transport (No ATP Required)
+\`\`\`diagram
+fluid-mosaic
+number: 2.1
+title: The fluid mosaic model of the plasma membrane
+caption: A phospholipid bilayer with hydrophilic phosphate heads facing the aqueous extracellular and intracellular environments, and hydrophobic fatty-acid tails forming the impermeable core. Cholesterol stabilizes fluidity. Integral proteins (channels and carriers) span the bilayer; peripheral proteins associate with one face; glycoproteins and glycolipids bear extracellular sugar chains used for cell recognition.
+\`\`\`
+
+### Phospholipid Bilayer
+
+The backbone of the membrane is a double layer of phospholipids. Each phospholipid is **amphipathic**: a polar phosphate-containing **head** that loves water, and two nonpolar **fatty-acid tails** that hate water. In aqueous solution, phospholipids spontaneously self-assemble into a bilayer where the tails hide from water in the middle and the heads face the extracellular and intracellular fluids.
+
+This arrangement makes the membrane **selectively permeable**. Small, nonpolar molecules (O₂, CO₂, N₂, steroid hormones) slip through the hydrophobic core unaided. Water, despite being polar, is small enough to leak across slowly — and many cells speed it up with **aquaporins**. Anything large or charged (glucose, amino acids, ions, ATP) cannot cross without protein help.
+
+### Cholesterol
+
+Cholesterol wedges itself between phospholipids and acts as a **fluidity buffer**: at high temperature it restrains lipid motion (keeping the membrane from becoming too fluid), and at low temperature it disrupts tight packing (keeping the membrane from becoming too rigid). Plants and bacteria lack cholesterol but use related sterols.
+
+### Membrane Proteins
+
+**Integral (transmembrane) proteins** span the bilayer, usually with α-helical regions of hydrophobic amino acids embedded in the lipid core. They function as channels, carriers, receptors, enzymes, and cell-adhesion molecules. **Peripheral proteins** sit on one face of the membrane, attached to lipid heads or to integral proteins. **Glycoproteins** and **glycolipids** display sugar chains on the extracellular face — these form the **glycocalyx**, a sugar coat that mediates cell–cell recognition, immune signaling, and the ABO blood-group antigens.
+
+> !high-yield
+> The DAT loves the **ABO blood types**. The A, B, and O antigens are sugar chains on red-blood-cell glycoproteins. Type A cells display A; type B display B; type AB display both; type O displays neither. Type O is the **universal donor** (no antigens to attack), and type AB is the **universal recipient** (makes no anti-A or anti-B antibodies).
+
+| Blood type | RBC antigen | Plasma antibodies | Donates to | Receives from |
+|------------|-------------|-------------------|------------|---------------|
+| A | A | anti-B | A, AB | A, O |
+| B | B | anti-A | B, AB | B, O |
+| AB | A and B | none | AB only | All (universal recipient) |
+| O | none | anti-A and anti-B | All (universal donor) | O |
+
+## Passive Transport — Down the Gradient, No ATP
+
+Passive transport moves molecules **down** their electrochemical gradient (from high concentration to low concentration). It is thermodynamically favorable, so no ATP is required. There are three flavors.
+
+\`\`\`diagram
+membrane-transport
+number: 2.2
+title: Simple diffusion, facilitated diffusion, and primary active transport
+caption: Simple diffusion moves small nonpolar molecules through the bilayer unaided. Facilitated diffusion uses a channel or carrier protein but still flows down the gradient. The Na⁺/K⁺ ATPase pumps 3 Na⁺ out and 2 K⁺ in against their gradients, consuming 1 ATP per cycle.
+\`\`\`
 
 ### Simple Diffusion
-- Movement of molecules **down** their concentration gradient
-- Small, nonpolar molecules: O₂, CO₂, N₂, steroid hormones
-- No protein needed
+
+The molecule slips through the bilayer on its own. Candidates: **O₂, CO₂, N₂, small uncharged molecules, steroid hormones, ethanol**, and (slowly) water. Rate depends only on the concentration gradient, the membrane's permeability to the molecule, and surface area — described quantitatively by **Fick's law**.
 
 ### Facilitated Diffusion
-- Uses **channel proteins** or **carrier proteins**
-- Still moves down the concentration gradient (no ATP)
-- Examples: glucose (via GLUT transporters), ions (via ion channels)
+
+Larger, polar, or charged molecules can't slip through unaided but can flow down their gradient through a protein **channel** (a hydrophilic pore) or **carrier** (a protein that binds the molecule, changes shape, and releases it on the other side). It is still passive — no ATP — but the rate **saturates** at high substrate concentration, because the number of transporter proteins is finite. Classic examples: **GLUT glucose transporters**, **ion channels** (Na⁺, K⁺, Ca²⁺, Cl⁻), and **aquaporins** for water.
 
 ### Osmosis
-- Diffusion of **water** across a selectively permeable membrane
-- Water moves toward the area of **higher solute concentration**
 
-| Solution | Compared to Cell | Water Movement | Cell Effect |
-|----------|-----------------|----------------|-------------|
-| Hypotonic | Less solute outside | Water enters cell | Cell swells (lyses in animal cells) |
-| Hypertonic | More solute outside | Water leaves cell | Cell shrinks (crenation) |
-| Isotonic | Equal solute | No net movement | Cell stays the same |
+Osmosis is the diffusion of **water** across a selectively permeable membrane, from a region of low solute concentration to a region of high solute concentration. Equivalently, water moves to dilute the more concentrated solution. The pressure required to oppose osmotic flow is the **osmotic pressure** Π = MRT (where M is molarity of solute, R is the gas constant, T is temperature in K).
 
-> **DAT Tip:** "Water follows solute" — water moves to where there's more dissolved stuff
+\`\`\`diagram
+tonicity
+number: 2.3
+title: Tonicity: hypotonic, isotonic, and hypertonic solutions
+caption: An animal cell in a hypotonic solution swells and may lyse; in isotonic solution it stays normal; in hypertonic solution it shrivels (crenation). Plant cells with rigid cell walls don't lyse — they become turgid in hypotonic solution (the healthy state) and plasmolyze in hypertonic solution.
+\`\`\`
 
-## Active Transport (ATP Required)
+> !mnemonic
+> **"Water follows solute."** In a **hyper**tonic solution (more solute outside), water exits the cell — it shrivels. In a **hypo**tonic solution (less solute outside), water enters the cell — it swells. **Hyper-shrink, hypo-swell.**
+
+## Active Transport — Against the Gradient, Requires Energy
+
+Active transport pumps molecules **against** their electrochemical gradient. This is thermodynamically unfavorable, so it must be coupled to an energy source.
 
 ### Primary Active Transport
-- Uses ATP directly to pump molecules **against** their gradient
-- **Na⁺/K⁺ ATPase:** Pumps 3 Na⁺ out and 2 K⁺ in per ATP
-- Maintains the resting membrane potential
+
+The pump hydrolyzes ATP directly. The textbook example is the **Na⁺/K⁺ ATPase**, present in every animal cell membrane. Per ATP hydrolyzed, it pumps **3 Na⁺ out** and **2 K⁺ in** — a net export of one positive charge per cycle. This single pump:
+
+- Maintains the resting membrane potential (about −70 mV in neurons)
+- Keeps intracellular Na⁺ low (~12 mM) and K⁺ high (~140 mM)
+- Powers secondary active transport throughout the body
+- Consumes roughly **20–40% of basal metabolic ATP**
+
+Other primary pumps include the **Ca²⁺ ATPase** (SERCA pump in muscle SR; PMCA in plasma membrane) and the **H⁺/K⁺ ATPase** (gastric parietal cells, makes stomach acid).
 
 ### Secondary Active Transport
-- Uses the gradient created by primary active transport
-- **Symport (cotransport):** Both molecules move in the same direction
-- **Antiport (exchange):** Molecules move in opposite directions
 
-## Bulk Transport
+The pump doesn't burn ATP directly — instead, it uses the gradient created by a primary pump. In the small intestine, the **Na⁺/glucose symporter (SGLT1)** uses the inward Na⁺ gradient (set up by the Na⁺/K⁺ ATPase) to drag glucose **into** intestinal cells *against* glucose's gradient. The Na⁺ pays the energetic cost; the ATP was spent earlier elsewhere.
+
+- **Symport (cotransport)**: both molecules move the same direction (e.g., Na⁺/glucose, Na⁺/amino acid)
+- **Antiport (exchange)**: molecules move in opposite directions (e.g., Na⁺/Ca²⁺ exchanger, Na⁺/H⁺ exchanger)
+
+> !clinical
+> Oral rehydration therapy (used to treat cholera and other secretory diarrheas) works because **SGLT1** is unaffected by cholera toxin. Giving a glucose + salt solution drags Na⁺ — and water by osmosis — back into intestinal cells, even when secretion is rampant. This one piece of physiology has saved an estimated 50 million lives.
+
+## Bulk Transport — Vesicular Trafficking
+
+Particles too large for channels or carriers (proteins, bacteria, fluid droplets) cross the membrane in **vesicles**.
 
 ### Endocytosis (into the cell)
-- **Phagocytosis:** "Cell eating" — engulfs large particles
-- **Pinocytosis:** "Cell drinking" — takes in fluid + dissolved solutes
-- **Receptor-mediated endocytosis:** Specific molecules bind receptors → clathrin-coated pit
+
+- **Phagocytosis** ("cell eating") — large solid particles. The cell extends pseudopods around a bacterium or debris, engulfs it, and forms a phagosome that fuses with a lysosome. Macrophages and neutrophils are the professionals.
+- **Pinocytosis** ("cell drinking") — bulk uptake of extracellular fluid and whatever solutes happen to be dissolved in it. Nonspecific.
+- **Receptor-mediated endocytosis** — highly specific. Ligands bind cell-surface receptors that cluster into a **clathrin-coated pit**, which pinches off as a coated vesicle. This is how cells take up **LDL cholesterol**, **transferrin** (iron), and many hormones.
 
 ### Exocytosis (out of the cell)
-- Vesicles fuse with the cell membrane and release contents
-- Example: neurotransmitter release, hormone secretion
+
+Secretory vesicles fuse with the plasma membrane, dumping their contents into the extracellular space. Used for **neurotransmitter release** at synapses, **hormone secretion** from endocrine cells, **digestive enzyme secretion** from acinar cells, and delivery of newly-made membrane proteins to the plasma membrane.
+
+> !high-yield
+> Familial hypercholesterolemia is caused by defective **LDL receptors** — patients can't clear LDL from blood by receptor-mediated endocytosis, so LDL accumulates and they develop premature atherosclerosis. This was the disease that won Brown & Goldstein the 1985 Nobel Prize and put receptor-mediated endocytosis on the medical map.
+
+## Summary Decision Tree
+
+When the DAT asks how molecule X crosses the membrane, ask yourself three questions in order:
+
+1. **Is X small and nonpolar?** → simple diffusion
+2. **Does X move down its gradient?** → if yes, passive (channel or carrier); if no, active (primary or secondary)
+3. **Is X too big for any channel/carrier?** → vesicular transport (endo- or exocytosis)
+
+That tree handles essentially every transport question on the exam.
 `,
         keyTerms: [
           { term: "Passive Transport", definition: "Movement down the concentration gradient without ATP" },
