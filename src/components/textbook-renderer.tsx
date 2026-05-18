@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { getDiagram, Figure } from "./diagrams";
 
 type CalloutKind = "high-yield" | "clinical" | "mnemonic" | "tip" | "warning" | "definition";
@@ -58,6 +59,7 @@ export function TextbookRenderer({ markdown }: { markdown: string }) {
     <div className="textbook max-w-none text-[15.5px] text-slate-900 leading-[1.75]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
           h1: ({ children }) => (
             <h1 className="text-3xl font-bold tracking-tight mb-4 mt-0 text-slate-900">{children}</h1>
