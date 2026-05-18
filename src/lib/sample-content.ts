@@ -536,86 +536,110 @@ That tree handles essentially every transport question on the exam.
         title: "DNA Replication",
         content: `# DNA Replication
 
-DNA replication is the process by which a cell copies its entire genome before division. For the DAT, you need to understand the enzymes, directionality, and key differences between prokaryotic and eukaryotic replication.
+Every time a cell divides, it has to hand each daughter cell a complete and accurate copy of its genome — roughly 3 billion base pairs in a human cell, 4.6 million in *E. coli*. The mechanism that gets this done is one of the most remarkable feats in biology: a coordinated team of enzymes that unzips the double helix, reads each strand, and builds a complementary copy with an error rate of about 1 in a billion. The DAT tests this in three flavors: the names and functions of the enzymes, the directionality rules that force the leading/lagging asymmetry, and the high-yield differences between prokaryotic and eukaryotic replication. Master all three and replication questions become free points.
 
-## Overview
+## The Building Block: A Nucleotide
 
-- Replication is **semiconservative** — each new DNA molecule contains one original (parent) strand and one newly synthesized (daughter) strand
-- Proved by the **Meselson-Stahl experiment** (1958) using heavy nitrogen (¹⁵N) and density gradient centrifugation
-- Occurs during **S phase** of the cell cycle
+Every DNA strand is a polymer of **nucleotides**, each consisting of a deoxyribose sugar, a phosphate group, and one of four nitrogenous bases: **adenine (A), thymine (T), guanine (G), or cytosine (C)**. The bases pair in fixed combinations by hydrogen bonds — **A pairs with T (2 H-bonds), G pairs with C (3 H-bonds)** — and the two strands run **antiparallel** (one 5'→3', the other 3'→5'). That single architectural fact governs every downstream feature of replication.
 
-> **High-Yield DAT Tip:** Semiconservative replication is a classic DAT question. Know the Meselson-Stahl experiment and why conservative and dispersive models were ruled out.
+\`\`\`diagram
+dna-helix
+number: 3.1
+title: DNA base pairing and antiparallel orientation
+caption: Adenine pairs with thymine through two hydrogen bonds; guanine pairs with cytosine through three. The G-C pair is stronger and more heat-stable. The strands run antiparallel — one 5'→3' (top), the other 3'→5' (bottom) — a constraint that forces DNA polymerase into asymmetric leading/lagging synthesis at every fork.
+\`\`\`
 
-## Replication Fork & Directionality
+## Semiconservative Replication
 
-DNA is **antiparallel** — the two strands run in opposite directions (5'→3' and 3'→5'). DNA polymerase can **only synthesize in the 5'→3' direction**.
+The model that DNA replication is **semiconservative** — each new double helix contains one old (parental) strand and one freshly synthesized strand — was proposed in the original Watson-Crick paper and proved by the elegant **Meselson-Stahl experiment** in 1958. They grew *E. coli* in heavy nitrogen (¹⁵N) for many generations until all the DNA was heavy, then switched the bacteria to ¹⁴N medium and watched the DNA density after each round of replication. After one round, all DNA was intermediate density (one heavy strand + one light strand) — which ruled out **conservative** replication (would have given two bands: all-heavy and all-light) and supported semiconservative replication. After two rounds, half was intermediate and half was light, ruling out **dispersive** replication (which would have continued to give intermediate density).
 
-- **Leading strand:** Synthesized continuously in the 5'→3' direction toward the replication fork
-- **Lagging strand:** Synthesized discontinuously in short fragments (**Okazaki fragments**) away from the fork, then joined together
+> !mnemonic
+> **Semi-conservative = each daughter conserves *half* (one strand) of the parent.** Old strand + new strand. Visualize a zipper unzipping and each half acquiring a new mate.
 
-| Feature | Leading Strand | Lagging Strand |
-|---------|---------------|----------------|
-| Direction | 5'→3' toward fork | 5'→3' away from fork |
-| Synthesis | Continuous | Discontinuous (Okazaki fragments) |
-| Primers needed | 1 | Multiple |
-| Ligase needed? | No | Yes (joins fragments) |
+## Directionality — Why There's a Leading and a Lagging Strand
 
-## Key Enzymes of Replication
+DNA polymerase is a strictly **5'→3' enzyme**: it can only add new nucleotides onto a free 3'-OH group. Because the two parental strands are antiparallel, only one of them can be read continuously into the fork as it opens. The other has to be read away from the fork in short bursts. This is the source of all the lagging-strand machinery.
+
+\`\`\`diagram
+replication-fork
+number: 3.2
+title: The replication fork — leading and lagging strand synthesis
+caption: Helicase unwinds the parental duplex at the fork. SSB proteins keep the single strands from re-pairing. On the 3'→5' template, DNA polymerase reads continuously into the fork (leading strand). On the 5'→3' template, polymerase must back up after each segment, creating Okazaki fragments that DNA polymerase I and DNA ligase later join into one continuous lagging strand.
+\`\`\`
+
+### The Cast of Replication Enzymes
 
 | Enzyme | Function |
 |--------|----------|
-| **Helicase** | Unwinds the double helix at the replication fork |
-| **Topoisomerase (Gyrase)** | Relieves tension/supercoiling ahead of the fork |
-| **Primase** | Synthesizes short **RNA primers** (5-10 nucleotides) to give DNA polymerase a 3'-OH start point |
-| **DNA Polymerase III** | Main replication enzyme — adds nucleotides 5'→3', has **3'→5' proofreading exonuclease** activity |
-| **DNA Polymerase I** | Removes RNA primers and replaces them with DNA |
-| **DNA Ligase** | Seals nicks (joins Okazaki fragments on the lagging strand) |
-| **Single-Strand Binding Proteins (SSBs)** | Stabilize separated single strands and prevent re-annealing |
-| **Sliding Clamp (PCNA)** | Holds DNA polymerase onto the template for processivity |
+| **Helicase** | Unwinds the double helix at the fork by breaking H-bonds |
+| **Topoisomerase / Gyrase** | Cuts and re-ligates DNA *ahead* of the fork to release supercoiling |
+| **Single-strand binding proteins (SSBs)** | Coat single-stranded regions to prevent re-annealing |
+| **Primase** | RNA polymerase that lays down short RNA primers (5–10 nt) — required because DNA Pol can't initiate de novo |
+| **DNA Polymerase III** | The workhorse: adds nucleotides 5'→3', proofreads with **3'→5' exonuclease** activity |
+| **DNA Polymerase I** | Removes RNA primers (via 5'→3' exonuclease) and fills the gap with DNA |
+| **DNA Ligase** | Seals nicks between Okazaki fragments by forming phosphodiester bonds |
+| **Sliding clamp (β / PCNA)** | Doughnut-shaped ring that holds DNA Pol onto the template for processivity |
 
-> **DAT Tip:** A common question format: "Which enzyme removes RNA primers?" → **DNA Polymerase I**. "Which enzyme joins Okazaki fragments?" → **DNA Ligase**.
+The leading strand needs only **one** primer at the origin and then runs to the end of the fork on a single elongating polymerase. The lagging strand needs **a new primer every ~1,000–2,000 nucleotides** (prokaryotes) or every ~100–200 nucleotides (eukaryotes), producing **Okazaki fragments** that get stitched together later.
 
-## Steps of Replication (Prokaryotic — E. coli model)
+> !high-yield
+> Two enzyme-function pairings appear constantly: **"Which enzyme removes the RNA primers?" → DNA Polymerase I.** **"Which enzyme joins Okazaki fragments?" → DNA Ligase.** Memorize these two reflexively.
 
-1. **Initiation:** Initiator proteins bind the **origin of replication (oriC)**. Helicase unwinds the helix, SSBs stabilize the strands.
-2. **Priming:** Primase lays down a short RNA primer on each strand.
-3. **Elongation:** DNA Pol III extends from the primer, adding dNTPs in the 5'→3' direction. The leading strand is synthesized continuously; the lagging strand produces Okazaki fragments (~1,000-2,000 nt in prokaryotes).
-4. **Primer removal:** DNA Pol I removes RNA primers via 5'→3' exonuclease activity and fills the gaps with DNA.
-5. **Ligation:** DNA ligase seals the remaining nicks.
-6. **Termination:** Replication forks meet at the **terminus region**.
+## The Steps in Order (E. coli Model)
+
+1. **Initiation.** Initiator proteins (DnaA) bind the **origin of replication (oriC)**, an AT-rich sequence (easier to melt — only 2 H-bonds per pair). Helicase loads, SSBs coat the single strands, topoisomerase relieves torque ahead of the fork.
+2. **Priming.** Primase synthesizes a short RNA primer on each template.
+3. **Elongation.** DNA Pol III extends both strands 5'→3'. Leading is continuous; lagging produces Okazaki fragments.
+4. **Primer removal.** DNA Pol I uses 5'→3' exonuclease to chew up the RNA primers, then fills the gap with DNA.
+5. **Ligation.** DNA ligase seals the remaining nicks.
+6. **Termination.** In *E. coli*, the two forks meet at the **terminus** region (ter sites bound by Tus protein); the two daughter chromosomes are resolved by topoisomerase IV.
 
 ## Eukaryotic vs. Prokaryotic Replication
 
-| Feature | Prokaryotic | Eukaryotic |
-|---------|------------|------------|
-| Origins of replication | 1 (oriC) | Multiple (thousands) |
-| Speed | ~1,000 nt/sec | ~50 nt/sec |
-| Okazaki fragments | ~1,000-2,000 nt | ~100-200 nt |
-| Main polymerase | DNA Pol III | DNA Pol δ (lagging), DNA Pol ε (leading) |
-| Telomere issue | No (circular DNA) | Yes — requires **telomerase** |
+| Feature | Prokaryote | Eukaryote |
+|---------|-----------|-----------|
+| Origins of replication | 1 (oriC) | Thousands per genome |
+| Replication speed | ~1,000 nt/sec | ~50 nt/sec |
+| Okazaki fragment length | 1,000–2,000 nt | 100–200 nt |
+| Main replicative polymerase | DNA Pol III | DNA Pol δ (lagging), DNA Pol ε (leading) |
+| Sliding clamp | β-clamp | PCNA |
+| Chromosome shape | Circular | Linear → telomere problem |
+| Cell-cycle stage | Continuous | S phase only |
+
+The reason eukaryotes need thousands of origins despite a much slower polymerase is simple arithmetic: with only one origin running at 50 nt/sec, copying a 3-billion-bp genome would take about a year. Fire thousands of origins simultaneously and the whole genome is done in ~6 hours.
 
 ## The Telomere Problem
 
-- Eukaryotic chromosomes are **linear**, so the lagging strand cannot fully replicate the ends
-- Each round of replication shortens the chromosome at the **telomeres** (TTAGGG repeats in humans)
-- **Telomerase** (a reverse transcriptase with an RNA template) extends telomeres in germ cells, stem cells, and most cancer cells
-- Somatic cells lack sufficient telomerase → **Hayflick limit** (finite number of divisions)
+Linear chromosomes pose a problem that circular bacterial chromosomes don't: when the last RNA primer on the lagging strand is removed, **there is no upstream 3'-OH for DNA Pol I to extend from**, so a small gap is left at every chromosome end. Without a fix, chromosomes would shorten with every division and useful genes near the ends would erode.
 
-> **DAT Tip:** Telomerase is active in germ cells and cancer cells but NOT in most somatic cells. This is why normal cells have a limited lifespan.
+The solution is **telomerase**, a reverse transcriptase that carries its own RNA template and extends the 3' ends of chromosomes with a species-specific repeat (**TTAGGG** in humans). Telomerase is highly active in **germ cells, embryonic stem cells, and most cancer cells**, but largely silenced in adult somatic cells — which is why normal cells have a finite division potential (the **Hayflick limit**, ~50 divisions) and why telomere shortening contributes to cellular aging.
 
-## DNA Repair Mechanisms
+> !clinical
+> Reactivation of telomerase is observed in roughly **85–90% of human cancers** and is a major therapeutic target. **Dyskeratosis congenita** is the classic inherited telomerase deficiency: patients have short telomeres, bone-marrow failure, and skin/nail abnormalities. Telomere biology earned the 2009 Nobel Prize (Blackburn, Greider, Szostak).
 
-| Mechanism | What It Fixes |
-|-----------|--------------|
-| **Proofreading** (3'→5' exonuclease) | Mismatched bases during replication |
-| **Mismatch repair** | Errors missed by proofreading |
-| **Nucleotide excision repair** | Bulky lesions (e.g., thymine dimers from UV) |
-| **Base excision repair** | Small, non-bulky lesions (deaminated bases) |
+## DNA Repair — Keeping the Genome Faithful
 
-## Key Terms
-- **Semiconservative:** Each daughter DNA has one old + one new strand
-- **Okazaki fragments:** Short DNA pieces on the lagging strand
-- **Telomere:** Repetitive DNA at chromosome ends that protects coding sequences
+DNA polymerase makes about 1 error per 10⁵ bp incorporated. Proofreading by the 3'→5' exonuclease drops that to 1 per 10⁷. Mismatch repair drops it again to about 1 per 10⁹. Several repair pathways handle distinct damage:
+
+| Pathway | What it fixes |
+|---------|---------------|
+| **Proofreading** (3'→5' exo of DNA Pol) | Mismatches caught during synthesis |
+| **Mismatch repair (MMR)** | Mismatches the polymerase missed; uses MSH/MLH proteins to recognize newly-synthesized strand |
+| **Nucleotide excision repair (NER)** | Bulky helix-distorting lesions like **thymine dimers** from UV |
+| **Base excision repair (BER)** | Single damaged bases (e.g., deaminated cytosine) |
+| **Double-strand break repair** | Non-homologous end joining (NHEJ) or homologous recombination (HR) |
+
+> !clinical
+> **Xeroderma pigmentosum** is a defect in **nucleotide excision repair**. Patients can't fix UV-induced thymine dimers and develop skin cancers at extraordinarily high rates, often as children. **Lynch syndrome (HNPCC)** is a defect in mismatch repair → hereditary colon and endometrial cancer.
+
+## DAT-Ready Summary
+
+- DNA is antiparallel; polymerase only synthesizes 5'→3' → forces leading/lagging asymmetry.
+- The fork: helicase opens, SSBs stabilize, topoisomerase relieves torque, primase primes, Pol III elongates, Pol I replaces primers with DNA, ligase seals.
+- Replication is **semiconservative** (Meselson-Stahl).
+- Prokaryotes: 1 origin, 1 polymerase (Pol III), big Okazaki fragments, fast (1,000 nt/s).
+- Eukaryotes: thousands of origins, multiple polymerases (δ and ε), small Okazaki fragments, slow per fork (50 nt/s), plus telomeres + telomerase.
+- Repair: proofreading + MMR + NER + BER, each tied to a clinical disease worth knowing.
 `,
         keyTerms: [
           { term: "Helicase", definition: "Unwinds the DNA double helix at the replication fork" },
@@ -633,160 +657,166 @@ DNA is **antiparallel** — the two strands run in opposite directions (5'→3' 
         title: "Transcription & Translation",
         content: `# Transcription & Translation
 
-Gene expression is the process by which the information in DNA is used to produce a functional protein (or RNA). This occurs in two major steps: **transcription** (DNA → mRNA) and **translation** (mRNA → protein).
+Genes do their work by being **expressed** — converted from a stored DNA sequence into a functioning protein (or, in some cases, into an RNA that does the work itself). The two-step pipeline that gets this done is the **central dogma of molecular biology**: DNA is **transcribed** into RNA, and RNA is **translated** into protein. Every cell in your body uses the same machinery, and the DAT will test you on the enzymes, the directionality rules, the differences between prokaryotic and eukaryotic versions, and the genetic code itself.
 
-## The Central Dogma of Molecular Biology
+## The Central Dogma
 
-**DNA → RNA → Protein**
+**DNA → RNA → Protein.**
 
-- **Transcription:** DNA is used as a template to synthesize messenger RNA (mRNA)
-- **Translation:** mRNA is read by ribosomes to assemble amino acids into a polypeptide
-- **Reverse transcription:** RNA → DNA (retroviruses like HIV use **reverse transcriptase**)
+- **Transcription** copies a gene's DNA sequence into a complementary **mRNA** in the nucleus (eukaryotes) or the cytoplasm (prokaryotes).
+- **Translation** reads the mRNA in three-nucleotide **codons** and assembles a polypeptide on a ribosome.
+- **Reverse transcription** is the famous exception: retroviruses like **HIV** carry **reverse transcriptase**, which copies their RNA genome back into DNA so it can integrate into the host chromosome.
 
-> **High-Yield DAT Tip:** The central dogma goes DNA → RNA → Protein. Reverse transcriptase is the exception — it makes DNA from an RNA template (retroviruses).
+> !high-yield
+> If a question asks "what's the exception to the central dogma?" the answer is **reverse transcriptase in retroviruses**. The drug **AZT** (zidovudine) was the first HIV therapy and works by inhibiting this enzyme.
 
 ---
 
 ## Part 1: Transcription
 
-Transcription produces an mRNA copy of a gene. It occurs in the **nucleus** (eukaryotes) or **cytoplasm** (prokaryotes).
+### Templates, Strands, and Direction
 
-### Key Players
+A gene has two relevant strands. One — the **template** (also called the **antisense** strand) — is what RNA polymerase actually reads, in the **3'→5' direction**. The other — the **coding** (or **sense**) strand — has the same sequence as the mRNA, with U replacing T. mRNA is synthesized **5'→3'**, exactly like DNA.
 
-| Component | Role |
-|-----------|------|
-| **Template strand** (antisense, 3'→5') | Read by RNA polymerase |
-| **Coding strand** (sense, 5'→3') | Same sequence as mRNA (except T→U) |
-| **RNA Polymerase** | Synthesizes mRNA in the **5'→3' direction** |
-| **Promoter** | DNA sequence where RNA polymerase binds to begin transcription |
-| **Terminator** | DNA sequence that signals the end of transcription |
-
-> **DAT Tip:** RNA polymerase reads the **template strand 3'→5'** and builds mRNA **5'→3'**. The mRNA sequence matches the **coding strand** (with U replacing T).
+\`\`\`diagram
+transcription-bubble
+number: 3.3
+title: RNA polymerase transcribing a gene
+caption: RNA polymerase opens a "bubble" of about 12–14 bp around the template, reads it 3'→5', and extrudes nascent mRNA 5'→3'. The mRNA sequence is identical to the coding strand except that uracil (U) replaces thymine (T). Conversion rules: A→U, T→A, G→C, C→G.
+\`\`\`
 
 ### Prokaryotic Transcription
 
-- Single **RNA polymerase** handles all RNA types (mRNA, rRNA, tRNA)
-- **Sigma factor (σ)** helps RNA polymerase recognize and bind the **promoter** (e.g., -10 and -35 regions)
-- No mRNA processing needed — mRNA is translated **simultaneously** (coupled transcription-translation)
-- Terminated by **rho-dependent** or **rho-independent** (hairpin loop) mechanisms
+In bacteria, a single **RNA polymerase** transcribes every kind of RNA (mRNA, rRNA, tRNA). A protein called the **sigma factor (σ)** binds the polymerase and helps it recognize the **promoter**, which in *E. coli* has consensus elements at **−35** and **−10** (the Pribnow box, TATAAT) upstream of the transcription start. After ~10 nucleotides of transcription, sigma dissociates and the core polymerase elongates on its own.
+
+Termination uses one of two mechanisms:
+- **Rho-independent (intrinsic)**: a GC-rich hairpin in the nascent RNA, followed by a string of Us, causes the polymerase to fall off.
+- **Rho-dependent**: the **Rho protein** binds a *rut* site on the mRNA and chases down the polymerase, pulling the RNA out.
+
+Because there is no nuclear membrane, prokaryotic mRNA is **translated as it is being transcribed** — ribosomes load onto the 5' end while RNA polymerase is still working on the 3' end. This is **coupled transcription-translation**.
 
 ### Eukaryotic Transcription
 
-Three different RNA polymerases:
+Eukaryotes use **three distinct RNA polymerases**, each making a specific class of RNA:
 
-| Polymerase | Product |
-|------------|---------|
-| **RNA Pol I** | rRNA (except 5S) |
-| **RNA Pol II** | mRNA (and some snRNAs) |
+| Polymerase | Synthesizes |
+|------------|-------------|
+| **RNA Pol I** | rRNA (28S, 18S, 5.8S) — in the nucleolus |
+| **RNA Pol II** | **mRNA** + some snRNAs |
 | **RNA Pol III** | tRNA, 5S rRNA |
 
-> **DAT Tip:** Remember: RNA Pol **II** makes **m**RNA — the one you care about most for gene expression.
+> !mnemonic
+> **"Pol II makes mRNA, the one you care about most."** Roman numeral II for the middle product (between rRNA and tRNA). The mushroom toxin **α-amanitin** specifically inhibits Pol II — death cap mushroom (*Amanita phalloides*) poisoning kills by silencing transcription of all protein-coding genes.
 
-**Eukaryotic promoter elements:**
-- **TATA box** (~-25 position) — bound by **TFIID** (TBP subunit)
-- **General transcription factors** (TFIIA, TFIIB, TFIID, TFIIE, TFIIF, TFIIH) assemble at the promoter
-- **Enhancers** — distal regulatory sequences that increase transcription (bound by activators)
-- **Silencers** — decrease transcription (bound by repressors)
+Promoters for Pol II include a **TATA box** about 25 bp upstream of the start. **TFIID** (with its TATA-binding protein, TBP, subunit) lands first, recruiting the rest of the **general transcription factors** (TFIIA, TFIIB, TFIIE, TFIIF, TFIIH). Distant regulatory sequences — **enhancers** (which boost transcription, bound by activators) and **silencers** (which suppress it, bound by repressors) — loop in to contact the promoter complex.
 
-### Post-Transcriptional Processing (Eukaryotes Only)
+### mRNA Processing (Eukaryotes Only)
 
-Before mRNA leaves the nucleus, it undergoes three modifications:
+Eukaryotic mRNA never leaves the nucleus raw. It undergoes three modifications:
 
-| Modification | What Happens | Purpose |
-|-------------|-------------|---------|
-| **5' cap** | 7-methylguanosine (m7G) added to 5' end | Protects from degradation; aids ribosome recognition |
-| **3' poly-A tail** | 100-250 adenine nucleotides added | Protects from degradation; aids nuclear export |
-| **Splicing** | Introns removed, exons joined by **spliceosome** | Creates mature mRNA with only coding sequences |
+\`\`\`diagram
+mrna-processing
+number: 3.4
+title: Eukaryotic mRNA processing
+caption: A 7-methylguanosine (m7G) cap is added to the 5' end, a poly-A tail of ~200 adenines is added to the 3' end, and the spliceosome (a complex of snRNPs) excises introns and ligates exons together. The mature mRNA exits the nucleus through nuclear pores for translation in the cytoplasm.
+\`\`\`
 
-- **Introns** = "in-trons stay in the nucleus" (removed)
-- **Exons** = "ex-ons are expressed" (kept)
-- **Alternative splicing:** One gene can produce multiple protein variants by including/excluding different exons
+| Modification | What happens | Purpose |
+|-------------|--------------|---------|
+| **5' capping** | 7-methylguanosine (m7G) added to 5' end | Protects from 5' exonucleases; ribosome binds here |
+| **3' polyadenylation** | ~200 A's added to 3' end after cleavage at AAUAAA | Protects from 3' exonucleases; aids nuclear export |
+| **Splicing** | Introns removed, exons joined by **spliceosome** (snRNPs U1, U2, U4, U5, U6) | Generates mature coding mRNA |
 
-> **DAT Tip:** Prokaryotes do NOT have introns (generally), 5' caps, or poly-A tails. Their mRNA is translated immediately.
+> !mnemonic
+> **"IN-trons stay IN the nucleus. EX-ons EX-it (and are EX-pressed)."** **Alternative splicing** — choosing which exons to include — lets one gene produce many different proteins; the immunoglobulin and tropomyosin genes are classic examples.
+
+> !clinical
+> Many genetic diseases are splicing defects. **β-thalassemia** can be caused by point mutations that create cryptic splice sites; **spinal muscular atrophy (SMA)** is caused by loss of *SMN1* combined with a *SMN2* splicing defect that produces a non-functional truncated protein.
 
 ---
 
 ## Part 2: Translation
 
-Translation converts the mRNA nucleotide sequence into an amino acid sequence (polypeptide). It occurs on **ribosomes** in the cytoplasm (or rough ER for secreted proteins).
+Translation reads the mature mRNA on a **ribosome** and synthesizes a polypeptide one amino acid at a time. The ribosome is essentially a giant ribozyme — its catalytic activity comes from rRNA, not protein.
 
 ### The Genetic Code
 
-- Read in **triplets** called **codons** (3 nucleotides = 1 amino acid)
-- **64 codons** total: 61 code for amino acids, 3 are stop codons
-- **Degenerate** (redundant) — multiple codons can code for the same amino acid
-- **Universal** — nearly all organisms use the same code
-- **Start codon: AUG** (methionine) — also signals the start of translation
-- **Stop codons: UAA, UAG, UGA** — do NOT code for amino acids
+The mRNA is read in three-nucleotide **codons**. With four bases per position and three positions, there are **4³ = 64 codons**. Sixty-one of those code for amino acids; three are **stop codons** (UAA, UAG, UGA). One codon, **AUG (methionine)**, doubles as the **start codon**.
 
-| Property | Detail |
-|----------|--------|
-| Codons | 64 total (61 amino acid + 3 stop) |
-| Start codon | AUG (Met) |
+| Feature | Detail |
+|---------|--------|
+| Codons | 64 total (61 amino-acid coding + 3 stop) |
+| Start codon | AUG (Met in eukaryotes, fMet in prokaryotes) |
 | Stop codons | UAA, UAG, UGA |
-| Degeneracy | 3rd position "wobble" allows flexibility |
-| Reading frame | Set by the start codon (AUG) |
+| Degeneracy | Most amino acids have multiple codons (3rd position "wobble") |
+| Universality | Nearly identical across all life (rare exceptions in mitochondria) |
+| Reading frame | Defined by the start codon; shifting it (frameshift mutation) usually destroys the protein |
 
-> **DAT Tip:** Remember stop codons with: **U A**re **A**wful, **U A**re **G**one, **U G**o **A**way.
+> !mnemonic
+> **Stop codons: "U Are Annoying (UAA), U Are Gone (UAG), U Go Away (UGA)."** Memorize all three — they appear constantly.
 
-### Key Molecules in Translation
+### The Ribosome and Its Sites
 
-| Molecule | Function |
-|----------|----------|
-| **mRNA** | Carries the genetic code from DNA to the ribosome |
-| **tRNA** | Adapter molecule — carries amino acids; has an **anticodon** complementary to the mRNA codon |
-| **Aminoacyl-tRNA synthetase** | Charges tRNA with the correct amino acid (uses ATP → AMP + PPi) |
-| **Ribosome** | Large macromolecular machine with 3 tRNA binding sites (A, P, E) |
+The ribosome has three tRNA-binding sites arranged in a line:
 
-**Ribosome binding sites:**
-- **A site (Aminoacyl):** Incoming charged tRNA binds here
-- **P site (Peptidyl):** tRNA holding the growing polypeptide chain
-- **E site (Exit):** Empty tRNA exits here
+\`\`\`diagram
+translation
+number: 3.5
+title: The ribosome at work — codon-anticodon pairing on the E, P, and A sites
+caption: The small subunit grips the mRNA. The large subunit holds three tRNA sites: A (aminoacyl, incoming tRNA), P (peptidyl, growing chain), and E (exit, leaving). Each cycle: new tRNA enters A → peptide bond forms → ribosome translocates one codon → P-site tRNA moves to E, A-site tRNA moves to P. Prokaryotic ribosomes are 70S (30S + 50S); eukaryotic are 80S (40S + 60S).
+\`\`\`
 
-### Steps of Translation
+- **A site (Aminoacyl)** — landing pad for the incoming charged tRNA
+- **P site (Peptidyl)** — holds the tRNA carrying the growing polypeptide chain
+- **E site (Exit)** — uncharged tRNA leaves through here
 
-**1. Initiation**
-- Small ribosomal subunit binds to the mRNA at the **5' cap** (eukaryotes) or **Shine-Dalgarno sequence** (prokaryotes)
-- Scans for the **start codon (AUG)**
-- Initiator tRNA (carrying **Met** in eukaryotes, **fMet** in prokaryotes) binds the P site
-- Large subunit joins → complete ribosome assembled
+### Charging tRNA
 
-**2. Elongation**
-- **Codon recognition:** Charged tRNA enters the A site (complementary anticodon-codon pairing)
-- **Peptide bond formation:** Peptidyl transferase (rRNA catalytic activity — **ribozyme**) forms a peptide bond between amino acids
-- **Translocation:** Ribosome shifts one codon in the 5'→3' direction. tRNA in P site moves to E site; tRNA in A site moves to P site; A site is now empty for the next tRNA
+Each tRNA carries one specific amino acid, attached at its 3' CCA end by an **aminoacyl-tRNA synthetase**. There is one synthetase per amino acid (20 total), and each one knows which tRNAs to charge with its amino acid. The reaction consumes one **ATP**, hydrolyzed to **AMP + PPi**. The CCA-tRNA-amino acid bond is high-energy — peptide bond formation in the ribosome doesn't cost any extra ATP because that energy is pre-stored in the aminoacyl-tRNA.
 
-**3. Termination**
-- Ribosome encounters a **stop codon** (UAA, UAG, or UGA)
-- **Release factor** binds the A site (no tRNA matches a stop codon)
-- Polypeptide is released, ribosome subunits dissociate
+### The Three Stages of Translation
+
+**1. Initiation.** The small ribosomal subunit binds the mRNA. In **prokaryotes**, the small subunit recognizes the **Shine-Dalgarno** sequence upstream of the start codon. In **eukaryotes**, it binds the **5' cap** and scans 3' until it finds the first AUG (the Kozak sequence biases which AUG counts). The initiator tRNA — carrying **fMet** in prokaryotes, **Met** in eukaryotes — drops into the P site. The large subunit joins, and translation is ready.
+
+**2. Elongation.** Three steps repeat:
+- **Codon recognition.** A charged tRNA enters the A site; its anticodon must be complementary to the next mRNA codon.
+- **Peptide bond formation.** The 23S rRNA in the large subunit (the **peptidyl transferase** — a ribozyme) catalyzes formation of a peptide bond between the amino acid in the A site and the polypeptide in the P site. The whole chain transfers from the P-site tRNA to the A-site tRNA.
+- **Translocation.** GTP-driven movement of the ribosome shifts everything by one codon: A-site tRNA → P, P-site tRNA → E, E-site tRNA falls off, A site is empty for the next round.
+
+**3. Termination.** When the A site reaches a stop codon (UAA, UAG, UGA), no tRNA matches — instead, a **release factor** binds. This triggers hydrolysis of the peptide from the P-site tRNA, the polypeptide is released, and the ribosomal subunits dissociate.
 
 ### Post-Translational Modifications
 
-After translation, proteins may be modified:
-- **Folding** — assisted by **chaperones** (e.g., heat shock proteins)
-- **Cleavage** — removal of signal peptides or activation of zymogens
-- **Glycosylation** — addition of carbohydrate groups (ER and Golgi)
-- **Phosphorylation** — addition of phosphate groups by kinases (regulation)
-- **Ubiquitination** — tagging with ubiquitin for proteasomal degradation
+Most proteins need finishing touches before they work. The DAT favorites:
+
+- **Folding** by **chaperones** (heat shock proteins) — prevents aggregation
+- **Cleavage** of zymogens (e.g., chymotrypsinogen → chymotrypsin) or signal peptides
+- **Glycosylation** in the ER and Golgi (N-linked at Asn, O-linked at Ser/Thr)
+- **Phosphorylation** by kinases (regulatory — turns activity on or off)
+- **Ubiquitination** — Lys-ubiquitin chains tag a protein for proteasomal degradation
 
 ### Prokaryotic vs. Eukaryotic Translation
 
-| Feature | Prokaryotic | Eukaryotic |
-|---------|------------|------------|
-| Ribosome | 70S (50S + 30S) | 80S (60S + 40S) |
-| Start amino acid | **fMet** (formyl-methionine) | **Met** (methionine) |
-| mRNA processing | None — coupled with transcription | 5' cap, poly-A tail, splicing |
-| Polycistronic? | Yes (one mRNA → multiple proteins) | No (one mRNA → one protein, monocistronic) |
-| Shine-Dalgarno | Yes | No (uses 5' cap scanning) |
+| Feature | Prokaryote | Eukaryote |
+|---------|-----------|-----------|
+| Ribosome | **70S** (30S + 50S) | **80S** (40S + 60S) |
+| First amino acid | **fMet** (formyl-methionine) | Met |
+| Initiation signal | Shine-Dalgarno sequence | 5' cap scanning (Kozak) |
+| Polycistronic? | **Yes** — one mRNA can encode multiple proteins | No — one mRNA, one protein |
+| Coupled with transcription? | **Yes** | No (transcription = nucleus, translation = cytoplasm) |
+| Antibiotic targets | Many (tetracyclines, aminoglycosides, macrolides, chloramphenicol) | Few (mostly toxic) |
 
-> **DAT Tip:** Prokaryotic ribosomes are **70S** — this is why certain antibiotics (e.g., tetracycline, chloramphenicol, erythromycin) can target bacterial ribosomes without harming human **80S** ribosomes.
+> !high-yield
+> The 70S/80S ribosome distinction is the basis for most ribosome-targeting antibiotics. **Streptomycin** and **gentamicin** (aminoglycosides) hit the 30S; **erythromycin** and **chloramphenicol** hit the 50S. None bind the 80S effectively — that selectivity is what makes them therapeutic. **Mitochondrial 70S ribosomes** explain why aminoglycosides can cause ototoxicity (hearing loss) — they damage mitochondrial protein synthesis in cochlear hair cells.
 
-## Gene Regulation Preview
+## DAT-Ready Summary
 
-- **Operon model** (prokaryotes): lac operon, trp operon
-- **Eukaryotic regulation:** Transcription factors, enhancers, silencers, epigenetics (methylation, acetylation)
-- These topics are covered in detail in a later chapter
+- **Central dogma**: DNA → mRNA → protein. Reverse transcriptase is the retrovirus exception.
+- **Transcription**: RNA polymerase reads template 3'→5', builds mRNA 5'→3'. Eukaryotes use **Pol II** for mRNA. Promoter element = **TATA box** at −25.
+- **mRNA processing** (eukaryotes only): **5' cap, poly-A tail, splicing**. "Introns stay In, Exons Exit."
+- **Genetic code**: 64 codons (61 sense + 3 stop), start = AUG, stops = UAA / UAG / UGA. Degenerate but universal.
+- **Translation**: A → P → E sites. Initiator tRNA = **fMet** (prok) or **Met** (euk). Peptidyl transferase is a **ribozyme** in the 23S/28S rRNA. Stop codons → **release factor**.
+- **70S vs 80S**: bacterial ribosome is the target of most ribosome-acting antibiotics.
 `,
         keyTerms: [
           { term: "Transcription", definition: "Process of copying DNA into mRNA, catalyzed by RNA polymerase" },
