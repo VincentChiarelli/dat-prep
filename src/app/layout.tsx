@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SyncInit from "../components/SyncInit";
@@ -16,6 +16,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "DAT Prep — Study Guide",
   description: "Interactive DAT study guide: textbook chapters, quizzes, full-length timed exams, spaced repetition, and analytics.",
+  icons: { icon: "/icon-192.png", apple: "/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "DAT Prep", statusBarStyle: "default" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#6c5ce7",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

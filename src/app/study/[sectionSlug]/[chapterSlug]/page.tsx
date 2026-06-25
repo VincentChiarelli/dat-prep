@@ -23,6 +23,7 @@ import {
 import { AppLayout } from "@/components/app-layout";
 import { TextbookNav } from "@/components/textbook-nav";
 import { TextbookRenderer } from "@/components/textbook-renderer";
+import ListenButton from "@/components/ListenButton";
 
 export default function ChapterPage() {
   const params = useParams();
@@ -484,6 +485,14 @@ export default function ChapterPage() {
         {/* Main content */}
         <main className="flex-1 py-6 px-4 md:py-8 md:px-8 overflow-y-auto">
           <article className="max-w-3xl">
+            {/* Lesson header row: title + Listen button */}
+            <div className="flex items-center gap-3 mb-4">
+              <h1 className="text-xl font-bold flex-1" style={{ color: "var(--ink)" }}>
+                {lesson.title}
+              </h1>
+              <ListenButton text={lesson.content} />
+            </div>
+
             {/* Lesson content */}
             <TextbookRenderer markdown={lesson.content} />
 
