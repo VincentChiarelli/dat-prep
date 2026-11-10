@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getQuizResults, type QuizResult } from "@/lib/progress";
 import { EXAM_CONFIGS, getExamAttempts, type ExamAttempt } from "@/lib/exam-engine";
+import { MOCK_EXAM_CONFIGS, MOCK_MPS_PERCENT, getMockAttempts, type MockAttempt } from "@/lib/mock-exam";
 import { getQuestionStats } from "@/lib/question-bank";
 import { getChaptersForSection } from "@/lib/content-map";
 import { AppLayout } from "@/components/app-layout";
@@ -11,11 +12,13 @@ import { AppLayout } from "@/components/app-layout";
 export default function ExamsPage() {
   const [quizScores, setQuizScores] = useState<QuizResult[]>([]);
   const [examAttempts, setExamAttempts] = useState<ExamAttempt[]>([]);
+  const [mockAttempts, setMockAttempts] = useState<MockAttempt[]>([]);
   const [questionCount, setQuestionCount] = useState(0);
 
   useEffect(() => {
     setQuizScores(getQuizResults());
     setExamAttempts(getExamAttempts());
+    setMockAttempts(getMockAttempts());
     setQuestionCount(getQuestionStats().total);
   }, []);
 
@@ -65,6 +68,81 @@ export default function ExamsPage() {
             <div className="text-xs text-[var(--color-text-muted)] mt-1">Exam Types</div>
           </div>
         </div>
+
+        {/* Full-length mocks, CFA Level I format */}
+        <h2 className="text-lg font-semibold mb-1">Full-Length Mock Exams</h2>
+        <p className="text-xs text-[var(--color-text-muted)] mb-4">
+          CFA Level I format: 180 questions, two 135-minute sessions with an optional break, three answer
+          choices per question, graded against a {MOCK_MPS_PERCENT}% minimum passing score.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {MOCK_EXAM_CONFIGS.map((mock) => {
+            const attempts = mockAttempts.filter((a) => a.mockId === mock.id);
+            const best = attempts.length > 0 ? Math.max(...attempts.map((a) => a.overallPercent)) : null;
+            const passed = attempts.some((a) => a.passed);
+            return (
+              <Link
+                key={mock.id}
+                href={`/mock/${mock.id}`}
+                className="bg-white rounded-xl border border-[var(--color-border)] p-5 hover:border-[var(--color-text-muted)] hover:shadow-md transition-all group"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="font-semibold group-hover:text-[var(--color-primary)] transition-colors">{mock.title}</div>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${passed ? "bg-green-50 text-green-600" : "bg-purple-50 text-purple-600"}`}>
+                    {passed ? "Passed" : "Mock"}
+                  </span>
+                </div>
+                <div className="text-xs text-[var(--color-text-muted)] mb-3">
+                  180 questions &middot; 2 × 135 min &middot; A/B/C format
+                </div>
+                {best !== null ? (
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-[var(--color-text-muted)]">{attempts.length} attempt{attempts.length !== 1 ? "s" : ""}</span>
+                    <span className="text-sm font-bold" style={{ color: best >= MOCK_MPS_PERCENT ? "#16A34A" : "#DC2626" }}>
+                      Best: {best}%
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-xs font-medium text-[var(--color-primary)]">Start →</span>
+                )}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Mock exam history */}
+        {mockAttempts.length > 0 && (
+          <div className="bg-white rounded-xl border border-[var(--color-border)] overflow-hidden mb-10">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-[var(--color-border)] bg-gray-50">
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wide">Date</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wide">Mock</th>
+                  <th className="text-right px-4 py-3 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wide">Score</th>
+                  <th className="text-right px-4 py-3 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wide">S1 / S2</th>
+                  <th className="text-right px-4 py-3 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wide">Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mockAttempts.slice().reverse().map((a, i) => (
+                  <tr key={i} className="border-b border-[var(--color-border)] last:border-0 hover:bg-gray-50">
+                    <td className="px-4 py-3 font-mono text-xs text-[var(--color-text-muted)]">{new Date(a.completedAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 font-medium">{a.mockTitle}</td>
+                    <td className="px-4 py-3 text-right font-mono font-bold">{a.overallCorrect}/{a.overallTotal} ({a.overallPercent}%)</td>
+                    <td className="px-4 py-3 text-right font-mono text-xs text-[var(--color-text-muted)]">
+                      {a.sessionResults.map((s) => `${s.percent}%`).join(" / ")}
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded ${a.passed ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
+                        {a.passed ? "PASS" : "FAIL"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         {/* Practice Exams */}
         <h2 className="text-lg font-semibold mb-4">Practice Exams</h2>
